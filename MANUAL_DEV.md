@@ -1,0 +1,201 @@
+# Manual do Desenvolvedor - Detetive Buscas
+
+## Integração de API e Modo Híbrido (DirectData V3)
+O sistema utiliza o arquivo `src/services/direct-data.ts` como ponte de comunicação.
+- **Modo Real:** Ativado quando `isDemo: false`. Realiza as chamadas via `axiosV2` (V2) e `axiosV3` (V3) ignorando validação rígida de SSL (`rejectUnauthorized: false`), o que resolve falhas de carregamento e incompatibilidade de certificados em containers Docker.
+- **Roteamento Inteligente:** O método `performSmartSearch` decide dinamicamente a rota dependendo do tipo da chave (`telefone`, `nome`, `email`, `cpf`).
+- **Modo Demo:** Retorna dados de fallback (mock) sem acionar custos. Disponível apenas via painel UI se o usuário tiver `role: 'ADMIN'`.
+
+## Autenticação e Segurança
+- **Login Social (Google):** Fluxo OAuth2 puro (sem NextAuth) usando `/api/auth/google/callback/route.ts`. Trata erros invisíveis via `useSearchParams` encapsulados em `<Suspense>`.
+- **Recuperação de Senha:** O fluxo "Esqueceu a Senha" salva chaves únicas na tabela `PasswordResetToken` (expiram em 1h). Os e-mails são disparados nativamente via API V3 do **Brevo** (`fetch`), economizando memória no container (sem precisar do pacote `nodemailer`).
+
+## Sistema de Cache Modular (48 Horas)
+Implementado na Server Action `realizarConsulta` (`src/app/actions/consultas.ts`).
+- **Funcionamento:** O banco verifica se existe uma busca nas últimas 48h com o mesmo `type` (tipo), `query` (valor) E o mesmo array de `modules` (módulos comprados).
+- **Cobrança Anti-Prejuízo:** O sistema sempre debita o valor dos módulos selecionados, mas o provedor de API não é chamado (custo de API = 0), mantendo a margem de lucro.
+
+## Variáveis de Ambiente Necessárias (.env)
+```env
+# DirectData V3
+DIRECT_DATA_TOKEN=seu_token_v3
+DIRECT_DATA_V3_URL=https://apiv3.directd.com.br
+
+# Google OAuth2
+GOOGLE_CLIENT_ID=seu_google_client_id
+GOOGLE_CLIENT_SECRET=seu_google_client_secret
+
+# E-mail e Recuperação (Brevo)
+BREVO_API_KEY=sua_chave_api_v3_do_brevo
+
+# Pagamentos PushinPay
+PUSHINPAY_TOKEN=token_do_gateway_pagamentos
+PUSHINPAY_WEBHOOK_TOKEN=token_de_seguranca_do_webhook
+
+# Banco de Dados (PostgreSQL Prisma)
+DATABASE_URL=postgres://user:pass@host/db
+```
+
+## Tratamento de Dados (DataViewer e ProcessosJudiciaisViewer)
+- **Componente Principal (`src/components/DataViewer.tsx`):**
+  - Realiza a separação inteligente de campos primitivos, sub-objetos e arrays de dados.
+  - Intercepta seções de processos judiciais (`isProcessosSection`) e delega a renderização para o `ProcessosJudiciaisViewer`, atribuindo largura total (`col-span-full`) no grid responsivo.
+  - O método `formatObjectItem` possui formatadores dedicados para Processos (`formatCNJ`), Endereços, Veículos, Sócios e Filiais, eliminando o fallback agressivo de `JSON.stringify`.
+
+- **Visualizador Especializado de Processos (`src/components/ProcessosJudiciaisViewer.tsx`):**
+  - **Formatação CNJ Nacional:** Transforma chaves de 20 dígitos no padrão `NNNNNNN-DD.AAAA.J.TR.OOOO`.
+  - **Ação de Cópia Tátil:** Botão interativo com `navigator.clipboard` e feedback via Toast do Sonner.
+  - **Divisão por Polos:** Mapeia arrays de partes em Polo Passivo e Polo Ativo, destacando com badge dourada a pessoa consultada quando houver coincidência de documento.
+  - **Advogados e OAB:** Exibe identificação dos defensores e número da OAB/UF.
+  - **Card de 'Nada Consta':** Tratamento visual positivo quando `totalProcessos === 0` ou nenhum registro for localizado.
+
+
+## Monitoramento de Logs
+- **SystemLog:** Registra falhas de API, trocas de senha e confirmações de saldo. Visualizável no admin via interface dedicada.
+
+## Canal de Proteção de Dados (Opt-out LGPD) e Whitelist
+Para conformidade com o Google Ads e LGPD, a plataforma expõe uma rota `/protecao-de-dados`:
+- **Estrutura:** A página `src/app/protecao-de-dados/page.tsx` usa componentes client interativos para gerenciar formulário, máscaras e feedbacks com Toasts.
+- **Armazenamento sem Migrations:** O formulário consome a Server Action `registrarOptOut` (`src/app/actions/optout.ts`). Ela valida o CPF pelo motor interno e registra a solicitação diretamente na tabela `SystemLog` com o nível `WARNING`. Isso permite ao administrador realizar auditorias e dar baixa técnica em solicitações sem a necessidade de migrações complexas de esquema no PostgreSQL.
+- **Componentização SSR:** A Landing Page principal (`src/app/page.tsx`) roda em modo de servidor (Server Component) para otimização extrema de SEO e metadados dinâmicos vindos da tabela `SystemSetting`. Elementos com estado dinâmico como abas (`HomeTabs`), accordions (`FaqAccordion`) e menus (`NavbarClient`) são carregados modularmente como Client Components híbridos.
+
+## Reatividade de Temas Claro e Escuro (Clean / Dark)
+A plataforma possui suporte completo a temas dinâmicos em toda a sua área pública, painel do cliente (`/dashboard`) e área administrativa (`/admin`).
+- **Prevenção de Flicadas (Anti-Flicker):** O `layout.tsx` injeta um scripthead síncrono que lê o `localStorage` no primeiro milissegundo de carregamento do DOM. Ele atribui a classe `.dark` ao elemento raiz `<html>` de forma síncrona antes que qualquer renderização ocorra, mitigando flashes brancos em visitas com modo escuro.
+- **Alternador de Temas (`ThemeToggle.tsx`):** Componente cliente reativo que alterna o estado visual adicionando/removendo a classe `.dark` da raiz HTML e gravando a preferência no `localStorage`.
+- **Estilização Adaptativa:** Utiliza as classes nativas de variantes `dark:` do Tailwind v4 (`bg-white dark:bg-card`, `text-slate-900 dark:text-white`, `border-slate-200 dark:border-white/10`) assegurando uma estética premium glassmorphism nos tons escuros e um design clean limpo e profissional nos tons claros.
+- **Área Administrativa e Login de Checkpoint:** A mesma reatividade e paleta de cores flexíveis foram estendidas para 100% das páginas administrativas, tabelas de KPI, listagem de transações Pix, modais de auditoria técnica e telas de segurança de mestre.
+
+## Validação Manual de Recarga Pix
+Para resolver inconsistências de webhooks da PushinPay (especialmente em ambientes locais de teste ou quando a transação Pix é criada e paga mas não é registrada no banco de dados de produção por problemas do gateway):
+- **Server Action**: `createAndApproveDepositManual(userId, externalId, amount)` em `src/app/actions/admin.ts`. Ela verifica a existência prévia do `externalId` para evitar duplicidade, insere o registro `DEPOSIT` com status `COMPLETED`, credita o saldo ao usuário e registra logs no `SystemLog`. O campo `externalId` é opcional. Se não for informado, a Server Action gerará automaticamente um ID único no formato `MANUAL-[timestamp]-[randomString]`.
+- **Interface**: No modal de gerenciamento de saldo do usuário (`UserTableClient.tsx`), há uma aba "Validar Pix Manual". Ela permite creditar Pix de forma simplificada sem exigir que o administrador digite ou localize o ID do Pix na PushinPay.
+
+## Busca por Nome (DirectData V2 & V3 Híbrido)
+Para a realização de consultas de Pessoa Física na API da DirectData:
+- **Buscas por Telefone e E-mail**: Utilizam a API síncrona V3 da DirectData (`/api/EnriquecimentoLead`), que é rápida e consome apenas uma requisição por chamada.
+- **Busca por Nome**: Como a API V3 da DirectData não possui um correspondente síncrono para busca por Nome (o endpoint `/api/Similarity` exige o CPF para validar similaridade cadastral), o sistema utiliza a Pesquisa Avançada V2 da DirectData (`/api/AdvancedSearch/FilterNaturalPerson`, `/api/AdvancedSearch/ProcessingIds` e `/api/AdvancedSearch/ViewSearch` com polling assíncrono). A Server Action executa o fluxo em 3 etapas por baixo dos panos e realiza um polling rápido de até 10 tentativas para retornar o resultado síncrono traduzido para o frontend.
+
+## Webhook PushinPay (Segurança Dupla e Resiliência)
+A rota `/api/webhooks/pushinpay` conta com um processamento resiliente e autenticação de requisições:
+- **Segurança de Camada Dupla**: Valida o token `PUSHINPAY_WEBHOOK_TOKEN` que pode vir via Query String (`?token=...`) na URL gerada ou via headers customizados (`x-pushinpay-token` ou `x-pushin-pay-token`).
+- **Mapeamento de Transação Resiliente**: Na geração do Pix, a URL enviada à PushinPay inclui o parâmetro `txId` com o ID interno da transação. Ao receber a notificação, o webhook busca a transação primeiro pelo `txId` e, caso não o encontre, utiliza o `transaction_id` do body da PushinPay como fallback.
+- **Vínculo Dinâmico**: Caso a transação seja encontrada via ID interno mas seu campo `externalId` ainda esteja em branco no banco de dados, o webhook atualiza o campo salvando o ID da PushinPay retroativamente.
+- **Múltiplos Status de Confirmação**: O webhook aceita tanto o status `"paid"` quanto o status `"approved"` como confirmações válidas de Pix pago. Outros status são ignorados retornando HTTP 200 para evitar reenvios.## Gerenciador de Páginas SEO & Blog (CMS)
+O sistema conta com um módulo completo de gerenciamento de conteúdo nas tabelas `Page`, `Category`, `Article` e `Redirect`.
+- **Slugs Limpos:** Toda criação ou edição força os slugs a ficarem em caixa baixa, sem caracteres especiais ou espaços e limpa barras redundantes.
+- **Redirecionamento 301 Automático:** Ao modificar o slug de uma página (`Page`) ou artigo (`Article`), uma Server Action insere um mapeamento na tabela `Redirect` (`oldSlug` -> `newSlug`). A rota dinámica `/[slug]` ou `/blog/[slug]` consulta esta tabela no momento do acesso. Se achar um redirecionamento, dispara um redirecionamento HTTP 301 Permanente via `permanentRedirect()`.
+- **Tratamento de Cadeias (Loops):** Se houver uma cadeia de renomeações consecutivas (ex: `/a` renomeia para `/b` e depois `/b` renomeia para `/c`), as Server Actions atualizam recursivamente os registros de redirecionamento antigos para apontarem diretamente para a URL final `/c`, mitigando múltiplos saltos de redirecionamento desfavoráveis ao SEO.
+- **Estruturação JSON-LD e Meta Tags:** Permite injeção de scripts personalizados de JSON-LD e configurações OpenGraph personalizadas, além de injeção automática de schemas do tipo `BlogPosting` para todos os posts de blog.
+
+## Sitemap.xml & Robots.txt Dinâmicos
+Ambas as rotas públicas utilizam geração dinâmica e servem arquivos síncronos baseados no banco de dados.
+- **Sitemap (`/sitemap.xml`):** Lista a página inicial, termos de uso, políticas e as páginas e artigos criados pelo admin. Filtra ativamente para remover páginas não-indexáveis (`robotsIndex: false`), páginas não-publicadas (rascunhos), rotas privadas/logadas e redirecionadas.
+- **Robots (`/robots.txt`):** Define diretivas para bots de busca, bloqueando caminhos de administração (`/admin`), área do cliente (`/dashboard/`), APIs (`/api/`), formulários de autenticação (`/login`, `/cadastro`, etc.) e links com query strings/parâmetros (`/*?*`). Contém o apontamento explícito para o sitemap usando o domínio configurado.
+
+## Busca por Nome Otimizada e ROI no Dashboard (v0.9.1)
+
+### 1. Pesquisa por Nome com Homônimos (Multi-Candidato)
+Para evitar o consumo indevido de saldo do usuário ao pesquisar nomes comuns (homônimos), o processo foi dividido em duas etapas:
+- **Etapa 1 (Gratuita)**: A chamada `performSmartSearch(nome)` executa apenas a rota grátis `FilterNaturalPerson` e retorna a lista de candidatos (homônimos encontrados) com dados mascarados (Nome, CPF mascarado, Data de Nascimento, Mãe, Cidade/UF). Nenhum saldo é debitado e nenhum polling de IDs é realizado.
+- **Etapa 2 (Paga)**: Ao escolher e confirmar o candidato desejado pelo ID (`candidateId`), a Server Action de consultas realiza a chamada passando o parâmetro `candidateId`. O saldo é então debitado, e o sistema executa o fluxo completo de processamento e polling da DirectData para retornar os dados completos do candidato.
+
+### 2. ROI e Custos Operacionais no Painel Admin
+O painel administrativo (`/admin`) exibe agora indicadores diários de ROI e Custo de API calculados da seguinte forma:
+- **Custo Operacional de API**: Calculado multiplicando cada consulta de sucesso efetuada pelo custo real cobrado pela API DirectData de acordo com o tipo de consulta.
+- **Lucro Diário/Mensal**: Faturamento total menos custo de API.
+- **ROI (%)**: `((Faturamento - Custo de API) / Custo de API) * 100`. Se o custo de API for zero, o ROI exibe `0%`.
+- **Preenchimento de Lacunas**: A listagem de consultas diárias por categoria faz o pre-fill com zero para categorias sem buscas, evitando furos no layout.
+- **Tabela de Depósitos Recentes**: Exibe a lista cronológica dos depósitos aprovados no dia no formato de hora local de Brasília (`America/Sao_Paulo`).
+
+### 4. Resiliência e Blindagem Anti-Hang (Carregamento Infinito)
+Para garantir que nenhuma consulta trave o frontend em carregamento infinito:
+- **Timeouts em Camadas:**
+  - `axiosV3` (`src/services/direct-data.ts`): Instanciado com `timeout: 8000` (8s padrão).
+  - Micro-endpoints veiculares: Rota nacional do Senatran com 6s e gateway estadual com 3.5s estritos (se o Detran estadual demorar, a rota nacional já conclui e entrega o veículo em ~1s).
+  - Processos Judiciais: Timeout de 5s para não atrasar a resposta de CPF/CNPJ.
+  - Server Actions (`realizarConsulta`): Proteção com `Promise.race` de 30s cortando qualquer travamento externo e gerando mensagem amigável.
+  - Client-side: `Promise.race` com 15s no `DashboardPage`, `VeiculosPage` e `EmpresasPage`, garantindo que o spinner seja sempre desligado.
+- **Singleton PrismaClient:** Instância global persistida em todos os ambientes (`globalForPrisma.prisma = prisma`) para evitar esgotamento de sockets e conexões no pool do Neon PostgreSQL.
+
+### 5. Tratamento de "Entidade Não Encontrada" e Auditoria de Falhas (/admin/logs)
+- **Sanitização de Respostas da DirectData:** O status técnico `Documento Entidade Não Encontrada` retornado pelo backend da DirectData (`resultadoId: 6`) é interceptado por `sanitizeApiErrorMessage(rawMsg, target)`. O usuário final recebe uma explicação transparente ("Nenhum titular ou cadastro vinculado a este número de telefone foi localizado na base de dados nacional. Seu saldo não foi debitado.").
+- **Logs Enriquecidos no Painel Admin (`/admin/logs`):** Em caso de falha ou registro não localizado, o `SystemLog` grava um payload completo estruturado contendo:
+  - Dados do cliente: Nome, E-mail e Saldo no momento da busca.
+  - Dados da consulta: Alvo (`telefone`, `cpf`, etc.), termo pesquisado, módulos e custo poupado.
+  - Diagnóstico do provedor: Código do resultado, mensagem original do provedor e explicação de que o saldo foi preservado.
+- **Badges Visuais no Admin:** A interface do `/admin/logs` extrai automaticamente o e-mail do cliente, o termo pesquisado e exibe o badge de "Saldo Preservado", permitindo ao suporte responder com rapidez ao cliente no WhatsApp.
+
+### 6. Pesquisa Avançada (V2) para Telefone e Auditoria de Custos
+- **Mecanismo Híbrido V2 + Fallback V3:**
+  - **Etapa 1 (V2 Grátis):** Chamada inicial ao endpoint `AdvancedSearch/FilterNaturalPerson` com `{ phoneNumber: phone }`. Retorna a lista de titulares e vínculos encontrados (`isMultiple: true`). O termo é gravado em `searchHistory` com `target: 'telefone_candidatos'` e custo R$ 0,00.
+  - **Etapa 2 (V2 Processamento Pago):** Quando o cliente clica no perfil desejado (`candidateId`), o backend aciona `AdvancedSearch/ProcessingIds` e realiza polling em `AdvancedSearch/ViewSearch` (até 20s). O saldo do cliente é debitado e a transação é registrada no histórico.
+  - **Fallback V3 Transparente:** Caso a V2 não encontre nenhum candidato para o telefone, o sistema realiza uma tentativa automática na V3 de Leads (`EnriquecimentoLead?CELULAR=...`). Se localizar o cadastro diretamente, o saldo é debitado e o relatório completo é entregue sem necessidade de seleção.
+- **Auditoria de Custos de APIs (`/admin/custos` e Dashboard Admin):**
+  - As funções `calculateApiCostForSearch` e `calculateTotalApiCost` foram calibradas:
+    - `telefone_candidatos` / `nome_candidatos`: Custo de API R$ 0,00 (Etapa 1 é gratuita no provedor).
+    - `telefone` (V2 processamento) / `nome` (V2 processamento): Custo de API R$ 0,36.
+    - `email` (V3 leads): Custo de API R$ 0,16.
+    - `placa` / `veicular`: Custo de API R$ 1,10.
+    - `cpf` / `cnpj`: Custo de API R$ 0,36.
+
+### 7. Resiliência e Arquitetura Anti-Timeout do Webhook PushinPay
+- **Timeout Estrito de 2000ms da PushinPay:** O gateway PushinPay possui um limite severo de timeout de 2.0 segundos (`CURLOPT_CONNECTTIMEOUT / CURLOPT_TIMEOUT = 2s`). Se a resposta ultrapassar 2000ms, o cURL aborta com status 0 (`cURL error 28: Connection timeout after 2000 ms`).
+- **Solução de Aceleração Implementada (`/api/webhooks/pushinpay`):**
+  - **Validação em Memória (0ms):** Compara o token primeiramente com `process.env.PUSHINPAY_WEBHOOK_TOKEN`, poupando uma ida de 200ms ao banco Neon.
+  - **Transação Enxuta:** Somente as operações atômicas indispensáveis (atualizar a transação para `COMPLETED` e incrementar o saldo do usuário) rodam no caminho síncrono.
+  - **Desacoplamento em Background:** Logs de auditoria (`SystemLog`), comissões de afiliados e Web Push notifications rodam de forma assíncrona após o commit, sem segurar a resposta HTTP.
+  - **Idempotência Instantânea:** Se a transação já constar como `COMPLETED` (por aprovação manual do admin ou retentativa da PushinPay), a rota retorna HTTP 200 de imediato, permitindo que o botão "Reprocessar Webhook" no painel da PushinPay marque o status como verde com sucesso.
+- **Guia Completo da Integração:** Consulte o arquivo [`documents/GUIA_PUSHINPAY.md`](file:///c:/Git/React/ConsultaALL/documents/GUIA_PUSHINPAY.md) para o passo a passo detalhado de endpoints (CashIn, CashOut), assinaturas com Pix, QR Code e tratamento de payloads.
+
+### 8. Módulo de Processos Judiciais e Otimização Direta
+- **Interface e Navegação (`/dashboard/processos` & `SidebarNav`):**
+  - Rota dedicada ativada na Sidebar desktop e mobile com ícone de balança (`Scale`).
+  - Formulário com três modalidades de busca visual: CPF (Pessoa Física), CNPJ (Pessoa Jurídica) e Nome Completo (Nominal com filtro por UF).
+  - **Tabela de Preços e Opções de Consulta:** Módulos estruturados em `INITIAL_PROCESSOS_MODULES` (`processos`, `certidoes` e `analise_credito`) com seleção individual via checkbox, totalizador dinâmico de custo e sincronização com a tabela `ModulePricing` do banco de dados.
+  - **Painel Informativo de Cobertura Nacional:** Detalha a abrangência nos 27 Tribunais de Justiça estaduais, 6 Regiões Federais (TRF), 24 Tribunais do Trabalho (TRT/TST) e lista completa dos campos entregues no relatório (CNJ, partes, OABs, valor da causa, andamentos).
+- **Roteamento de API Otimizado (`executeApi` em `src/app/actions/consultas.ts`):**
+  - Quando a consulta contém exclusivamente o módulo `processos` via CPF ou CNPJ (`selectedModules.length === 1 && selectedModules[0] === 'processos'`), o sistema aciona diretamente o endpoint `consultaProcessos(cleanQuery)` (`/api/ProcessosJudiciaisCompleta`), sem gastar créditos com cadastros da V3 de Pessoa Física ou Jurídica.
+  - Para consultas compostas no Dashboard principal (`/dashboard`) onde o usuário marca Processos juntamente com outros módulos (ex: Dados Básicos, Telefones), a busca V3 integra a consulta de processos em paralelo anexando os dados sob a chave `Processos_Judiciais`.
+- **Pesquisa Nominal de Processos:**
+  - Realizada via `performSmartSearch('name', ...)` em duas etapas: lista homônimos gratuitamente para seleção de candidato (`candidateId`), acionando a busca de processos ao confirmar o perfil correto.
+
+### 9. Gestão de Preços Dinâmica e Revalidação de Cache
+- **Tabela de Preços (`/admin/precos`):** Interface mobile-first (`PrecosClient.tsx`) com busca instantânea e filtros por categoria.
+- **Sanitização Monetária:** Permite digitação com vírgula ou ponto (ex: `4,90` ou `4.90`), convertendo automaticamente para ponto flutuante antes de salvar.
+- **Revalidação Imediata:** A Server Action `atualizarPrecoModulo` (`src/app/actions/precos.ts`) executa `revalidatePath` em cascata para:
+  - `/admin/precos` (atualiza os cards e lista do admin);
+  - `/admin/custos` (recalcula margens de lucro);
+  - `/dashboard`, `/dashboard/processos`, `/dashboard/veiculos`, `/dashboard/empresas` e `/dashboard/enderecos` (atualiza os custos das consultas para os clientes imediatamente).
+- **Auditoria de Custos de APIs (`/admin/custos`):** Alinhado o custo do módulo de *Processos Judiciais* para R$ 3,30 (custo real do provedor DirectData).
+
+### 10. Bloqueio de Consultas por Nome e Governança LGPD
+- **Modelagem de Bloqueios (`BlockedData`):**
+  - O model Prisma `BlockedData` suporta nativamente o tipo `'NOME'`, além de `'CPF'`, `'CNPJ'`, `'TELEFONE'` e `'PLACA'`.
+  - **Higienização:** Nomes são normalizados usando decomposição canônica (`normalize('NFD')`), removendo acentos diacríticos (`replace(/[\u0300-\u036f]/g, '')`), espaços redundantes e convertidos para maiúsculas.
+  - **Validação de Entrada:** A Server Action `addBlockedData` exige no mínimo 2 palavras (nome e sobrenome) para evitar bloqueios abrangentes indesejados.
+- **Controle Global no Sistema (`SystemSetting.allowNameSearch`):**
+  - Armazena um booleano (padrão `true`) indicando se a busca por nome está habilitada na plataforma.
+  - O painel administrativo (`/admin/configuracoes`) conta com a seção "Regras de Consulta e LGPD" com switch reativo para ativar/desativar consultas nominais a qualquer momento.
+- **Adaptação e Segurança no Frontend:**
+  - A Server Action `getSearchSettings()` exporta a configuração para os componentes do dashboard (`/dashboard`, `/dashboard/processos`, `/dashboard/enderecos`).
+  - Quando `allowNameSearch` é falso, as opções de busca nominal são omitidas dos formulários e seletores de chaves de busca. Se o usuário já estiver na aba de nome, o estado recai automaticamente para `'cpf'`.
+- **Blindagem no Backend de Consultas (`realizarConsulta`):**
+  - **Validação Prévia:** Se `target === 'nome'` e `allowNameSearch === false`, a requisição é rejeitada antes de qualquer consumo de API ou banco.
+  - **Verificação de Blocklist Direta:** Intercepta consultas quando o nome buscado consta na tabela `BlockedData`.
+  - **Filtragem de Homônimos (`candidates`):** Na busca por lista de candidatos, o backend filtra todos os perfis cujos nomes ou CPFs coincidam com registros de `BlockedData`.
+  - **Checagem Pós-API:** Impede a entrega de relatórios ou cobrança caso os dados finais retornados pela API pertençam a um titular bloqueado.
+
+### 11. Precisão Monetária e Eliminação de Resíduos IEEE 754
+- **Causa Raiz de Ponto Flutuante:** Operações com números decimais em JavaScript e PostgreSQL utilizam o padrão IEEE 754. Ao somar os preços dos módulos (ex: R$ 3,90 + 6x R$ 1,90 + R$ 8,90), o resultado binário é `24.200000000000003`. Ao comparar com um saldo exato de `24.20` (`user.balance < totalCost`), a condição avaliava como `true`, gerando a falsa mensagem de "Saldo insuficiente. Esta consulta requer R$ 24,20.".
+- **Tratamento Implementado:**
+  - `totalCost = Math.round(rawCost * 100) / 100` em todos os cálculos.
+  - Verificação de saldo baseada em centavos inteiros: `Math.round(user.balance * 100) < Math.round(totalCost * 100)`.
+  - Tolerância no update atômico do Prisma: `where: { id: user.id, balance: { gte: totalCost - 0.005 } }` para assegurar que resíduos acumulados não impeçam débitos válidos.
+  - Arredondamento dos totais também no frontend para manter sincronia visual rigorosa.
+
+
+
+
+
+

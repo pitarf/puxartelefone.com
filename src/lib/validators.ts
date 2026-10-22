@@ -1,0 +1,152 @@
+/**
+ * Utilitários de Validação de Dados
+ */
+
+/**
+ * Valida CPF (Algoritmo de dígitos verificadores)
+ */
+export function validarCPF(cpf: string): boolean {
+  const cleanCPF = cpf.replace(/\D/g, '');
+
+  if (cleanCPF.length !== 11) return false;
+
+  // Impede CPFs com todos os dígitos iguais (ex: 111.111.111-11)
+  if (/^(\d)\1{10}$/.test(cleanCPF)) return false;
+
+  let sum = 0;
+  let rest;
+
+  for (let i = 1; i <= 9; i++) {
+    sum = sum + parseInt(cleanCPF.substring(i - 1, i)) * (11 - i);
+  }
+
+  rest = (sum * 10) % 11;
+  if (rest === 10 || rest === 11) rest = 0;
+  if (rest !== parseInt(cleanCPF.substring(9, 10))) return false;
+
+  sum = 0;
+  for (let i = 1; i <= 10; i++) {
+    sum = sum + parseInt(cleanCPF.substring(i - 1, i)) * (12 - i);
+  }
+
+  rest = (sum * 10) % 11;
+  if (rest === 10 || rest === 11) rest = 0;
+  if (rest !== parseInt(cleanCPF.substring(10, 11))) return false;
+
+  return true;
+}
+
+/**
+ * Valida Telefone (Formatos brasileiros: 10 ou 11 dígitos, aceitando prefixo 55 opcional)
+ */
+export function validarTelefone(telefone: string): boolean {
+  let cleanTelefone = telefone.replace(/\D/g, '');
+  // Remove prefixo 55 do Brasil se presente
+  if ((cleanTelefone.length === 12 || cleanTelefone.length === 13) && cleanTelefone.startsWith('55')) {
+    cleanTelefone = cleanTelefone.substring(2);
+  }
+  // Aceita (XX) XXXX-XXXX ou (XX) XXXXX-XXXX
+  return cleanTelefone.length >= 10 && cleanTelefone.length <= 11;
+}
+
+/**
+ * Valida E-mail (Regex padrão)
+ */
+export function validarEmail(email: string): boolean {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+}
+
+/**
+ * Valida Placa de Veículo (Brasil: Antiga e Mercosul)
+ */
+export function validarPlaca(placa: string): boolean {
+  const cleanPlaca = placa.replace(/[^a-zA-Z0-9]/g, '');
+  
+  // Formato Antigo (AAA9999) e Mercosul (AAA9A99)
+  const regex = /^[a-zA-Z]{3}[0-9]{1}[a-zA-Z0-9]{1}[0-9]{2}$/;
+  return regex.test(cleanPlaca);
+}
+
+/**
+ * Valida CNPJ (Algoritmo de dígitos verificadores)
+ */
+export function validarCNPJ(cnpj: string): boolean {
+  const cleanCNPJ = cnpj.replace(/\D/g, '');
+
+  if (cleanCNPJ.length !== 14) return false;
+
+  // Impede CNPJs com todos os dígitos iguais
+  if (/^(\d)\1{13}$/.test(cleanCNPJ)) return false;
+
+  let tamanho = cleanCNPJ.length - 2;
+  let numeros = cleanCNPJ.substring(0, tamanho);
+  const digitos = cleanCNPJ.substring(tamanho);
+  let soma = 0;
+  let pos = tamanho - 7;
+  
+  for (let i = tamanho; i >= 1; i--) {
+    soma += parseInt(numeros.charAt(tamanho - i)) * pos--;
+    if (pos < 2) pos = 9;
+  }
+  
+  let resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+  if (resultado !== parseInt(digitos.charAt(0))) return false;
+
+  tamanho = tamanho + 1;
+  numeros = cleanCNPJ.substring(0, tamanho);
+  soma = 0;
+  pos = tamanho - 7;
+  
+  for (let i = tamanho; i >= 1; i--) {
+    soma += parseInt(numeros.charAt(tamanho - i)) * pos--;
+    if (pos < 2) pos = 9;
+  }
+  
+  resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+  if (resultado !== parseInt(digitos.charAt(1))) return false;
+
+  return true;
+}
+
+/**
+ * Validador genérico baseado no tipo de chave
+ */
+export function validarChave(tipo: string, valor: string): { valid: boolean; message: string } {
+  if (!valor) return { valid: false, message: 'O campo não pode estar vazio.' };
+
+  switch (tipo) {
+    case 'cpf':
+      return validarCPF(valor) 
+        ? { valid: true, message: '' } 
+        : { valid: false, message: 'CPF inválido. Verifique os números.' };
+        
+    case 'cnpj':
+      return validarCNPJ(valor)
+        ? { valid: true, message: '' }
+        : { valid: false, message: 'CNPJ inválido. Verifique os números.' };
+    
+    case 'telefone':
+      return validarTelefone(valor)
+        ? { valid: true, message: '' }
+        : { valid: false, message: 'Telefone inválido. Use DDD + Número.' };
+
+    case 'email':
+      return validarEmail(valor)
+        ? { valid: true, message: '' }
+        : { valid: false, message: 'E-mail inválido. Verifique o formato.' };
+
+    case 'nome':
+      return valor.trim().split(' ').length >= 2
+        ? { valid: true, message: '' }
+        : { valid: false, message: 'Informe o nome completo para uma busca precisa.' };
+
+    case 'placa':
+      return validarPlaca(valor)
+        ? { valid: true, message: '' }
+        : { valid: false, message: 'Placa inválida. Use o formato AAA-0000 ou AAA0A00.' };
+
+    default:
+      return { valid: true, message: '' };
+  }
+}

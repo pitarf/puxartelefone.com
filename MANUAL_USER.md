@@ -1,0 +1,88 @@
+# Manual do Usuário - Detetive Buscas
+
+## Consultas de Alta Performance
+- **Velocidade e Precisão:** Utilize diferentes chaves (CPF, Nome, Telefone, E-mail). Graças ao nosso sistema de cache inteligente, se você buscar os mesmos dados nas últimas 48 horas, o resultado é instantâneo.
+- **Transparência:** O sistema informa exatamente o custo de cada módulo antes de você confirmar a busca.
+
+## Painel Financeiro e Usabilidade
+- **Extrato Real:** Acompanhe cada movimentação de saldo. Recargas via Pix são creditadas automaticamente em segundos.
+- **Fluxo Inteligente:** Faltou saldo? A plataforma sugere atalhos diretos e botões rápidos ("Recarregar Agora") para você colocar saldo sem interromper sua jornada.
+- **Acessibilidade Mobile:** Uma experiência 100% responsiva. No celular, utilize o menu lateral (hambúrguer) para acessar facilmente o seu histórico, perfil e suporte.
+- **Histórico Eterno:** Suas consultas ficam salvas para sempre. Você pode revisitar qualquer resultado anterior sem pagar nada a mais por isso.
+
+## Segurança e Perfil
+- **Login Instantâneo:** Acesse ou crie sua conta em segundos utilizando sua conta Google (Google OAuth2).
+- **Proteção:** Suas informações e senhas (quando aplicável) são criptografadas com tecnologia de ponta.
+- **Suporte Direto:** Em caso de dúvidas, utilize o botão de WhatsApp na barra lateral para falar com um atendente humano.
+
+## Recursos de Administrador
+- **Dashboard Analítico:** Visualize a saúde financeira do site e o ranking dos serviços mais procurados.
+- **Modo Teste:** Possibilidade de realizar consultas de demonstração sem custo para validação do sistema.
+- **Gestão de Auditoria:** Acesso completo aos logs de sistema para suporte técnico rápido ao cliente, incluindo a aba para monitorar solicitações de bloqueio de dados.
+- **Gestão de Usuários e Ajustes de Saldo:** Capacidade de adicionar/remover saldos via Ajuste Simples ou validar transações Pix manualmente de forma rápida e simplificada (sem a necessidade de digitar o ID externo do Pix, caso o administrador queira apenas confirmar pelo valor recebido no banco), garantindo o crédito ágil na conta do cliente e o faturamento do site atualizado com precisão.
+
+## Conformidade LGPD & Proteção de Dados (Opt-out)
+- **Bloqueio de Visualização (Opt-out):** Em conformidade com a LGPD, os titulares de dados podem, a qualquer momento, solicitar o bloqueio e a restrição da exibição de suas informações de CPF nas buscas internas.
+- **Como Solicitar:** Acesse o link "Proteção de Dados (LGPD)" no rodapé da página principal corporativa, preencha o formulário formal informando Nome, CPF, E-mail e o motivo. As solicitações são recebidas instantaneamente pelo administrador e processadas de forma prioritária em até 48 horas comerciais.
+
+## Alternador de Visualização (Tema Clean / Dark)
+Para proporcionar o maior conforto visual aos usuários e administradores da plataforma, implementamos um sistema dinâmico de temas:
+- **Modo Clean (Claro):** Ideal para uso diurno ou ambientes corporativos, com excelente contraste, fundo branco leve e sombras sutis de design minimalista.
+- **Modo Dark (Escuro):** Ideal para uso noturno ou sessões de busca prolongadas, reduzindo a fadiga ocular com o tradicional design glassmorphism premium.
+- **Como Alternar:** No painel do usuário (`/dashboard`) ou painel de controle do administrador (`/admin`), clique no ícone de Sol ☀️ ou Lua 🌙 localizado no cabeçalho superior (ao lado do saldo da sua carteira). A plataforma memoriza instantaneamente a sua escolha para todas as próximas visitas. O alternador também está disponível no canto superior direito das telas de login e cadastro.## Gestão de Páginas SEO & Blog (Apenas Administradores)
+No painel administrativo, há duas novas ferramentas para gerenciar a indexação orgânica e o tráfego do site:
+- **Páginas SEO:** No menu lateral do admin, clique em "Páginas SEO". Lá você pode criar páginas personalizadas (ex: `/consulta-cpf`). Ao preencher o formulário, o sistema criará as meta tags corretas para o Google, adicionará a página ao Sitemap automático e cuidará dos cabeçalhos. Se você mudar a URL de uma página existente, o sistema fará um redirecionamento 301 automático (impedindo erros 404).
+- **Blog & Conteúdo:** Clique em "Blog" para gerenciar artigos e categorias. Você pode cadastrar categorias de postagens e criar artigos completos informando autor, imagem de capa, descrição meta e o conteúdo em HTML rico. O blog ficará disponível publicamente em `/blog` para atrair tráfego e consolidar a marca de forma orgânica.
+
+## Novidades da Versão (v0.9.1)
+
+### 1. Teste de Busca Interativo na Homepage
+Agora você pode experimentar a ferramenta antes mesmo de se cadastrar:
+- Na página inicial do site, digite um CPF, Placa de Veículo ou Telefone no campo de busca.
+- A plataforma simulará o processo de checagem em tempo real e exibirá uma prévia resumida (com dados parcialmente ocultos/mascarados) mostrando o que foi localizado.
+- Para revelar o relatório completo, basta clicar no botão de revelação e criar sua conta grátis.
+
+### 2. Busca Segura por Nome (Escolha de Homônimo)
+Ao pesquisar por Nome e Sobrenome, o sistema exibe uma tela com os homônimos encontrados (com dados parciais mascarados de Nascimento e Mãe para identificação):
+- A pesquisa inicial é inteiramente gratuita e serve para você confirmar que achou a pessoa certa.
+- O seu saldo só será consumido no momento em que você clicar no perfil correspondente e confirmar a abertura da consulta detalhada.
+
+### 3. Links Rápidos de Consulta
+Na página inicial do site, você encontra atalhos diretos para as páginas explicativas de cada tipo de pesquisa:
+- Consulta de CPF
+- Consulta de telefone
+- Consulta de placa
+- Consulta de CNPJ
+- Consulta por nome
+- Consulta de processos judiciais
+Cada uma destas páginas explica o funcionamento técnico de cada consulta e a finalidade recomendada para cada busca.
+
+## Consulta de Processos Judiciais (/dashboard/processos)
+Agora você pode consultar o histórico de processos judiciais de qualquer pessoa física ou jurídica diretamente no painel:
+- **Pessoa Física (CPF):** Localiza ações cíveis, criminais, trabalhistas e execuções no âmbito Estadual (TJ) e Federal (TRF).
+- **Pessoa Jurídica (CNPJ):** Pesquisa processos cíveis, fiscais e trabalhistas em que a empresa figura como ré, autora ou executada.
+- **Nome Completo:** Permite buscar pelo nome completo com filtro opcional por Estado (UF). O sistema lista os candidatos homônimos primeiro de forma gratuita, permitindo que você confirme a pessoa antes de debitar seu saldo.
+- **Opções de Consulta e Tabela de Preços:**
+  - **Processos Judiciais (Completo) - R$ 1,00:** Varas Cíveis, Família, Criminais, Fazenda Pública, Juizados Especiais e Execuções Fiscais em Tribunais de Justiça (TJs), Tribunais Regionais Federais (TRFs) e Justiça do Trabalho (TRTs).
+  - **Certidões Negativas e Falências - R$ 1,00:** Certidões judiciais de distribuição, antecedentes cíveis, falências, concordatas e recuperações judiciais.
+  - **Score e Risco de Crédito - R$ 2,00:** Avaliação de probabilidade de inadimplência e capacidade financeira associada ao histórico judicial.
+- **Cálculo Dinâmico:** Você pode marcar ou desmarcar cada opção individualmente ou usar o botão "Marcar todos". O custo total é recalculado automaticamente e exibido no botão de consulta antes do débito no saldo.
+- **Relatório Completo e Visualizador Dedicado:**
+  - **Número CNJ Formatado:** Exibição oficial no padrão CNJ (`0000000-00.0000.0.00.0000`) com botão "Copiar" direto no celular ou desktop.
+  - **Badges de Tribunal e Status:** Indicação imediata do tribunal (ex: TJ-SP, TRF), instância e status da ação (`Em Andamento`, `Arquivado`, `Julgado`, `Suspenso`).
+  - **Dados da Causa:** Detalhamento do órgão julgador, comarca, data de distribuição, valor da causa e assunto principal/secundário.
+  - **Partes Envolvidas:** Separação visual entre Polo Passivo (réu/apelante) e Polo Ativo (autor/apelado), com destaque especial para a pessoa consultada e identificação de advogados e defensores com número da OAB.
+  - **Nada Consta:** Se a pessoa não possuir processos judiciais, o sistema exibe um card de segurança confirmando a inexistência de apontamentos.
+
+
+## Bloqueios LGPD e Controle de Consultas por Nome (Apenas Administradores)
+No painel administrativo, foram integrados dois recursos fundamentais de governança e conformidade:
+- **Bloqueio de Nomes no Painel LGPD (`/admin/bloqueios`):**
+  - Agora você pode bloquear pessoas diretamente pelo **Nome Completo** (além de CPF, CNPJ, Placa e Telefone).
+  - O sistema normaliza automaticamente a digitação (remove acentos e espaços extras). Uma vez bloqueado, qualquer tentativa de pesquisar por esse nome em qualquer módulo da plataforma será impedida imediatamente, protegendo a privacidade do titular.
+  - Caso o titular apareça em uma listagem de homônimos de terceiros, o sistema também remove automaticamente o perfil da lista sem cobrar do cliente.
+- **Desativação Global de Consultas por Nome (`/admin/configuracoes`):**
+  - Caso prefira que os usuários realizem consultas exclusivamente por chaves exatas (CPF, CNPJ, Placa ou Telefone), basta acessar `/admin/configuracoes` > "Regras de Consulta e LGPD" e desativar o botão **"Permitir Consulta por Nome"**.
+  - Com essa opção desmarcada, a opção "Nome" é automaticamente ocultada do Dashboard, da busca de Processos Judiciais e demais telas da plataforma.
+
+
