@@ -76,9 +76,9 @@ model SearchHistory {
 
 model SystemSetting {
   id                    String   @id @default("default")
-  siteTitle             String   @default("Detetive Buscas")
-  siteDescription       String   @default("Investigação de dados profissional. Consulte CPF, CNPJ, Veículos e muito mais.")
-  siteKeywords          String   @default("consultas, cpf, cnpj, veículos, investigação")
+  siteTitle             String   @default("PuxarTelefone")
+  siteDescription       String   @default("Consulta de telefone e informações cadastrais completas com precisão e agilidade.")
+  siteKeywords          String   @default("consulta telefone, puxar telefone, consultas cadastrais, titularidade de telefone")
   faviconUrl            String?
   logoUrl               String?
   companyName           String?  @default("NOME DA EMPRESA LTDA")

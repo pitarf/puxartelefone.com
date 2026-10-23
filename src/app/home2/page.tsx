@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 
 /**
- * Landing Page Principal do Detetive Buscas (Arquivada para /home2)
+ * Landing Page Principal do PuxarTelefone (Arquivada para /home2)
  * Design original escuro com glassmorphism, gradientes azul/roxo e identidade investigativa.
  */
 export default async function Home2() {
@@ -44,7 +44,7 @@ export default async function Home2() {
               </div>
             )}
             <span className="text-xl font-bold tracking-wider text-white">
-              Detetive<span className="text-primary">Buscas</span>
+              Puxar<span className="text-primary">Telefone</span>
             </span>
           </div>
 
@@ -339,7 +339,7 @@ export default async function Home2() {
                 </div>
               )}
               <span className="text-lg font-bold text-white">
-                Detetive<span className="text-primary">Buscas</span>
+                Puxar<span className="text-primary">Telefone</span>
               </span>
             </div>
             <div className="flex gap-6 text-sm text-gray-500">
@@ -348,7 +348,7 @@ export default async function Home2() {
               <Link href="/termos" className="hover:text-white transition-colors">Termos de Uso</Link>
             </div>
             <p className="text-gray-600 text-sm text-center md:text-right">
-              © {new Date().getFullYear()} {settings?.siteTitle?.split(' - ')[0] || "Detetive Buscas"}. Todos os direitos reservados.
+              © {new Date().getFullYear()} {settings?.siteTitle?.split(' - ')[0] || "PuxarTelefone"}. Todos os direitos reservados.
             </p>
           </div>
         </div>

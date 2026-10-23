@@ -11,8 +11,8 @@ async function main() {
     update: {},
     create: {
       id: 'default',
-      siteTitle: 'ConsultaALL - Inteligência em Dados',
-      siteDescription: 'A plataforma mais completa para consulta de dados e informações.',
+      siteTitle: 'PuxarTelefone - Consulta de Telefone e Dados Cadastrais',
+      siteDescription: 'Consulte informações cadastrais completas a partir de um número de telefone com precisão e agilidade.',
       supportWhatsapp: '5511999999999',
     },
   });

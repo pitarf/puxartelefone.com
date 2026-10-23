@@ -43,7 +43,7 @@ export function MobileSidebar({ isAdmin, isSeo, role, whatsappLink, logoUrl }: M
               </div>
             )}
             <span className="text-lg font-extrabold tracking-tight text-white">
-              puxar<span className="text-[#0061D9]">telefone</span><span className="text-[#00B7C2]">.com</span>
+              puxar<span className="text-[#0061D9]">telefone</span>
             </span>
           </Link>
           <button 

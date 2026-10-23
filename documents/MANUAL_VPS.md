@@ -1,11 +1,11 @@
-# 🐧 Guia de Deploy VPS Ubuntu - ConsultaALL
+# 🐧 Guia de Deploy VPS Ubuntu - PuxarTelefone
 
-Este manual descreve o passo a passo para configurar sua VPS Hostinger e colocar o sistema no ar usando Docker.
+Este manual descreve o passo a passo para configurar sua VPS e colocar o sistema no ar usando Docker.
 
 ## 1. Acesso Inicial
 Acesse sua VPS via SSH (use o terminal ou PuTTY):
 ```bash
-ssh root@IP_DA_SUA_VPS
+ssh root@2.25.105.214
 ```
 
 ## 2. Preparação do Ambiente
@@ -19,7 +19,7 @@ curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 
 # Instalar Docker Compose
-sudo apt install docker-compose -y
+sudo apt install docker-compose-plugin -y
 
 # Instalar Nginx (Proxy Reverso)
 sudo apt install nginx -y
@@ -31,13 +31,13 @@ sudo apt install certbot python3-certbot-nginx -y
 ## 3. Clonagem e Configuração do Projeto
 ```bash
 # Clone o repositório
-git clone https://github.com/pitarf/consultaall.git
-cd consultaall
+git clone https://github.com/pitarf/puxartelefone.com.git /var/www/puxartelefone.com
+cd /var/www/puxartelefone.com
 
 # Crie o arquivo de ambiente
 nano .env
 ```
-*(Cole o conteúdo do seu .env local aqui e salve com Ctrl+O, Enter, Ctrl+X)*
+*(Cole o conteúdo do seu .env de produção e salve com Ctrl+O, Enter, Ctrl+X)*
 
 ## 4. Deploy com Docker
 ```bash
@@ -55,12 +55,12 @@ O sistema estará rodando internamente na porta **3000**.
 ## 5. Configuração do Nginx (Cadeado HTTPS)
 Crie o arquivo de configuração do seu domínio:
 ```bash
-sudo nano /etc/nginx/sites-available/consultaall
+sudo nano /etc/nginx/sites-available/puxartelefone.com
 ```
 **Cole este conteúdo (ajustando seu domínio):**
 ```nginx
 server {
-    server_name detetivebuscas.com;
+    server_name puxartelefone.com www.puxartelefone.com;
 
     location / {
         proxy_pass http://localhost:3000;
@@ -74,18 +74,18 @@ server {
 ```
 Ative o site e gere o SSL:
 ```bash
-sudo ln -s /etc/nginx/sites-available/consultaall /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/puxartelefone.com /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl restart nginx
 
 # Gerar SSL Grátis
-sudo certbot --nginx -d detetivebuscas.com
+sudo certbot --nginx -d puxartelefone.com -d www.puxartelefone.com
 ```
 
 ## 6. Comandos Úteis
-- **Ver logs:** `docker-compose logs -f`
-- **Parar sistema:** `docker-compose down`
-- **Atualizar código:** `git pull && docker-compose up -d --build`
+- **Ver logs:** `docker compose logs -f`
+- **Parar sistema:** `docker compose down`
+- **Atualizar código:** `git pull && docker compose up -d --build`
 
 ## 7. Backups Automáticos Diários
 Para garantir que você nunca perca dados, configure o backup automático:
@@ -102,8 +102,7 @@ crontab -e
 
 3. Adicione esta linha ao final do arquivo para rodar todo dia às 03:00 da manhã:
 ```bash
-00 03 * * * /root/consultaall/scripts/backup-db.sh
+00 03 * * * /var/www/puxartelefone.com/scripts/backup-db.sh
 ```
-*(Substitua `/path/to/` pelo caminho real da pasta na sua VPS)*
 
 Os backups ficarão salvos na pasta `./backups/` dentro do projeto.

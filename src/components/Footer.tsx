@@ -70,7 +70,7 @@ export default async function Footer({ logoUrl }: FooterProps) {
               {logoUrl ? (
                 <img 
                   src={logoUrl} 
-                  alt="puxartelefone.com" 
+                  alt="PuxarTelefone" 
                   className="h-8 w-auto object-contain" 
                 />
               ) : (
@@ -79,7 +79,7 @@ export default async function Footer({ logoUrl }: FooterProps) {
                 </div>
               )}
               <span className="text-lg font-extrabold text-[#172B3A] dark:text-white tracking-tight">
-                puxar<span className="text-[#0061D9]">telefone</span><span className="text-[#00B7C2]">.com</span>
+                puxar<span className="text-[#0061D9]">telefone</span>
               </span>
             </Link>
 
@@ -152,7 +152,7 @@ export default async function Footer({ logoUrl }: FooterProps) {
 
         {/* Rodapé inferior com Copyright e Avisos Legais */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#667784] dark:text-slate-500">
-          <p>© {new Date().getFullYear()} puxartelefone.com. Todos os direitos reservados.</p>
+          <p>© {new Date().getFullYear()} PuxarTelefone. Todos os direitos reservados.</p>
           <p className="text-center md:text-right max-w-xl">
             A plataforma consulta bases públicas e fontes legais em conformidade com a legislação aplicável. Não disponibilizamos dados privados, senhas ou histórico de comunicações.
           </p>

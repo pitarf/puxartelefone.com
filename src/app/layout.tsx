@@ -32,7 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
   try {
     const settings = await prisma.systemSetting.findFirst();
 
-    const title = settings?.siteTitle || "puxartelefone.com - Consulta de Telefone e Validação Cadastral";
+    const title = settings?.siteTitle || "PuxarTelefone - Consulta de Telefone e Validação Cadastral";
     const description = settings?.siteDescription || "Consulte informações a partir de um número de telefone com DDD. Plataforma rápida, segura e em conformidade com a LGPD.";
     const keywords = settings?.siteKeywords || "consulta telefone, puxar telefone, titular de telefone, consulta cadastral, validação de contato, lgpd";
     const faviconUrl = settings?.faviconUrl || "/favicon.ico";
@@ -59,7 +59,7 @@ export async function generateMetadata(): Promise<Metadata> {
   } catch {
     // Fallback caso o banco não esteja acessível ainda
     return {
-      title: "puxartelefone.com - Consulta de Telefone",
+      title: "PuxarTelefone - Consulta de Telefone",
       description: "Plataforma de consultas cadastrais a partir de número de telefone.",
     };
   }

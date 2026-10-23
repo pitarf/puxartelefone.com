@@ -57,7 +57,7 @@ export default function NavbarClient({ logoUrl, siteTitle, menuPages = [] }: Nav
           {logoUrl ? (
             <img 
               src={logoUrl} 
-              alt={siteTitle || "puxartelefone.com"} 
+              alt={siteTitle || "PuxarTelefone"} 
               className="h-8 w-auto object-contain" 
             />
           ) : (
@@ -67,7 +67,7 @@ export default function NavbarClient({ logoUrl, siteTitle, menuPages = [] }: Nav
           )}
           <div className="flex flex-col">
             <span className="text-lg font-extrabold tracking-tight leading-tight text-[#172B3A] dark:text-white">
-              puxar<span className="text-[#0061D9]">telefone</span><span className="text-[#00B7C2]">.com</span>
+              puxar<span className="text-[#0061D9]">telefone</span>
             </span>
             <span className="text-[10px] font-medium tracking-wide text-[#667784] dark:text-slate-400">
               Consultas Cadastrais

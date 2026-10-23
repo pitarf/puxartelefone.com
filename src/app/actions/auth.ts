@@ -203,7 +203,7 @@ export async function requestPasswordReset(prevState: any, formData: FormData) {
 
   const dbEmail = settings?.companyEmail?.trim();
   const senderEmail = (dbEmail && dbEmail !== 'contato@seusite.com') ? dbEmail : 'brasiltda2012@gmail.com';
-  const senderName = (settings?.companyName || 'Detetive Buscas').trim();
+  const senderName = (settings?.companyName || 'PuxarTelefone').trim();
 
   try {
     const response = await fetch('https://api.brevo.com/v3/smtp/email', {

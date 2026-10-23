@@ -1,5 +1,63 @@
 # Roadmap de Desenvolvimento - puxartelefone.com
 
+## SPLIT 16: Remoção do Sufixo ".com" da Identidade Visual da Marca (✅ 100% CONCLUÍDO)
+*Este split removeu o sufixo de domínio ".com" de todas as ocorrências visuais, garantindo um logotipo e identidade visual mais limpos, corporativos e diretos: PuxarTelefone.*
+- [x] **Remoção de Logos & Elementos Visuais:**
+  - `DashboardNavbar.tsx`: Logo alterado para `puxartelefone`.
+  - `NavbarClient.tsx`: Logo da landing page alterado para `puxartelefone`.
+  - `Footer.tsx`: Logo e copyright atualizados para `PuxarTelefone`.
+  - `login/page.tsx` e `cadastro/page.tsx`: Identidade visual limpa no topo dos cards.
+  - `MobileSidebar.tsx`: Cabeçalho do menu mobile atualizado.
+- [x] **Textos Institucionais, Metadados e Banco:**
+  - `page.tsx`: Seções "Por que utilizar o PuxarTelefone?", textos da LGPD e OpenGraph `siteName`.
+  - `layout.tsx` e `SystemSetting`: Título mestre unificado para `PuxarTelefone`.
+- [x] **Compilação e Validação de Produção:**
+  - `npm run build` aprovado com 100% de sucesso.
+
+## SPLIT 15: Migração da Sidebar para Navbar Superior Horizontal (✅ 100% CONCLUÍDO)
+*Este split removeu a barra lateral escura fixa do painel e implementou uma Navbar moderna superior horizontal com dropdowns, liberando área útil de tela e alinhando o design com a identidade clean da marca.*
+- [x] **Criação da Nova Navbar do Dashboard (`DashboardNavbar.tsx`):**
+  - Barra superior fixa (`sticky top-0 z-50`) com efeito glassmorphism translúcido.
+  - Dropdown elegante de **Consultas** priorizando a Consulta Telefônica em primeiro lugar.
+  - Links horizontais rápidos para Histórico, Saldo, Promoções, Indicações e Suporte.
+  - Card de Saldo (`BalanceHeader`) e menu de perfil de usuário integrados no topo à direita.
+  - Gaveta móvel responsiva retrátil para smartphones.
+- [x] **Refatoração do Layout Principal (`src/app/dashboard/layout.tsx`):**
+  - Remoção da `aside` lateral de 256px de largura.
+  - Conteúdo do painel centralizado em container de alta resolução (`max-w-7xl mx-auto`).
+- [x] **Compilação e Validação de Produção:**
+  - `npm run build` aprovado sem erros (40 rotas compiladas no Next.js 16).
+
+## SPLIT 14: Rebranding Integral da Marca (DetetiveBuscas -> PuxarTelefone) (✅ 100% CONCLUÍDO)
+*Este split eliminou qualquer ocorrência residual de DetetiveBuscas, atualizando o banco de dados e todo o ecossistema de metadados, e-mails, rotas e páginas institucionais para PuxarTelefone.*
+- [x] **Atualização do Registro Mestre em Banco (`SystemSetting`):**
+  - Título oficial definido: `PuxarTelefone - Consulta de Telefone e Dados Cadastrais`.
+  - Razão social atualizada para `PUXARTELEFONE TECNOLOGIA LTDA` e e-mail `contato@puxartelefone.com`.
+- [x] **Substituição de Fallbacks de Domínio & Schemas Estruturados:**
+  - Fallbacks em `robots.ts`, `sitemap.ts`, `actions/cms.ts` e `actions/auth.ts` atualizados de `detetivebuscas.com` para `https://puxartelefone.com`.
+  - Rich Snippets Schema.org (`Organization`, `WebPage`, `BlogPosting`) atualizados para nome `PuxarTelefone`.
+- [x] **Ajustes de UI & Comunicação com o Usuário:**
+  - Link de suporte via WhatsApp atualizado com mensagem de saudação para `PuxarTelefone`.
+  - Rodapés de segurança do admin-login e páginas legais padrão (Termos de Uso, Sobre, LGPD) devidamente atualizados.
+- [x] **Validação e Build:** Compilação de produção (`npm run build`) executada com sucesso absoluto.
+
+## SPLIT 13: Deploy em Produção na VPS & Provisionamento Docker (✅ 100% CONCLUÍDO)
+*Este split cobriu a sincronização do repositório no GitHub, configuração da VPS Ubuntu 24.04, instalação do Docker Engine e Nginx reverso, e ativação dos containers em produção.*
+- [x] **Sincronização com GitHub:** Repositório oficial atualizado em `https://github.com/pitarf/puxartelefone.com.git`.
+- [x] **Configuração e Segurança da VPS (`2.25.105.214`):**
+  - Chave SSH pública do operador configurada com permissões seguras em `/root/.ssh/authorized_keys`.
+  - Instalação dos pacotes de infraestrutura (`git`, `curl`, `nginx`, `certbot`, `docker.io`, `docker-compose-v2`).
+- [x] **Configuração do Nginx Proxy Reverso:**
+  - Bloco em `/etc/nginx/sites-available/puxartelefone.com` encaminhando porta 80 para a porta local `3000`.
+- [x] **Build e Deploy Docker Multi-Stage:**
+  - Build otimizado standalone do Next.js 16 (`puxartelefone-app`) e container de banco de dados (`puxartelefone-db`).
+  - Containers iniciados com sucesso via `docker compose up -d` com mapeamento de volume persistente.
+  - Resposta HTTP 200 confirmada em `http://2.25.105.214` e `http://127.0.0.1:3000`.
+- [x] **Certificado SSL / HTTPS Ativo:**
+  - Emissão bem-sucedida de certificado Let's Encrypt para `puxartelefone.com` e `www.puxartelefone.com`.
+  - Redirecionamento automático HTTP para HTTPS configurado e testado no Nginx.
+  - Renovação automática programada via timer do Certbot.
+
 ## SPLIT 12: Redesign Clean com Predominância do Branco Puro (✅ 100% CONCLUÍDO)
 *Este split removeu a sensação dark da landing page, integrando o Branco Puro (#FFFFFF) como cor central da paleta e garantindo uma experiência SaaS limpa, iluminada e profissional.*
 - [x] **Inclusão do Branco Puro (#FFFFFF) na Identidade Visual:**

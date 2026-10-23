@@ -734,7 +734,7 @@ export default function GerenciadorPaginas({ initialPages }: GerenciadorPaginasP
                   <div>
                     <label className="block text-xs font-bold text-slate-400 dark:text-gray-400 uppercase tracking-widest mb-2 flex items-center gap-1.5">
                       Open Graph Customizado Extra (JSON)
-                      <Tooltip text="Customizações adicionais das meta tags em formato JSON. Ex: { 'og:site_name': 'Detetive Buscas' }">
+                      <Tooltip text="Customizações adicionais das meta tags em formato JSON. Ex: { 'og:site_name': 'PuxarTelefone' }">
                         <HelpCircle className="w-3.5 h-3.5 text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-help inline-block ml-1" />
                       </Tooltip>
                     </label>

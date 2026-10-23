@@ -1,13 +1,13 @@
-# Guia de Configuração e Funcionamento do Webhook PushinPay - Detetive Buscas
+# Guia de Configuração e Funcionamento do Webhook PushinPay - PuxarTelefone
 
-Este guia detalha como funciona a integração de pagamentos Pix em tempo real através de Webhooks na plataforma **Detetive Buscas** utilizando o gateway **PushinPay**, cobrindo o fluxo de segurança, a configuração no painel do gateway e fornecendo um script adaptado para testes.
+Este guia detalha como funciona a integração de pagamentos Pix em tempo real através de Webhooks na plataforma **PuxarTelefone** utilizando o gateway **PushinPay**, cobrindo o fluxo de segurança, a configuração no painel do gateway e fornecendo um script adaptado para testes.
 
 ---
 
 ## 1. Como Funciona o Webhook?
-O Webhook é uma notificação do tipo HTTP POST enviada pelo servidor da PushinPay diretamente para o servidor do **Detetive Buscas** sempre que o status de uma cobrança Pix é alterado (por exemplo, quando o cliente realiza o pagamento).
+O Webhook é uma notificação do tipo HTTP POST enviada pelo servidor da PushinPay diretamente para o servidor do **PuxarTelefone** sempre que o status de uma cobrança Pix é alterado (por exemplo, quando o cliente realiza o pagamento).
 
-No **Detetive Buscas**, o processamento foi desenhado com foco em segurança absoluta e integridade financeira:
+No **PuxarTelefone**, o processamento foi desenhado com foco em segurança absoluta e integridade financeira:
 
 ```mermaid
 sequenceDiagram
@@ -53,12 +53,12 @@ sequenceDiagram
 Siga os seguintes passos para colocar o Webhook para funcionar em produção:
 
 ### Passo 1: Obter a URL do Webhook da sua aplicação
-O webhook do **Detetive Buscas** conta com um mecanismo de segurança de camada dupla e correspondência por ID interno:
+O webhook do **PuxarTelefone** conta com um mecanismo de segurança de camada dupla e correspondência por ID interno:
 1. **Via URL Dinâmica Gerada pelo Sistema (Padrão):** O sistema gera e envia automaticamente à PushinPay a URL contendo o token de segurança e o ID interno da transação:
-   `https://detetivebuscas.com/api/webhooks/pushinpay?token=SEU_TOKEN_DO_WEBHOOK&txId=ID_INTERNO_DA_TRANSACAO`
+   `https://puxartelefone.com/api/webhooks/pushinpay?token=SEU_TOKEN_DO_WEBHOOK&txId=ID_INTERNO_DA_TRANSACAO`
    *Esta abordagem permite que o webhook busque o depósito prioritariamente pelo ID interno (`txId`) da URL e use o ID da PushinPay do body apenas como fallback, eliminando 100% de inconsistências ou atrasos no banco.*
 2. **Via URL Limpa do Painel:** Se configurada no painel de controle da PushinPay, use:
-   `https://detetivebuscas.com/api/webhooks/pushinpay`
+   `https://puxartelefone.com/api/webhooks/pushinpay`
    *Nesse modelo, a PushinPay deve enviar o token no header `x-pushinpay-token` (configurado na PushinPay no campo "Token do Webhook" com o mesmo valor de `PUSHINPAY_WEBHOOK_TOKEN` do seu `.env`).*
 
 > [!NOTE]
@@ -103,11 +103,11 @@ O formato do JSON enviado pela PushinPay para o webhook segue a estrutura abaixo
 ---
 
 ## 4. Script de Simulação e Teste (Node.js)
-Salve o código abaixo como `test_webhook.js` para simular o disparo de uma notificação do webhook da PushinPay para a sua aplicação local ou em produção. Ele passa o token de segurança na query string (`?token=...`) conforme exigido pela segurança do Detetive Buscas.
+Salve o código abaixo como `test_webhook.js` para simular o disparo de uma notificação do webhook da PushinPay para a sua aplicação local ou em produção. Ele passa o token de segurança na query string (`?token=...`) conforme exigido pela segurança do PuxarTelefone.
 
 ```javascript
 /**
- * Script de Teste de Webhook - Detetive Buscas
+ * Script de Teste de Webhook - PuxarTelefone
  * Como usar: node test_webhook.js <URL_BASE_WEBHOOK> <WEBHOOK_TOKEN> <TRANSACTION_ID>
  * Exemplo local: node test_webhook.js http://localhost:3000/api/webhooks/pushinpay 880d03ddeda5ad631ebd021c6d7b5013 A21A4C79-A568-44A9-80CB-4EF3AFA6A777
  */

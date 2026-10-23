@@ -1,4 +1,4 @@
-# Guia de Atualização na VPS - ConsultaALL
+# Guia de Atualização na VPS - PuxarTelefone
 
 Este documento lista os comandos fundamentais que você deve usar na VPS sempre que fizer alterações no código, no banco de dados ou no servidor, explicando o porquê de cada um.
 

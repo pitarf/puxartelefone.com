@@ -42,7 +42,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       url: "https://puxartelefone.com/",
-      siteName: "puxartelefone.com",
+      siteName: "PuxarTelefone",
       type: "website",
       locale: "pt_BR",
     },
@@ -390,7 +390,7 @@ export default async function Home() {
               Diferenciais Tecnológicos
             </span>
             <h2 className="text-3xl md:text-4xl font-extrabold text-[#172B3A] tracking-tight">
-              Por que utilizar o puxartelefone.com?
+              Por que utilizar o PuxarTelefone?
             </h2>
             <p className="text-[#667784] text-sm md:text-base">
               Projetado para oferecer a melhor experiência em consultas cadastrais rápidas com segurança jurídica.
@@ -612,7 +612,7 @@ export default async function Home() {
 
           <div className="text-left bg-[#F7FAFC] dark:bg-[#0F172A] border border-[#E2EAF0] dark:border-white/10 rounded-3xl p-8 md:p-10 space-y-5 text-xs md:text-sm text-[#667784] dark:text-slate-300 leading-relaxed shadow-xs">
             <p>
-              A plataforma <strong className="text-[#172B3A] dark:text-white">puxartelefone.com</strong> deve ser utilizada estritamente para finalidades legítimas, em total consonância com a legislação brasileira vigente, em especial a Lei Geral de Proteção de Dados (Lei nº 13.709/2018) e o Marco Civil da Internet.
+              A plataforma <strong className="text-[#172B3A] dark:text-white">PuxarTelefone</strong> deve ser utilizada estritamente para finalidades legítimas, em total consonância com a legislação brasileira vigente, em especial a Lei Geral de Proteção de Dados (Lei nº 13.709/2018) e o Marco Civil da Internet.
             </p>
             <p>
               O usuário é individualmente responsável pelas consultas que executa e pela base legal que fundamenta sua pesquisa (como prevenção a fraudes em cadastros, proteção ao crédito ou legítimo interesse corporativo). É terminantemente proibido utilizar a plataforma para perseguição, ameaça, discriminação, práticas de extorsão ou qualquer conduta que viole direitos de terceiros.

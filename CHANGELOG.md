@@ -2,6 +2,66 @@
 
 Todas as mudanças notáveis para este projeto serão documentadas neste arquivo.
 
+## [1.4.1] - 2026-10-23
+### Limpeza da Marca Visual: Remoção do Sufixo ".com"
+- **Remoção de Todos os Sufixos Visuais de Domínio:**
+  - **Navbar Superior do Dashboard (`DashboardNavbar.tsx`):** Logo ajustado de `puxartelefone.com` para `puxartelefone` (`puxar` em branco/escuro e `telefone` no tom azul da marca `#0061D9`).
+  - **Navbar da Landing Page (`NavbarClient.tsx`):** Logo principal limpo de `puxartelefone.com` para `puxartelefone`.
+  - **Rodapé (`Footer.tsx`):** Logo e texto de copyright atualizados para `© PuxarTelefone. Todos os direitos reservados.`.
+  - **Telas de Autenticação (`login/page.tsx`, `cadastro/page.tsx`):** Identidade visual limpa no topo do formulário.
+  - **Menu Mobile Retrátil (`MobileSidebar.tsx`):** Logo no cabeçalho do drawer ajustado para `puxartelefone`.
+  - **Seções Institucionais da Home (`page.tsx`):** Títulos de benefícios ("Por que utilizar o PuxarTelefone?"), textos da LGPD e tags OpenGraph `siteName`.
+  - **Metadados (`layout.tsx`) e Banco de Dados (`SystemSetting`):** Título base unificado para `PuxarTelefone - Consulta de Telefone e Validação Cadastral`.
+
+## [1.4.0] - 2026-10-23
+### Migração Arquitetural do Painel: Sidebar Lateral -> Navbar Superior
+- **Novo Componente Header/Navbar (`src/components/DashboardNavbar.tsx`):**
+  - Barra de navegação superior horizontal fixa (`sticky top-0 z-50`) com efeito glassmorphism (`backdrop-blur-md`).
+  - Alinhamento clean e integrado à paleta oficial:
+    - Logo à esquerda (`puxartelefone.com`) com link direto para o dashboard.
+    - Menu dropdown interativo **"Consultar"** agrupando as consultas (Telefone em destaque prioritário, CPF, Placas, CNPJ e Processos Judiciais).
+    - Links horizontais rápidos para **Histórico**, **Adicionar Saldo**, **Promoções**, **Indicações** e **Suporte WhatsApp**.
+    - Badge de acesso rápido ao **Painel Admin** visível apenas para usuários com permissão `ADMIN`.
+    - Lado direito com **ThemeToggle** (Claro/Escuro), **BalanceHeader** (Saldo em R$ e botão de recarga) e Menu Suspenso de Usuário com avatar, nome, e-mail e botão de logout.
+  - Gaveta mobile responsiva (`lg:hidden`) preservando 100% da usabilidade em smartphones.
+- **Refatoração do Layout (`src/app/dashboard/layout.tsx`):**
+  - Remoção da barra lateral fixa escura (`<aside className="w-64">`), liberando espaço horizontal útil na tela.
+  - Container principal centralizado e responsivo (`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8`).
+
+## [1.3.3] - 2026-10-23
+### Rebranding Completo de Marca: DetetiveBuscas -> PuxarTelefone
+- **Banco de Dados & SystemSetting:**
+  - Atualização do registro `default` em `SystemSetting`:
+    - `siteTitle`: "PuxarTelefone - Consulta de Telefone e Dados Cadastrais".
+    - `companyName`: "PUXARTELEFONE TECNOLOGIA LTDA".
+    - `companyEmail`: "contato@puxartelefone.com".
+    - `siteKeywords` e `siteDescription` orientados a consultas telefônicas e inteligência cadastral.
+- **Domínios e Fallbacks de URL:**
+  - Substituição de todas as ocorrências de fallback de `detetivebuscas.com` para `https://puxartelefone.com` em:
+    - [robots.ts](file:///c:/Git/React/puxartelefone.com/src/app/robots.ts)
+    - [sitemap.ts](file:///c:/Git/React/puxartelefone.com/src/app/sitemap.ts)
+    - [actions/cms.ts](file:///c:/Git/React/puxartelefone.com/src/app/actions/cms.ts) (validação anti-phishing de redirecionamentos 301)
+    - [actions/auth.ts](file:///c:/Git/React/puxartelefone.com/src/app/actions/auth.ts) (remetente oficial de e-mails transacionais)
+    - [api/webhooks/pushinpay/route.ts](file:///c:/Git/React/puxartelefone.com/src/app/api/webhooks/pushinpay/route.ts) (`VAPID_SUBJECT` contato@puxartelefone.com)
+    - [[slug]/page.tsx](file:///c:/Git/React/puxartelefone.com/src/app/[slug]/page.tsx) e [blog/[slug]/page.tsx](file:///c:/Git/React/puxartelefone.com/src/app/blog/[slug]/page.tsx) (Organization Schema.org estruturado)
+    - [ClientScriptExecutor.tsx](file:///c:/Git/React/puxartelefone.com/src/components/ClientScriptExecutor.tsx) (redirecionamento relativo seguro para `/cadastro`).
+- **Interfaces e Textos Institucionais:**
+  - Mensagem do WhatsApp no dashboard: `https://wa.me/...&text=Olá, gostaria de suporte no PuxarTelefone`.
+  - Telas de autenticação, rodapé de segurança do admin e páginas padrão de Termos de Uso, Sobre e LGPD atualizadas para a marca **PuxarTelefone**.
+  - Validação de compilação de produção (`npm run build`) concluída com 100% de sucesso.
+
+## [1.3.2] - 2026-10-22
+### Deploy em Produção na VPS & Provisionamento Docker
+- **Sincronização com o GitHub:**
+  - Código atualizado e enviado para o repositório remoto: `https://github.com/pitarf/puxartelefone.com.git`.
+- **Configuração e Provisionamento da VPS (`2.25.105.214`):**
+  - Autenticação e instalação da chave pública SSH do operador em `~/.ssh/authorized_keys`.
+  - Atualização completa do SO (`apt-get update`), Docker Engine v29.9.2 e Docker Compose v5.6.1 instalados.
+  - Clone do repositório em `/var/www/puxartelefone.com` e sincronização do `.env` de produção.
+  - Configuração do Nginx reverso apontando a porta 80 para a porta interna 3000 da aplicação.
+  - Build multi-stage concluído e containers ativos (`puxartelefone-app` e `puxartelefone-db`). Resposta HTTP 200 validada tanto internamente quanto via IP público da VPS.
+  - Certificado SSL Let's Encrypt gerado e configurado com renovação automática para `puxartelefone.com` e `www.puxartelefone.com`, com redirecionamento HTTP -> HTTPS ativo.
+
 ## [1.3.1] - 2026-10-22
 ### Harmonização com Ondas Orgânicas (Wave SVGs) ao Longo da Home
 - **Aplicação Completa dos Divisores em Curvas Orgânicas:**

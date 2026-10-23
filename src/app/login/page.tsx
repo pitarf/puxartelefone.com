@@ -45,7 +45,7 @@ function LoginContent() {
             <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#0061D9] to-[#00B7C2] flex items-center justify-center text-white">
               <Database className="w-4 h-4" />
             </div>
-            <span className="text-2xl font-black text-slate-900 dark:text-white">puxar<span className="text-[#0061D9]">telefone</span><span className="text-[#00B7C2]">.com</span></span>
+            <span className="text-2xl font-black text-slate-900 dark:text-white">puxar<span className="text-[#0061D9]">telefone</span></span>
           </Link>
           <h2 className="text-2xl font-semibold text-slate-900 dark:text-white">Bem-vindo de volta</h2>
           <p className="text-slate-500 dark:text-slate-400 text-sm mt-2">Acesse sua conta para realizar consultas.</p>

@@ -1,4 +1,4 @@
-# Manual do Desenvolvedor - Detetive Buscas
+# Manual do Desenvolvedor - PuxarTelefone
 
 ## Integração de API e Modo Híbrido (DirectData V3)
 O sistema utiliza o arquivo `src/services/direct-data.ts` como ponte de comunicação.

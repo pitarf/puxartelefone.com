@@ -3,10 +3,10 @@
 # Configurações
 BACKUP_DIR="./backups"
 TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
-BACKUP_NAME="backup_consultaall_$TIMESTAMP.sql"
-CONTAINER_NAME="consultaall-db"
+BACKUP_NAME="backup_puxartelefone_$TIMESTAMP.sql"
+CONTAINER_NAME="puxartelefone-db"
 DB_USER="postgres"
-DB_NAME="consultaall"
+DB_NAME="puxartelefone"
 
 # Criar diretório de backup se não existir
 mkdir -p $BACKUP_DIR
