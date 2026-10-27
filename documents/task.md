@@ -1,5 +1,19 @@
 # Roadmap de Desenvolvimento - puxartelefone.com
 
+## SPLIT 22: Conformidade Jurídica LGPD - Termos de Uso e Pop-up de Ciência Pré-WhatsApp (✅ 100% CONCLUÍDO)
+*Este split implementou a aceitação obrigatória dos Termos de Uso e Política de Privacidade no cadastro e o modal prioritário de Termo de Ciência no primeiro acesso ao dashboard.*
+- [x] **Termos de Uso e Responsabilidade na Tela de Cadastro (`CadastroClient.tsx`):**
+  - Título expansível com texto de aviso de finalidade legítima e proibição de atividades ilícitas.
+  - Duas caixas de seleção obrigatórias visíveis para aceite dos Termos de Uso e Política de Privacidade.
+  - Bloqueio de submissão do formulário caso as opções não estejam marcadas.
+- [x] **Pop-up de Ciência, Responsabilidade e Uso Legítimo (`TermoCienciaModal.tsx`):**
+  - Modal com os 7 parágrafos jurídicos de responsabilidade sob a LGPD.
+  - Botão "Prosseguir" que grava o aceite formal no banco de dados (`hasAcceptedTerms`, `acceptedTermsAt`).
+  - Sequenciamento estrito no Dashboard: exibido antes do modal promocional de WhatsApp.
+- [x] **Validação & Deploy:**
+  - Build local aprovado com Next.js 16.
+  - Sincronização via Git e deploy na VPS.
+
 ## SPLIT 21: Atualização da Google Tag do Google Analytics (✅ 100% CONCLUÍDO)
 *Este split configurou a Google Tag oficial (gtag.js) no layout raiz da aplicação para rastreamento de acessos e conversões.*
 - [x] **Configuração do Google Tag Manager / GA4 (`src/app/layout.tsx`):**

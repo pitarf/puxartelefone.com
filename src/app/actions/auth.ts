@@ -109,7 +109,8 @@ export async function register(prevState: any, formData: FormData) {
         email,
         passwordHash,
         balance: 0.0, // Saldo inicial zerado
-        hasSeenPromoPopup: false, // Força a exibição do popup logo após o cadastro
+        hasSeenPromoPopup: false, // Força a exibição do popup de WhatsApp após os termos
+        hasAcceptedTerms: false, // Exige a ciência formal do Termo de Uso e Responsabilidade (LGPD)
         trafficSource,
         referralCode,
         referredById,

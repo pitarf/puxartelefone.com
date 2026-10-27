@@ -2,6 +2,17 @@
 
 Todas as mudanças notáveis para este projeto serão documentadas neste arquivo.
 
+## [1.4.7] - 2026-10-27
+### Compliance & LGPD: Termos de Uso no Cadastro e Pop-up de Ciência
+- **Tela de Cadastro (`src/app/cadastro/CadastroClient.tsx`):**
+  - Adicionado o título retrátil **"Termos de Uso e Responsabilidade"** com texto explicativo de uso legítimo e proibição de atividades ilícitas.
+  - Duas caixas de seleção visíveis e obrigatórias para aceite dos Termos de Uso e ciência da Política de Privacidade.
+  - Validação ativa que impede a criação de conta caso os termos não sejam aceitos.
+- **Pop-up de Termo de Ciência no Dashboard (`src/components/TermoCienciaModal.tsx`):**
+  - Implementado o pop-up obrigatório **"Termo de Ciência, Responsabilidade e Uso Legítimo"** com os 7 parágrafos jurídicos de responsabilização sob a LGPD (Lei nº 13.709/2018).
+  - Botão **"Prosseguir"** integrado que registra o aceite no banco de dados (`hasAcceptedTerms`, `acceptedTermsAt`).
+  - Ordenação prioritária no Dashboard: o modal de solicitação de número de WhatsApp (`PromoModal`) agora só abre após o aceite formal do Termo de Ciência.
+
 ## [1.4.6] - 2026-10-27
 ### Analytics: Atualização da Google Tag Oficial (GA4)
 - **Tag do Google Analytics Atualizada:**
