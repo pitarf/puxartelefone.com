@@ -2,6 +2,12 @@
 
 Todas as mudanças notáveis para este projeto serão documentadas neste arquivo.
 
+## [1.4.6] - 2026-10-27
+### Analytics: Atualização da Google Tag Oficial (GA4)
+- **Tag do Google Analytics Atualizada:**
+  - `src/app/layout.tsx`: Atualizada a tag global `gtag.js` para o ID de medição oficial `G-7S1B7HEF50`.
+  - Carregamento assíncrono via `next/script` mantido com estratégia `afterInteractive` para não impactar a velocidade e pontuação de Core Web Vitals.
+
 ## [1.4.5] - 2026-10-27
 ### Identidade Visual Dinâmica: Ícone do Sistema nas Telas de Login e Cadastro
 - **Sincronização com as Configurações do Painel Administrativo:**

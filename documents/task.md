@@ -1,5 +1,14 @@
 # Roadmap de Desenvolvimento - puxartelefone.com
 
+## SPLIT 21: Atualização da Google Tag do Google Analytics (✅ 100% CONCLUÍDO)
+*Este split configurou a Google Tag oficial (gtag.js) no layout raiz da aplicação para rastreamento de acessos e conversões.*
+- [x] **Configuração do Google Tag Manager / GA4 (`src/app/layout.tsx`):**
+  - Script oficial configurado com ID `G-7S1B7HEF50` via `next/script` com estratégia `afterInteractive`.
+  - Disparo de métricas e inicialização do `dataLayer` em todas as rotas do site.
+- [x] **Validação & Deploy:**
+  - Build local aprovado sem erros.
+  - Sincronização via Git e deploy na VPS.
+
 ## SPLIT 20: Ícone e Logo Dinâmicos nas Páginas de Login e Cadastro (✅ 100% CONCLUÍDO)
 *Este split unificou a identidade visual de autenticação, sincronizando o ícone das telas de login e cadastro com o ícone/logo configurado pelo administrador no painel de configurações.*
 - [x] **Criação do Componente de Identidade (`BrandLogo.tsx`):**
