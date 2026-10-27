@@ -53,6 +53,14 @@ export default function CadastroClient({ logoUrl, faviconUrl }: CadastroClientPr
     }
   };
 
+  const handleGoogleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    if (!acceptTerms || !acceptPrivacy) {
+      e.preventDefault();
+      toast.warning('Para se cadastrar com o Google, você deve aceitar os Termos de Uso e a Política de Privacidade.');
+      return;
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background px-4 py-8">
       {/* Botão de Alternar Tema */}
@@ -200,10 +208,20 @@ export default function CadastroClient({ logoUrl, faviconUrl }: CadastroClientPr
             </div>
           </div>
 
-          <form action={loginWithGoogle} className="mt-5">
+          <form action={loginWithGoogle} onSubmit={handleGoogleSubmit} className="mt-5">
             <button
               type="submit"
-              className="w-full flex items-center justify-center gap-3 bg-white hover:bg-gray-100 text-gray-900 font-medium py-2.5 rounded-xl transition-colors shadow-xs cursor-pointer border border-slate-200 text-sm"
+              disabled={!acceptTerms || !acceptPrivacy}
+              className={`w-full flex items-center justify-center gap-3 py-2.5 rounded-xl transition-all border text-sm font-medium ${
+                acceptTerms && acceptPrivacy
+                  ? 'bg-white hover:bg-gray-100 text-gray-900 border-slate-200 cursor-pointer shadow-xs hover:scale-[1.01]'
+                  : 'bg-slate-100 dark:bg-white/5 text-slate-400 dark:text-gray-500 border-slate-200/60 dark:border-white/10 cursor-not-allowed opacity-60 shadow-none'
+              }`}
+              title={
+                !acceptTerms || !acceptPrivacy
+                  ? 'Marque os Termos de Uso e a Política de Privacidade acima para liberar o cadastro com Google'
+                  : 'Criar conta com o Google'
+              }
             >
               <svg className="w-4.5 h-4.5" viewBox="0 0 24 24">
                 <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -213,6 +231,11 @@ export default function CadastroClient({ logoUrl, faviconUrl }: CadastroClientPr
               </svg>
               <span>Continuar com Google</span>
             </button>
+            {(!acceptTerms || !acceptPrivacy) && (
+              <p className="text-[11px] text-center text-slate-400 dark:text-gray-500 mt-1.5">
+                * Marque os termos acima para cadastrar via Google
+              </p>
+            )}
           </form>
         </div>
 

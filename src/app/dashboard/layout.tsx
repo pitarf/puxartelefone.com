@@ -2,6 +2,7 @@ import { verifySession } from '@/lib/session';
 import { prisma } from '@/lib/prisma';
 import { redirect } from 'next/navigation';
 import { DashboardNavbar } from '@/components/DashboardNavbar';
+import { TermsComplianceGuard } from '@/components/TermsComplianceGuard';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -24,7 +25,7 @@ export default async function DashboardLayout({
 
   const user = await prisma.user.findUnique({
     where: { id: session.userId },
-    select: { id: true, name: true, email: true, balance: true, role: true, lastActiveAt: true },
+    select: { id: true, name: true, email: true, balance: true, role: true, lastActiveAt: true, hasAcceptedTerms: true },
   });
 
   if (!user) {
@@ -46,6 +47,9 @@ export default async function DashboardLayout({
 
   return (
     <div className="min-h-screen bg-[#f8fafc] dark:bg-background flex flex-col">
+      {/* Guardião de Termos e LGPD: Bloqueia qualquer navegação no Dashboard até o aceite */}
+      <TermsComplianceGuard hasAcceptedTerms={!!user.hasAcceptedTerms} />
+
       {/* Navbar Superior do Painel */}
       <DashboardNavbar
         user={{

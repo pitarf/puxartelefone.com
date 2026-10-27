@@ -9,7 +9,6 @@ import { Search, Loader2, HelpCircle, FlaskConical, Zap, ChevronDown } from 'luc
 import { DataViewer } from '@/components/DataViewer';
 import { Tooltip } from '@/components/Tooltip';
 import PromoModal from '@/components/PromoModal';
-import TermoCienciaModal from '@/components/TermoCienciaModal';
 
 // Estrutura visual base (custos serão sobrescritos pelo banco)
 const INITIAL_DATA_MODULES = [
@@ -594,17 +593,7 @@ export default function DashboardPage() {
         </div>
       )}
 
-      {/* 1. Modal de Compliance LGPD: Termo de Ciência, Responsabilidade e Uso Legítimo (Aparece em primeiro lugar) */}
-      {userProfile && !userProfile.hasAcceptedTerms && (
-        <TermoCienciaModal 
-          isOpen={!userProfile.hasAcceptedTerms} 
-          onAccepted={() => {
-            setUserProfile((prev: any) => ({ ...prev, hasAcceptedTerms: true }));
-          }} 
-        />
-      )}
-
-      {/* 2. Modal Promocional do WhatsApp (Aparece após o Termo de Ciência ser aceito) */}
+      {/* Modal Promocional do WhatsApp (Só abre se já aceitou os termos) */}
       {userProfile && userProfile.hasAcceptedTerms && (
         <PromoModal 
           hasSeenPopup={userProfile.hasSeenPromoPopup} 

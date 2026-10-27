@@ -2,6 +2,16 @@
 
 Todas as mudanças notáveis para este projeto serão documentadas neste arquivo.
 
+## [1.4.8] - 2026-10-27
+### Segurança & LGPD: Bloqueio Total de Cadastro sem Aceite (Formulário e Google)
+- **Bloqueio no Cadastro com Google:**
+  - `src/app/cadastro/CadastroClient.tsx`: O botão "Continuar com Google" agora fica bloqueado e desabilitado caso o usuário não marque previamente os Termos de Uso e a Política de Privacidade.
+  - `src/app/api/auth/google/callback/route.ts`: Criação de usuários via Google com flag `hasAcceptedTerms: false`.
+- **Validação Server-Side:**
+  - `src/app/actions/auth.ts`: Adicionada validação formal no `registerSchema` (Zod), bloqueando requisições diretas de cadastro que não contenham o aceite dos termos.
+- **Proteção Global na Área Logada (`TermsComplianceGuard.tsx`):**
+  - Adicionado componente interceptador no `DashboardLayout.tsx` para bloquear qualquer navegação em todas as rotas do painel até que o usuário conclua o aceite no modal de Termo de Ciência.
+
 ## [1.4.7] - 2026-10-27
 ### Compliance & LGPD: Termos de Uso no Cadastro e Pop-up de Ciência
 - **Tela de Cadastro (`src/app/cadastro/CadastroClient.tsx`):**

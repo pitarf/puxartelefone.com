@@ -1,5 +1,19 @@
 # Roadmap de Desenvolvimento - puxartelefone.com
 
+## SPLIT 23: Bloqueio Estrito no Cadastro Convencional e via Google sem Aceite (✅ 100% CONCLUÍDO)
+*Este split assegurou que nenhum usuário possa se cadastrar sem aceitar previamente os Termos de Uso e Política de Privacidade, inclusive pelo login social do Google.*
+- [x] **Bloqueio no Cadastro pelo Google (`CadastroClient.tsx`):**
+  - Botão "Continuar com Google" bloqueado (desabilitado com cursor not-allowed) se as caixas de seleção não estiverem marcadas.
+  - Alerta orientativo imediato para marcação dos termos antes do redirecionamento ao Google.
+- [x] **Validação no Backend (`src/app/actions/auth.ts`):**
+  - `registerSchema` validando obrigatoriedade estrita de `acceptTerms` e `acceptPrivacy`.
+  - Novos usuários criados pelo Google recebem `hasAcceptedTerms: false` no callback OAuth.
+- [x] **Guardião Global do Painel (`TermsComplianceGuard.tsx`):**
+  - Injetado no layout mestre do Dashboard (`DashboardLayout.tsx`), interceptando qualquer rota logada e exigindo o clique em "Prosseguir" no Termo de Ciência LGPD.
+- [x] **Validação & Deploy:**
+  - Build local aprovado sem erros.
+  - Sincronização via Git e deploy na VPS.
+
 ## SPLIT 22: Conformidade Jurídica LGPD - Termos de Uso e Pop-up de Ciência Pré-WhatsApp (✅ 100% CONCLUÍDO)
 *Este split implementou a aceitação obrigatória dos Termos de Uso e Política de Privacidade no cadastro e o modal prioritário de Termo de Ciência no primeiro acesso ao dashboard.*
 - [x] **Termos de Uso e Responsabilidade na Tela de Cadastro (`CadastroClient.tsx`):**

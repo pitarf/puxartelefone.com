@@ -118,7 +118,8 @@ export async function GET(request: NextRequest) {
           name: name || 'Usuário Google',
           passwordHash: null, // Sem senha
           balance: 0.0,
-          hasSeenPromoPopup: false, // Força a exibição do popup logo após o cadastro
+          hasSeenPromoPopup: false, // Força a exibição do popup promocional apenas após aceitar os termos
+          hasAcceptedTerms: false, // Exige expressamente o aceite do Termo de Ciência no primeiro acesso
           trafficSource,
           referralCode,
           referredById,
