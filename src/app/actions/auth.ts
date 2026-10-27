@@ -16,12 +16,6 @@ const registerSchema = z.object({
   name: z.string().min(2, { message: 'Nome deve ter no mínimo 2 caracteres.' }),
   email: z.string().email({ message: 'E-mail inválido.' }),
   password: z.string().min(6, { message: 'A senha deve ter no mínimo 6 caracteres.' }),
-  acceptTerms: z.literal('on', {
-    errorMap: () => ({ message: 'Você deve aceitar os Termos de Uso e Responsabilidade para criar uma conta.' })
-  }),
-  acceptPrivacy: z.literal('on', {
-    errorMap: () => ({ message: 'Você deve declarar ciência da Política de Privacidade para criar uma conta.' })
-  }),
 });
 
 export async function login(prevState: any, formData: FormData) {
@@ -61,6 +55,16 @@ export async function register(prevState: any, formData: FormData) {
 
   if (!result.success) {
     return { error: result.error.issues[0].message };
+  }
+
+  // Validação resiliente de aceite dos termos no backend
+  const rawTerms = formData.get('acceptTerms');
+  const rawPrivacy = formData.get('acceptPrivacy');
+  const isTermsAccepted = rawTerms === 'on' || rawTerms === 'true' || rawTerms === true || rawTerms === '1';
+  const isPrivacyAccepted = rawPrivacy === 'on' || rawPrivacy === 'true' || rawPrivacy === true || rawPrivacy === '1';
+
+  if (!isTermsAccepted || !isPrivacyAccepted) {
+    return { error: 'Você deve aceitar os Termos de Uso e a Política de Privacidade para criar uma conta.' };
   }
 
   const { name, email, password } = result.data;

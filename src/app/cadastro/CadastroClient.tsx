@@ -161,6 +161,8 @@ export default function CadastroClient({ logoUrl, faviconUrl }: CadastroClientPr
                 <input
                   type="checkbox"
                   name="acceptTerms"
+                  id="acceptTerms"
+                  value="on"
                   checked={acceptTerms}
                   onChange={(e) => setAcceptTerms(e.target.checked)}
                   className="mt-0.5 w-4 h-4 rounded border-slate-300 dark:border-white/20 text-[#0061D9] focus:ring-[#0061D9] cursor-pointer"
@@ -174,6 +176,8 @@ export default function CadastroClient({ logoUrl, faviconUrl }: CadastroClientPr
                 <input
                   type="checkbox"
                   name="acceptPrivacy"
+                  id="acceptPrivacy"
+                  value="on"
                   checked={acceptPrivacy}
                   onChange={(e) => setAcceptPrivacy(e.target.checked)}
                   className="mt-0.5 w-4 h-4 rounded border-slate-300 dark:border-white/20 text-[#0061D9] focus:ring-[#0061D9] cursor-pointer"
