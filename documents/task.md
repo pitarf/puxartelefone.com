@@ -1,5 +1,17 @@
 # Roadmap de Desenvolvimento - puxartelefone.com
 
+## SPLIT 20: Ícone e Logo Dinâmicos nas Páginas de Login e Cadastro (✅ 100% CONCLUÍDO)
+*Este split unificou a identidade visual de autenticação, sincronizando o ícone das telas de login e cadastro com o ícone/logo configurado pelo administrador no painel de configurações.*
+- [x] **Criação do Componente de Identidade (`BrandLogo.tsx`):**
+  - Renderização dinâmica com suporte a `faviconUrl` e `logoUrl`.
+  - Tratamento de erro de carregamento com fallback suave para o ícone tecnológico com gradiente da marca.
+- [x] **Integração no Login e Cadastro:**
+  - `src/app/login/page.tsx` e `src/app/cadastro/page.tsx` transformados em Server Components que buscam as configurações no banco.
+  - Componentes `LoginClient.tsx` e `CadastroClient.tsx` renderizando a logo do sistema dinamicamente.
+- [x] **Validação & Deploy:**
+  - Build local aprovado sem erros.
+  - Sincronização via Git e deploy na VPS.
+
 ## SPLIT 19: Migração Definitiva para o PostgreSQL Local no Docker da VPS (✅ 100% CONCLUÍDO)
 *Este split desvinculou a aplicação de produção do Neon (usado para desenvolvimento/testes) e ativou o banco de dados oficial no container PostgreSQL local do Docker na VPS.*
 - [x] **Importação de Schema & Dados Oficiais:**

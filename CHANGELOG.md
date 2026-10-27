@@ -2,6 +2,13 @@
 
 Todas as mudanças notáveis para este projeto serão documentadas neste arquivo.
 
+## [1.4.5] - 2026-10-27
+### Identidade Visual Dinâmica: Ícone do Sistema nas Telas de Login e Cadastro
+- **Sincronização com as Configurações do Painel Administrativo:**
+  - Criado o componente `BrandLogo.tsx`, que renderiza o ícone/logo cadastrado pelo admin (`faviconUrl` / `logoUrl`) com fallback automático para o ícone padrão com gradiente.
+  - Refatoradas as páginas `login/page.tsx` e `cadastro/page.tsx` para Server Components que consultam a tabela `SystemSetting` no banco de dados e injetam as propriedades nos componentes clientes `LoginClient.tsx` e `CadastroClient.tsx`.
+  - Tratamento de erro de carregamento de imagem com fallback instantâneo para preservar estabilidade visual.
+
 ## [1.4.4] - 2026-10-27
 ### Infraestrutura: Ativação do Banco de Dados PostgreSQL no Docker da VPS
 - **Desvinculação do Neon e Migração para o Container Local:**
