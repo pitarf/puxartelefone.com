@@ -33,11 +33,12 @@ export function BalanceHeader({ initialBalance }: BalanceHeaderProps) {
 
   return (
     <>
-      <div className="flex items-center gap-3">
-        {/* Card de Saldo */}
+      <div className="flex items-center">
+        {/* Card de Saldo Desktop (sm em diante) */}
         <div 
           onClick={() => setIsModalOpen(true)}
-          className="flex items-center gap-3 bg-white dark:bg-[#0f172a] hover:bg-slate-50 dark:hover:bg-[#1e293b] px-4 py-2 rounded-2xl border border-slate-200 dark:border-white/10 cursor-pointer transition-all group shadow-sm"
+          className="hidden sm:flex items-center gap-3 bg-white dark:bg-[#0f172a] hover:bg-slate-50 dark:hover:bg-[#1e293b] px-4 py-2 rounded-2xl border border-slate-200 dark:border-white/10 cursor-pointer transition-all group shadow-xs shrink-0"
+          title="Clique para recarregar saldo"
         >
           <div className="p-1.5 bg-green-500/10 rounded-lg text-green-500 group-hover:scale-110 transition-transform">
             <Wallet className="w-4 h-4" />
@@ -49,6 +50,23 @@ export function BalanceHeader({ initialBalance }: BalanceHeaderProps) {
             </span>
           </div>
           <div className="ml-2 p-1 bg-primary text-white rounded-md shadow-lg shadow-primary/20">
+            <Plus className="w-3 h-3" />
+          </div>
+        </div>
+
+        {/* Card de Saldo Mobile (compacto e elegante para nunca estourar a viewport em smartphones) */}
+        <div 
+          onClick={() => setIsModalOpen(true)}
+          className="flex sm:hidden items-center gap-1.5 bg-white dark:bg-[#0f172a] hover:bg-slate-50 dark:hover:bg-[#1e293b] px-2.5 py-1.5 rounded-xl border border-slate-200 dark:border-white/10 cursor-pointer transition-all active:scale-95 shadow-2xs shrink-0"
+          title="Clique para recarregar saldo"
+        >
+          <div className="p-1 bg-green-500/10 rounded-md text-green-500">
+            <Wallet className="w-3.5 h-3.5" />
+          </div>
+          <span className="text-xs font-black text-slate-900 dark:text-green-400">
+            R$ {initialBalance.toFixed(2).replace('.', ',')}
+          </span>
+          <div className="p-0.5 bg-primary text-white rounded-md">
             <Plus className="w-3 h-3" />
           </div>
         </div>

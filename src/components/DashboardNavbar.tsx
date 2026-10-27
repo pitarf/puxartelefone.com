@@ -83,20 +83,20 @@ export function DashboardNavbar({ user, logoUrl, whatsappLink }: DashboardNavbar
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-white/10 bg-white/95 dark:bg-[#0f172a]/95 backdrop-blur-md shadow-xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 gap-2">
           
           {/* ================= 1. LOGO & BRAND ================= */}
-          <div className="flex items-center gap-6">
-            <Link href="/dashboard" className="flex items-center gap-2.5">
+          <div className="flex items-center gap-3 sm:gap-6 min-w-0 shrink-0">
+            <Link href="/dashboard" className="flex items-center gap-2 sm:gap-2.5 shrink-0">
               {logoUrl ? (
-                <img src={logoUrl} alt="Logo" className="h-8 w-auto object-contain" />
+                <img src={logoUrl} alt="Logo" className="h-7 sm:h-8 w-auto object-contain" />
               ) : (
-                <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#0061D9] to-[#00B7C2] flex items-center justify-center text-white shadow-sm shadow-blue-500/20">
-                  <Database className="w-4 h-4" />
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-gradient-to-tr from-[#0061D9] to-[#00B7C2] flex items-center justify-center text-white shadow-xs shadow-blue-500/20">
+                  <Database className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </div>
               )}
-              <span className="text-lg font-black tracking-tight text-slate-900 dark:text-white">
+              <span className="text-base sm:text-lg font-black tracking-tight text-slate-900 dark:text-white">
                 puxar<span className="text-[#0061D9]">telefone</span>
               </span>
             </Link>
@@ -267,9 +267,11 @@ export function DashboardNavbar({ user, logoUrl, whatsappLink }: DashboardNavbar
           </div>
 
           {/* ================= 3. AÇÕES DA DIREITA ================= */}
-          <div className="flex items-center gap-3">
-            {/* Alternar Tema */}
-            <ThemeToggle />
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            {/* Alternar Tema (Desktop) */}
+            <div className="hidden sm:block">
+              <ThemeToggle />
+            </div>
 
             {/* Saldo / Recarga */}
             <BalanceHeader initialBalance={user.balance} />
@@ -279,7 +281,7 @@ export function DashboardNavbar({ user, logoUrl, whatsappLink }: DashboardNavbar
               <button
                 type="button"
                 onClick={() => setUserMenuOpen(!userMenuOpen)}
-                className="flex items-center gap-2 p-1.5 pl-3 rounded-2xl border border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/5 transition-all"
+                className="flex items-center gap-2 p-1.5 pl-3 rounded-2xl border border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/5 transition-all cursor-pointer"
               >
                 <div className="flex flex-col text-right">
                   <span className="text-xs font-bold text-slate-900 dark:text-white leading-tight">
@@ -289,7 +291,7 @@ export function DashboardNavbar({ user, logoUrl, whatsappLink }: DashboardNavbar
                     {user.role === 'ADMIN' ? 'Administrador' : 'Cliente'}
                   </span>
                 </div>
-                <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#0061D9] to-[#00B7C2] text-white flex items-center justify-center font-bold text-xs shadow-sm">
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#0061D9] to-[#00B7C2] text-white flex items-center justify-center font-bold text-xs shadow-xs">
                   {(user.name?.[0] || user.email[0]).toUpperCase()}
                 </div>
                 <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${userMenuOpen ? 'rotate-180' : ''}`} />
@@ -333,7 +335,7 @@ export function DashboardNavbar({ user, logoUrl, whatsappLink }: DashboardNavbar
                   <form action={logout}>
                     <button
                       type="submit"
-                      className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors font-semibold"
+                      className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors font-semibold cursor-pointer"
                     >
                       <LogOut className="w-4 h-4" />
                       <span>Encerrar Sessão</span>
@@ -343,14 +345,14 @@ export function DashboardNavbar({ user, logoUrl, whatsappLink }: DashboardNavbar
               )}
             </div>
 
-            {/* Botão Hambúrguer Mobile */}
+            {/* Botão Hambúrguer Mobile (Sempre visível e de fácil toque em celulares) */}
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 rounded-xl text-slate-600 dark:text-gray-300 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
-              aria-label="Abrir Menu"
+              className="lg:hidden flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-gray-200 hover:bg-slate-200 dark:hover:bg-white/15 transition-all active:scale-95 shrink-0 cursor-pointer shadow-2xs"
+              aria-label={mobileMenuOpen ? "Fechar Menu" : "Abrir Menu"}
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5 text-red-500" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
@@ -358,122 +360,216 @@ export function DashboardNavbar({ user, logoUrl, whatsappLink }: DashboardNavbar
 
       {/* ================= 4. MENU MOBILE EXPANSÍVEL ================= */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-slate-200 dark:border-white/10 bg-white dark:bg-[#0f172a] px-4 pt-3 pb-6 space-y-1 shadow-lg animate-in slide-in-from-top duration-200">
-          <div className="px-3 py-2 text-xs font-bold text-slate-400 uppercase tracking-wider">
-            Consultas Disponíveis
-          </div>
+        <div className="lg:hidden border-t border-slate-200 dark:border-white/10 bg-white/98 dark:bg-[#0f172a]/98 backdrop-blur-xl px-4 pt-3 pb-8 space-y-4 shadow-2xl animate-in slide-in-from-top-2 duration-200 max-h-[calc(100vh-4rem)] overflow-y-auto">
           
-          <Link
-            href="/dashboard"
-            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-[#0061D9] bg-[#EFFBFC] dark:bg-white/10"
-          >
-            <Phone className="w-4 h-4 text-[#0061D9]" />
-            <span>Consultar Telefone</span>
-          </Link>
+          {/* Card do Usuário Logado */}
+          <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#0061D9] to-[#00B7C2] text-white flex items-center justify-center font-bold text-sm shadow-sm shrink-0">
+                {(user.name?.[0] || user.email[0]).toUpperCase()}
+              </div>
+              <div className="min-w-0">
+                <div className="font-bold text-sm text-slate-900 dark:text-white truncate">
+                  {user.name || user.email.split('@')[0]}
+                </div>
+                <div className="text-[11px] text-slate-500 dark:text-gray-400 truncate">
+                  {user.email}
+                </div>
+              </div>
+            </div>
 
-          <Link
-            href="/dashboard?tab=cpf"
-            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 dark:text-gray-200 hover:bg-slate-50 dark:hover:bg-white/5"
-          >
-            <Users className="w-4 h-4 text-slate-400" />
-            <span>Consultar Pessoas (CPF)</span>
-          </Link>
-
-          <Link
-            href="/dashboard/veiculos"
-            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 dark:text-gray-200 hover:bg-slate-50 dark:hover:bg-white/5"
-          >
-            <Car className="w-4 h-4 text-slate-400" />
-            <span>Consultar Veículos (Placa)</span>
-          </Link>
-
-          <Link
-            href="/dashboard/empresas"
-            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 dark:text-gray-200 hover:bg-slate-50 dark:hover:bg-white/5"
-          >
-            <Building2 className="w-4 h-4 text-slate-400" />
-            <span>Consultar Empresas (CNPJ)</span>
-          </Link>
-
-          <Link
-            href="/dashboard/processos"
-            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 dark:text-gray-200 hover:bg-slate-50 dark:hover:bg-white/5"
-          >
-            <Scale className="w-4 h-4 text-slate-400" />
-            <span>Consultar Processos</span>
-          </Link>
-
-          <div className="border-t border-slate-100 dark:border-white/5 my-2" />
-
-          <div className="px-3 py-2 text-xs font-bold text-slate-400 uppercase tracking-wider">
-            Sua Conta
+            {/* Alternar Tema no Mobile */}
+            <div className="shrink-0 flex items-center bg-white dark:bg-[#1e293b] rounded-xl border border-slate-200 dark:border-white/10 p-0.5 shadow-2xs">
+              <ThemeToggle />
+            </div>
           </div>
 
-          <Link
-            href="/dashboard/historico"
-            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 dark:text-gray-200 hover:bg-slate-50 dark:hover:bg-white/5"
-          >
-            <History className="w-4 h-4 text-slate-400" />
-            <span>Minhas Consultas</span>
-          </Link>
+          {/* Seção 1: Consultas Cadastrais */}
+          <div>
+            <div className="px-2 pb-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+              Consultas Cadastrais
+            </div>
+            <div className="space-y-1">
+              <Link
+                href="/dashboard"
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
+                  pathname === '/dashboard'
+                    ? 'text-[#0061D9] bg-[#EFFBFC] dark:bg-white/10 dark:text-cyan-400'
+                    : 'text-slate-700 dark:text-gray-200 hover:bg-slate-100 dark:hover:bg-white/5'
+                }`}
+              >
+                <div className="w-7 h-7 rounded-lg bg-cyan-50 dark:bg-cyan-500/10 flex items-center justify-center text-[#0061D9]">
+                  <Phone className="w-3.5 h-3.5" />
+                </div>
+                <div className="flex-1">
+                  <div>Consultar Telefone</div>
+                  <div className="text-[11px] font-normal text-slate-400">Titularidade e operadora</div>
+                </div>
+              </Link>
 
-          <Link
-            href="/dashboard/faturas"
-            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 dark:text-gray-200 hover:bg-slate-50 dark:hover:bg-white/5"
-          >
-            <Package className="w-4 h-4 text-slate-400" />
-            <span>Adicionar Saldo</span>
-          </Link>
+              <Link
+                href="/dashboard?tab=cpf"
+                className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 dark:text-gray-200 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
+              >
+                <div className="w-7 h-7 rounded-lg bg-blue-50 dark:bg-blue-500/10 flex items-center justify-center text-blue-600">
+                  <Users className="w-3.5 h-3.5" />
+                </div>
+                <div className="flex-1">
+                  <div>Pessoas (CPF)</div>
+                  <div className="text-[11px] font-normal text-slate-400">Dados cadastrais completos</div>
+                </div>
+              </Link>
 
-          <Link
-            href="/dashboard/promocoes"
-            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 dark:text-gray-200 hover:bg-slate-50 dark:hover:bg-white/5"
-          >
-            <Gift className="w-4 h-4 text-slate-400" />
-            <span>Promoções</span>
-          </Link>
+              <Link
+                href="/dashboard/veiculos"
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
+                  pathname.startsWith('/dashboard/veiculos')
+                    ? 'text-[#0061D9] bg-[#EFFBFC] dark:bg-white/10 dark:text-cyan-400'
+                    : 'text-slate-700 dark:text-gray-200 hover:bg-slate-100 dark:hover:bg-white/5'
+                }`}
+              >
+                <div className="w-7 h-7 rounded-lg bg-emerald-50 dark:bg-emerald-500/10 flex items-center justify-center text-emerald-600">
+                  <Car className="w-3.5 h-3.5" />
+                </div>
+                <div className="flex-1">
+                  <div>Veículos (Placa)</div>
+                  <div className="text-[11px] font-normal text-slate-400">Débitos e proprietário</div>
+                </div>
+              </Link>
 
-          <Link
-            href="/dashboard/indicacoes"
-            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 dark:text-gray-200 hover:bg-slate-50 dark:hover:bg-white/5"
-          >
-            <Award className="w-4 h-4 text-slate-400" />
-            <span>Indicações</span>
-          </Link>
+              <Link
+                href="/dashboard/empresas"
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
+                  pathname.startsWith('/dashboard/empresas')
+                    ? 'text-[#0061D9] bg-[#EFFBFC] dark:bg-white/10 dark:text-cyan-400'
+                    : 'text-slate-700 dark:text-gray-200 hover:bg-slate-100 dark:hover:bg-white/5'
+                }`}
+              >
+                <div className="w-7 h-7 rounded-lg bg-purple-50 dark:bg-purple-500/10 flex items-center justify-center text-purple-600">
+                  <Building2 className="w-3.5 h-3.5" />
+                </div>
+                <div className="flex-1">
+                  <div>Empresas (CNPJ)</div>
+                  <div className="text-[11px] font-normal text-slate-400">Sócios, filiais e capital</div>
+                </div>
+              </Link>
 
-          <Link
-            href="/dashboard/perfil"
-            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 dark:text-gray-200 hover:bg-slate-50 dark:hover:bg-white/5"
-          >
-            <UserCircle className="w-4 h-4 text-slate-400" />
-            <span>Meu Perfil</span>
-          </Link>
+              <Link
+                href="/dashboard/processos"
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
+                  pathname.startsWith('/dashboard/processos')
+                    ? 'text-[#0061D9] bg-[#EFFBFC] dark:bg-white/10 dark:text-cyan-400'
+                    : 'text-slate-700 dark:text-gray-200 hover:bg-slate-100 dark:hover:bg-white/5'
+                }`}
+              >
+                <div className="w-7 h-7 rounded-lg bg-amber-50 dark:bg-amber-500/10 flex items-center justify-center text-amber-600">
+                  <Scale className="w-3.5 h-3.5" />
+                </div>
+                <div className="flex-1">
+                  <div>Processos Judiciais</div>
+                  <div className="text-[11px] font-normal text-slate-400">Tribunais de todo o Brasil</div>
+                </div>
+              </Link>
+            </div>
+          </div>
 
-          <a
-            href={whatsappLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-500/10"
-          >
-            <LifeBuoy className="w-4 h-4" />
-            <span>Suporte WhatsApp</span>
-          </a>
+          {/* Seção 2: Financeiro & Serviços */}
+          <div>
+            <div className="px-2 pb-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+              Painel & Financeiro
+            </div>
+            <div className="space-y-1">
+              <Link
+                href="/dashboard/historico"
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+                  isActive('/dashboard/historico')
+                    ? 'text-[#0061D9] bg-[#EFFBFC] dark:bg-white/10 font-semibold'
+                    : 'text-slate-700 dark:text-gray-200 hover:bg-slate-100 dark:hover:bg-white/5'
+                }`}
+              >
+                <History className="w-4 h-4 text-slate-400" />
+                <span>Minhas Consultas (Histórico)</span>
+              </Link>
 
+              <Link
+                href="/dashboard/faturas"
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+                  isActive('/dashboard/faturas')
+                    ? 'text-[#0061D9] bg-[#EFFBFC] dark:bg-white/10 font-semibold'
+                    : 'text-slate-700 dark:text-gray-200 hover:bg-slate-100 dark:hover:bg-white/5'
+                }`}
+              >
+                <Package className="w-4 h-4 text-slate-400" />
+                <span>Adicionar Saldo / Recargas</span>
+              </Link>
+
+              <Link
+                href="/dashboard/promocoes"
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+                  isActive('/dashboard/promocoes')
+                    ? 'text-[#0061D9] bg-[#EFFBFC] dark:bg-white/10 font-semibold'
+                    : 'text-slate-700 dark:text-gray-200 hover:bg-slate-100 dark:hover:bg-white/5'
+                }`}
+              >
+                <Gift className="w-4 h-4 text-slate-400" />
+                <span>Promoções & Cupons</span>
+              </Link>
+
+              <Link
+                href="/dashboard/indicacoes"
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+                  isActive('/dashboard/indicacoes')
+                    ? 'text-[#0061D9] bg-[#EFFBFC] dark:bg-white/10 font-semibold'
+                    : 'text-slate-700 dark:text-gray-200 hover:bg-slate-100 dark:hover:bg-white/5'
+                }`}
+              >
+                <Award className="w-4 h-4 text-slate-400" />
+                <span>Indicações (Ganhe Saldo)</span>
+              </Link>
+
+              <Link
+                href="/dashboard/perfil"
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+                  isActive('/dashboard/perfil')
+                    ? 'text-[#0061D9] bg-[#EFFBFC] dark:bg-white/10 font-semibold'
+                    : 'text-slate-700 dark:text-gray-200 hover:bg-slate-100 dark:hover:bg-white/5'
+                }`}
+              >
+                <UserCircle className="w-4 h-4 text-slate-400" />
+                <span>Meu Perfil</span>
+              </Link>
+
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-500/10 transition-colors"
+              >
+                <LifeBuoy className="w-4 h-4 text-emerald-600" />
+                <span>Suporte WhatsApp</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Painel Administrativo */}
           {user.role === 'ADMIN' && (
-            <Link
-              href="/admin"
-              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-bold text-red-600 bg-red-50 dark:bg-red-500/10"
-            >
-              <ShieldCheck className="w-4 h-4" />
-              <span>Painel Admin</span>
-            </Link>
+            <div className="pt-1">
+              <Link
+                href="/admin"
+                className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-bold text-red-600 bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20"
+              >
+                <ShieldCheck className="w-4 h-4 text-red-600" />
+                <span>Painel Administrativo Master</span>
+              </Link>
+            </div>
           )}
 
-          <div className="border-t border-slate-100 dark:border-white/5 pt-2">
+          {/* Botão Sair */}
+          <div className="border-t border-slate-200/80 dark:border-white/10 pt-3">
             <form action={logout}>
               <button
                 type="submit"
-                className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-red-600 hover:bg-red-50 dark:hover:bg-red-500/10"
+                className="w-full flex items-center justify-center gap-2.5 px-4 py-2.5 rounded-xl text-sm font-bold text-red-600 bg-red-50 dark:bg-red-500/10 hover:bg-red-100 transition-colors cursor-pointer"
               >
                 <LogOut className="w-4 h-4" />
                 <span>Encerrar Sessão</span>

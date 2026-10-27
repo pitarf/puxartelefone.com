@@ -1,5 +1,18 @@
 # Roadmap de Desenvolvimento - puxartelefone.com
 
+## SPLIT 18: Correção e Aprimoramento da Navbar Mobile (✅ 100% CONCLUÍDO)
+*Este split corrigiu o corte da barra superior em smartphones, tornando o botão de menu hambúrguer prioritário e visível, compactando o card de saldo no mobile e redesenhando a gaveta de navegação.*
+- [x] **Card de Saldo Adaptativo (`BalanceHeader.tsx`):**
+  - Implementada variante mobile compacta (`sm:hidden`) com ícone, valor e botão de recarga reduzidos para ~95px.
+  - Mantida variante desktop rica e espaçosa (`hidden sm:flex`).
+- [x] **Responsividade da Navbar (`DashboardNavbar.tsx`):**
+  - Botão hambúrguer com `shrink-0` e dimensões confortáveis (40x40px).
+  - Tema (Light/Dark) movido para dentro do drawer no mobile para evitar sobrecarga de largura.
+  - Gaveta mobile enriquecida com perfil do usuário, consultas categorizadas, financeiro e logout.
+- [x] **Validação & Deploy:**
+  - Build local aprovado com Next.js 16.
+  - Sincronização via Git e deploy na VPS.
+
 ## SPLIT 17: Resiliência de Consultas & Expansão de Timeout da API Externa (✅ 100% CONCLUÍDO)
 *Este split aumentou a tolerância a latências da API DirectData em horários de pico, elevando o timeout de 8s para 18s (e micro-timeout de processos para 12s), eliminando abortos prematuros em consultas detalhadas.*
 - [x] **Ajuste de Timeout no Cliente Axios (`src/services/direct-data.ts`):**

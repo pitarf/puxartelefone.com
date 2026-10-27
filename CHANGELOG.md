@@ -2,6 +2,15 @@
 
 Todas as mudanças notáveis para este projeto serão documentadas neste arquivo.
 
+## [1.4.3] - 2026-10-26
+### Responsividade Mobile Premium: Navbar do Dashboard & Menu Hambúrguer
+- **Resolução do Menu Hambúrguer Cortado em Celulares:**
+  - `BalanceHeader.tsx`: Implementada variante compacta de saldo para dispositivos móveis (`sm:hidden`), reduzindo a largura necessária de ~170px para ~95px e preservando clique rápido de recarga.
+  - `DashboardNavbar.tsx`:
+    - Botão Hambúrguer transformado em elemento prioritário fixo com `shrink-0` e dimensões de toque confortáveis (40x40px).
+    - `ThemeToggle` movido para dentro da gaveta do menu expansível no mobile, liberando largura crítica na barra superior de smartphones (360px a 390px).
+    - Gaveta mobile (`mobileMenuOpen`) totalmente redesenhada: card de perfil no topo com avatar e alternador de tema, blocos de Consultas Cadastrais com ícones dedicados, atalhos de extrato, promoções, suporte WhatsApp e logout seguro.
+
 ## [1.4.2] - 2026-10-26
 ### Otimização de Resiliência: Timeout do Axios Expandido para 18s
 - **Prevenção de Falsos Timeouts em Horários de Pico da DirectData:**
