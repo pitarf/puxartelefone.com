@@ -2,6 +2,13 @@
 
 Todas as mudanças notáveis para este projeto serão documentadas neste arquivo.
 
+## [1.4.2] - 2026-10-26
+### Otimização de Resiliência: Timeout do Axios Expandido para 18s
+- **Prevenção de Falsos Timeouts em Horários de Pico da DirectData:**
+  - Instância global `axiosV3` em `src/services/direct-data.ts` atualizada com timeout de `18.000ms` (18 segundos), evitando cancelamentos prematuros em consultas profundas e enriquecimentos em lote.
+  - Micro-timeout de processos judiciais (`consultaProcessos`) ampliado de `5.000ms` para `12.000ms`.
+  - Tratamento amigável de erro sanitizado preservado, evitando exibição de termos técnicos (`ECONNRESET`, `socket hang up` ou `timeout`) ao usuário.
+
 ## [1.4.1] - 2026-10-23
 ### Limpeza da Marca Visual: Remoção do Sufixo ".com"
 - **Remoção de Todos os Sufixos Visuais de Domínio:**

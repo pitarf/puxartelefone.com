@@ -1,5 +1,14 @@
 # Roadmap de Desenvolvimento - puxartelefone.com
 
+## SPLIT 17: Resiliência de Consultas & Expansão de Timeout da API Externa (✅ 100% CONCLUÍDO)
+*Este split aumentou a tolerância a latências da API DirectData em horários de pico, elevando o timeout de 8s para 18s (e micro-timeout de processos para 12s), eliminando abortos prematuros em consultas detalhadas.*
+- [x] **Ajuste de Timeout no Cliente Axios (`src/services/direct-data.ts`):**
+  - Instância `axiosV3` configurada com `timeout: 18000` (18 segundos).
+  - Micro-timeout da consulta de processos aumentado de 5000ms para 12000ms (12 segundos).
+- [x] **Validação & Deploy:**
+  - Build local aprovado sem erros.
+  - Sincronização com o repositório Git e atualização com rebuild na VPS.
+
 ## SPLIT 16: Remoção do Sufixo ".com" da Identidade Visual da Marca (✅ 100% CONCLUÍDO)
 *Este split removeu o sufixo de domínio ".com" de todas as ocorrências visuais, garantindo um logotipo e identidade visual mais limpos, corporativos e diretos: PuxarTelefone.*
 - [x] **Remoção de Logos & Elementos Visuais:**
