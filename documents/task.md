@@ -1,5 +1,16 @@
 # Roadmap de Desenvolvimento - puxartelefone.com
 
+## SPLIT 19: Migração Definitiva para o PostgreSQL Local no Docker da VPS (✅ 100% CONCLUÍDO)
+*Este split desvinculou a aplicação de produção do Neon (usado para desenvolvimento/testes) e ativou o banco de dados oficial no container PostgreSQL local do Docker na VPS.*
+- [x] **Importação de Schema & Dados Oficiais:**
+  - Dump estrutural e de dados do Neon migrado com sucesso para o container `puxartelefone-db`.
+  - Todas as 15 tabelas criadas no banco local `puxartelefone`.
+  - Usuário administrador preservado (`rfpita.ti@gmail.com`) com saldo e configurações de sistema.
+- [x] **Configuração de Conexão Interna na VPS:**
+  - `DATABASE_URL` no `.env` da VPS configurada para `postgresql://postgres:***@db:5432/puxartelefone?schema=public`.
+  - Persistência garantida via volume Docker `postgres-data`.
+  - Container da aplicação reiniciado e respondendo com status 200 OK.
+
 ## SPLIT 18: Correção e Aprimoramento da Navbar Mobile (✅ 100% CONCLUÍDO)
 *Este split corrigiu o corte da barra superior em smartphones, tornando o botão de menu hambúrguer prioritário e visível, compactando o card de saldo no mobile e redesenhando a gaveta de navegação.*
 - [x] **Card de Saldo Adaptativo (`BalanceHeader.tsx`):**

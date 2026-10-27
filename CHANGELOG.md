@@ -2,6 +2,14 @@
 
 Todas as mudanças notáveis para este projeto serão documentadas neste arquivo.
 
+## [1.4.4] - 2026-10-27
+### Infraestrutura: Ativação do Banco de Dados PostgreSQL no Docker da VPS
+- **Desvinculação do Neon e Migração para o Container Local:**
+  - Migração de todos os dados do banco para o container Docker `puxartelefone-db` (`postgres:15-alpine`), mapeado no volume persistente `postgres-data`.
+  - Importadas todas as 15 tabelas do sistema, mantendo o usuário administrador master (`rfpita.ti@gmail.com`), permissões, saldos e configurações.
+  - Variável de ambiente `DATABASE_URL` na VPS atualizada para a rede interna do Docker (`postgresql://postgres:***@db:5432/puxartelefone?schema=public`).
+  - Container da aplicação reiniciado com sucesso e validado em produção.
+
 ## [1.4.3] - 2026-10-26
 ### Responsividade Mobile Premium: Navbar do Dashboard & Menu Hambúrguer
 - **Resolução do Menu Hambúrguer Cortado em Celulares:**
