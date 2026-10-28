@@ -16,10 +16,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error('Erro ao ler sitemap settings:', err);
   }
 
-  // 1. Rotas estáticas indexáveis (exclui login, cadastro, painel, etc.)
+  // 1. Rotas estáticas indexáveis (exclui login, cadastro, painel, home2 privada, etc.)
   const staticRoutes = [
     '',
-    '/home2',
     '/protecao-de-dados',
     '/termos',
   ];

@@ -18,11 +18,11 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
       userAgent: '*',
       allow: [
         '/',
-        '/home2',
         '/protecao-de-dados',
         '/termos',
       ],
       disallow: [
+        '/home2',
         '/admin',
         '/admin-login',
         '/dashboard/',

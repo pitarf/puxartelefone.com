@@ -149,11 +149,11 @@ export default async function DynamicCoringaPage({ params }: Props) {
         content: `<h2>Tratamento de Dados Pessoais</h2>
 <p>Sua privacidade é prioritária. Esta política descreve quais dados coletamos, armazenamos e tratamos na plataforma.</p>
 <h3>1. Dados Coletados</h3>
-<p>Coletamos seu nome, e-mail e CPF/CNPJ no cadastro para garantir a identificação legal e a integridade financeira das transações.</p>
-<h3>2. Segurança</h3>
-<p>Adotamos criptografia SSL de ponta a ponta e práticas de segurança de bancos de dados para que suas informações e históricos de pesquisas permaneçam confidenciais.</p>
-<h3>3. Direitos de Acesso</h3>
-<p>Você tem o direito de solicitar a alteração ou exclusão de seus dados de cadastro a qualquer momento entrando em contato conosco.</p>`
+<p>No momento do cadastro de novos usuários, solicitamos exclusivamente nome completo, endereço de e-mail e criação de senha segura. Não exigimos documento de identificação pessoal (como CPF ou CNPJ) para a abertura de conta pública.</p>
+<h3>2. Segurança e Comunicação</h3>
+<p>Adotamos protocolos rígidos de segurança, tráfego criptografado via HTTPS/TLS (SSL) e práticas avançadas de proteção e isolamento em nossos bancos de dados para que suas informações e históricos de pesquisas permaneçam confidenciais.</p>
+<h3>3. Direitos de Acesso e LGPD</h3>
+<p>Você tem o direito de solicitar a alteração, confirmação ou exclusão de seus dados cadastrais a qualquer momento através do suporte ou de nossa página de proteção de dados.</p>`
       },
       'politica-de-cookies': {
         title: 'Política de Cookies',
@@ -177,6 +177,76 @@ export default async function DynamicCoringaPage({ params }: Props) {
 <p>Garantimos a todo cidadão brasileiro a transparência sobre a existência de dados em nossa plataforma.</p>
 <h3>2. Exclusão e Bloqueio de Dados (Opt-out)</h3>
 <p>Caso você seja titular de um CPF ou Telefone e deseje que o mesmo seja permanentemente bloqueado para pesquisas em nosso site, basta preencher nosso formulário de Opt-out.</p>`
+      },
+      'consulta-cpf': {
+        title: 'Consulta de CPF Online | Validação Cadastral',
+        description: 'Consulte informações cadastrais de pessoas físicas pelo CPF. Validação rápida da situação na Receita Federal, histórico de endereços e contatos vinculados.',
+        content: `<h2>Consulta e Validação de CPF</h2>
+<p>O serviço de <strong>Consulta de CPF</strong> do PuxarTelefone permite que empresas e profissionais realizem validações cadastrais de pessoas físicas com agilidade, transparência e segurança jurídica.</p>
+<h2>O que você pode validar com esta consulta?</h2>
+<ul>
+  <li><strong>Situação Cadastral:</strong> Verificação imediata do status junto à Receita Federal (Regular, Suspensa, Cancelada).</li>
+  <li><strong>Confirmação de Dados:</strong> Nome completo, data de nascimento e conferência de dígitos verificadores.</li>
+  <li><strong>Contatos e Vínculos:</strong> Identificação de números de telefone e e-mails associados para enriquecimento de cadastros e KYC.</li>
+  <li><strong>Histórico de Localização:</strong> Registro de endereços prévios para localização e correspondência legítima.</li>
+</ul>
+<h2>Como realizar a consulta?</h2>
+<p>Nossa plataforma opera no modelo pay-per-use, sem taxas mensais fixas ou contratos engessados. Você recarrega apenas o saldo que desejar via Pix e utiliza para as consultas necessárias.</p>
+<div style="margin: 32px 0; text-align: center;">
+  <a href="/cadastro" style="background: #0061D9; color: #ffffff; padding: 14px 28px; border-radius: 12px; font-weight: 700; text-decoration: none; display: inline-block; box-shadow: 0 4px 14px rgba(0, 97, 217, 0.3);">Criar Conta e Consultar CPF</a>
+</div>`
+      },
+      'consulta-cnpj': {
+        title: 'Consulta de CNPJ Online | Quadro Societário e Dados Empresariais',
+        description: 'Consulte dados cadastrais completos de empresas através do CNPJ. Situação cadastral, sócios (QSA), CNAE e contatos corporativos.',
+        content: `<h2>Consulta Cadastral de Empresas por CNPJ</h2>
+<p>A <strong>Consulta de CNPJ</strong> do PuxarTelefone foi desenvolvida para agilizar o processo de homologação de fornecedores, análise de risco B2B, prevenção de fraudes e qualificação de parceiros comerciais.</p>
+<h2>Informações disponíveis na consulta empresarial</h2>
+<ul>
+  <li><strong>Dados Básicos da Pessoa Jurídica:</strong> Razão Social, Nome Fantasia, data de abertura, porte empresarial e natureza jurídica.</li>
+  <li><strong>Quadro de Sócios e Administradores (QSA):</strong> Relação de sócios, cargos e participações societárias.</li>
+  <li><strong>Atividades Econômicas:</strong> Código e descrição do CNAE Principal e CNAEs Secundários.</li>
+  <li><strong>Contatos Institucionais:</strong> Telefones comerciais, e-mails cadastrados e endereços corporativos.</li>
+</ul>
+<h2>Agilidade e Conformidade</h2>
+<p>Obtenha os dados essenciais para o seu negócio em segundos. Comece hoje mesmo sem fidelidade, pagando apenas pelas consultas realizadas.</p>
+<div style="margin: 32px 0; text-align: center;">
+  <a href="/cadastro" style="background: #0061D9; color: #ffffff; padding: 14px 28px; border-radius: 12px; font-weight: 700; text-decoration: none; display: inline-block; box-shadow: 0 4px 14px rgba(0, 97, 217, 0.3);">Consultar CNPJ Agora</a>
+</div>`
+      },
+      'consulta-placa': {
+        title: 'Consulta de Veículos por Placa | Informações e Restrições',
+        description: 'Consulte dados de veículos pela placa. Marca, modelo, ano de fabricação, características técnicas e status cadastral em base pública.',
+        content: `<h2>Consulta Veicular por Placa</h2>
+<p>A <strong>Consulta de Veículos por Placa</strong> permite identificar as características técnicas e a situação cadastral de veículos em território nacional para prevenção de fraudes em compras, vistorias e negociações.</p>
+<h2>O que você verifica na consulta veicular?</h2>
+<ul>
+  <li><strong>Dados Técnicos do Veículo:</strong> Marca, modelo, versão, cor, ano de fabricação e ano do modelo.</li>
+  <li><strong>Características Cadastrais:</strong> Tipo de combustível, potência, cilindradas e número de eixos.</li>
+  <li><strong>Situação Cadastral:</strong> Verificação de status público e regularidade cadastral.</li>
+</ul>
+<h2>Sem Mensalidades</h2>
+<p>Acesse o painel do PuxarTelefone, recarregue créditos via Pix com ativação instantânea e realize consultas pontuais conforme a sua demanda.</p>
+<div style="margin: 32px 0; text-align: center;">
+  <a href="/cadastro" style="background: #0061D9; color: #ffffff; padding: 14px 28px; border-radius: 12px; font-weight: 700; text-decoration: none; display: inline-block; box-shadow: 0 4px 14px rgba(0, 97, 217, 0.3);">Realizar Consulta de Placa</a>
+</div>`
+      },
+      'consulta-nome': {
+        title: 'Consulta por Nome Completo | Localização e Apoio Cadastral',
+        description: 'Pesquise dados e referências cadastrais a partir do nome completo para localização de titulares e conferência de registros.',
+        content: `<h2>Consulta Cadastral por Nome Completo</h2>
+<p>A <strong>Consulta por Nome</strong> auxilia empresas, advogados e investigadores legítimos a localizar registros e vínculos cadastrais quando há carência de documentos primários, como CPF ou telefone.</p>
+<h2>Finalidades e Funcionalidades</h2>
+<ul>
+  <li><strong>Localização de Contatos:</strong> Identificação de números telefônicos ou municípios associados ao nome completo.</li>
+  <li><strong>Desambiguação Cadastral:</strong> Triagem de registros com cruzamento de data aproximada ou estado (UF).</li>
+  <li><strong>Conformidade e Ética:</strong> Uso estritamente condicionado à comprovação de finalidade legítima em conformidade com as diretrizes da LGPD.</li>
+</ul>
+<h2>Como começar?</h2>
+<p>Crie sua conta em menos de 1 minuto e tenha acesso imediato a todas as ferramentas de consulta da plataforma PuxarTelefone.</p>
+<div style="margin: 32px 0; text-align: center;">
+  <a href="/cadastro" style="background: #0061D9; color: #ffffff; padding: 14px 28px; border-radius: 12px; font-weight: 700; text-decoration: none; display: inline-block; box-shadow: 0 4px 14px rgba(0, 97, 217, 0.3);">Acessar Consulta por Nome</a>
+</div>`
       }
     };
 

@@ -1,6 +1,15 @@
 import Link from "next/link";
+import { Metadata } from "next";
 import SearchTeaser from "@/components/SearchTeaser";
 import { prisma } from "../../lib/prisma";
+
+export const metadata: Metadata = {
+  title: "PuxarTelefone - Versão Alternativa",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 import {
   Search,
   ShieldCheck,
@@ -261,7 +270,7 @@ export default async function Home2() {
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Prioridade Máxima</span>
               </h2>
               <p className="text-gray-400 mb-8 leading-relaxed">
-                Operamos com total conformidade legal. Todas as consultas são registradas e auditadas. Seus dados de pagamento são protegidos com criptografia de ponta a ponta.
+                Operamos com total conformidade legal. Todas as consultas são registradas e auditadas. Seus dados de tráfego e transações são protegidos com comunicação criptografada SSL/TLS e infraestrutura segura.
               </p>
               <div className="space-y-4">
                 {[
