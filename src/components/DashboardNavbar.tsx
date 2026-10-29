@@ -90,11 +90,20 @@ export function DashboardNavbar({ user, logoUrl, whatsappLink }: DashboardNavbar
           <div className="flex items-center gap-3 sm:gap-6 min-w-0 shrink-0">
             <Link href="/dashboard" className="flex items-center gap-2 sm:gap-2.5 shrink-0">
               {logoUrl ? (
-                <img src={logoUrl} alt="Logo" className="h-7 sm:h-8 w-auto object-contain" />
+                <img 
+                  src={logoUrl} 
+                  alt="Logo" 
+                  className="h-7 sm:h-8 w-auto object-contain" 
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/logo.webp';
+                  }}
+                />
               ) : (
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-gradient-to-tr from-[#0061D9] to-[#00B7C2] flex items-center justify-center text-white shadow-xs shadow-blue-500/20">
-                  <Database className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                </div>
+                <img 
+                  src="/logo.webp" 
+                  alt="Logo" 
+                  className="h-7 sm:h-8 w-auto object-contain" 
+                />
               )}
               <span className="text-base sm:text-lg font-black tracking-tight text-slate-900 dark:text-white">
                 puxar<span className="text-[#0061D9]">telefone</span>

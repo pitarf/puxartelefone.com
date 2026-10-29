@@ -35,7 +35,10 @@ export async function generateMetadata(): Promise<Metadata> {
     const title = settings?.siteTitle || "PuxarTelefone - Consulta de Telefone e Validação Cadastral";
     const description = settings?.siteDescription || "Consulte informações a partir de um número de telefone com DDD. Plataforma rápida, segura e em conformidade com a LGPD.";
     const keywords = settings?.siteKeywords || "consulta telefone, puxar telefone, titular de telefone, consulta cadastral, validação de contato, lgpd";
-    const faviconUrl = settings?.faviconUrl || "/favicon.ico";
+    
+    // Favicon com fallback seguro para /favicon.ico e /favicon.png
+    const rawFavicon = settings?.faviconUrl?.trim();
+    const faviconUrl = (rawFavicon && !rawFavicon.includes('canva.com')) ? rawFavicon : "/favicon.ico";
 
     return {
       title,
@@ -44,9 +47,12 @@ export async function generateMetadata(): Promise<Metadata> {
       icons: {
         icon: [
           { url: faviconUrl, href: faviconUrl },
-          { url: faviconUrl, href: faviconUrl, sizes: '32x32', type: 'image/png' },
+          { url: '/favicon.png', href: '/favicon.png', sizes: '32x32', type: 'image/png' },
+          { url: '/android-chrome-192x192.png', href: '/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
         ],
-        apple: faviconUrl,
+        apple: [
+          { url: '/apple-touch-icon.png', href: '/apple-touch-icon.png', sizes: '180x180' }
+        ],
         shortcut: faviconUrl,
       },
       openGraph: {
@@ -54,6 +60,14 @@ export async function generateMetadata(): Promise<Metadata> {
         description,
         type: "website",
         locale: "pt_BR",
+        images: [
+          {
+            url: "/logo.png",
+            width: 550,
+            height: 540,
+            alt: "PuxarTelefone Logo",
+          }
+        ],
       },
     };
   } catch {
@@ -61,6 +75,11 @@ export async function generateMetadata(): Promise<Metadata> {
     return {
       title: "PuxarTelefone - Consulta de Telefone",
       description: "Plataforma de consultas cadastrais a partir de número de telefone.",
+      icons: {
+        icon: "/favicon.ico",
+        shortcut: "/favicon.ico",
+        apple: "/apple-touch-icon.png",
+      }
     };
   }
 }

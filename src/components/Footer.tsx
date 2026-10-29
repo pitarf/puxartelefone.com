@@ -89,11 +89,16 @@ export default async function Footer({ logoUrl }: FooterProps) {
                   src={logoUrl} 
                   alt="PuxarTelefone" 
                   className="h-8 w-auto object-contain" 
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/logo.webp';
+                  }}
                 />
               ) : (
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#0061D9] to-[#00B7C2] flex items-center justify-center text-white">
-                  <Phone className="w-4 h-4" />
-                </div>
+                <img 
+                  src="/logo.webp" 
+                  alt="PuxarTelefone" 
+                  className="h-8 w-auto object-contain" 
+                />
               )}
               <span className="text-lg font-extrabold text-[#172B3A] dark:text-white tracking-tight">
                 puxar<span className="text-[#0061D9]">telefone</span>

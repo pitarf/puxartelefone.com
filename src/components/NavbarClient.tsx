@@ -70,11 +70,17 @@ export default function NavbarClient({ logoUrl, siteTitle, menuPages = [] }: Nav
               src={logoUrl} 
               alt={siteTitle || "PuxarTelefone"} 
               className="h-8 w-auto object-contain" 
+              onError={(e) => {
+                // Fallback para logo local se a URL do banco falhar
+                (e.target as HTMLImageElement).src = '/logo.webp';
+              }}
             />
           ) : (
-            <div className="w-9 h-9 rounded-xl flex items-center justify-center shadow-sm bg-gradient-to-tr from-[#0061D9] to-[#00B7C2] text-white transition-transform group-hover:scale-105">
-              <Phone className="w-4.5 h-4.5" />
-            </div>
+            <img 
+              src="/logo.webp" 
+              alt="PuxarTelefone" 
+              className="h-8 w-auto object-contain" 
+            />
           )}
           <div className="flex flex-col">
             <span className="text-lg font-extrabold tracking-tight leading-tight text-[#172B3A] dark:text-white">

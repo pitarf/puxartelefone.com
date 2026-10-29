@@ -17,17 +17,25 @@ interface BrandLogoProps {
  * com fallback automático para o ícone padrão com gradiente caso não configurado.
  */
 export function BrandLogo({ logoUrl, faviconUrl, className = '', href = '/' }: BrandLogoProps) {
-  const iconSrc = faviconUrl || logoUrl;
+  const iconSrc = faviconUrl || logoUrl || '/logo.webp';
   const [imageError, setImageError] = useState(false);
 
   return (
     <Link href={href} className={`flex items-center gap-2.5 group ${className}`}>
-      {iconSrc && !imageError ? (
+      {!imageError ? (
         <img
           src={iconSrc}
           alt="Ícone do Sistema"
           className="w-8 h-8 rounded-xl object-contain shadow-xs transition-transform group-hover:scale-105"
-          onError={() => setImageError(true)}
+          onError={() => {
+            if (iconSrc !== '/logo.webp') {
+              // Tenta fallback para logo.webp
+              const img = document.querySelector('img[alt="Ícone do Sistema"]') as HTMLImageElement;
+              if (img) img.src = '/logo.webp';
+            } else {
+              setImageError(true);
+            }
+          }}
         />
       ) : (
         <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#0061D9] to-[#00B7C2] flex items-center justify-center text-white shadow-xs transition-transform group-hover:scale-105">
