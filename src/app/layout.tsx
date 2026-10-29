@@ -71,26 +71,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  var theme = localStorage.getItem('theme');
-                  // Se o tema for explicitamente 'dark', adiciona a classe; senão, mantém clean (branco)
-                  if (theme === 'dark') {
-                    document.documentElement.classList.add('dark');
-                  } else {
-                    document.documentElement.classList.remove('dark');
-                  }
-                } catch (e) {}
-              })();
-            `
-          }}
-        />
-      </head>
+    <html lang="pt-BR" suppressHydrationWarning className="dark">
       <body
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen flex flex-col`}
       >

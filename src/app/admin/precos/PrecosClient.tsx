@@ -135,15 +135,15 @@ export default function PrecosClient({ modulos: modulosIniciais }: Props) {
   }, [modulosFiltrados]);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 min-w-0 max-w-full">
       {/* Header da Página */}
       <div>
         <div className="flex items-center gap-3 mb-2">
-          <div className="w-10 h-10 rounded-xl bg-yellow-500/20 border border-yellow-500/30 flex items-center justify-center shadow-sm">
+          <div className="w-10 h-10 rounded-xl bg-yellow-500/20 border border-yellow-500/30 flex items-center justify-center shadow-sm shrink-0">
             <Tag className="w-5 h-5 text-yellow-600 dark:text-yellow-400" />
           </div>
-          <div>
-            <h1 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">Tabela de Preços</h1>
+          <div className="min-w-0">
+            <h1 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white truncate">Tabela de Preços</h1>
             <p className="text-slate-500 dark:text-gray-400 text-xs md:text-sm">
               Gerencie o valor cobrado por consulta de cada módulo.
             </p>
@@ -152,7 +152,7 @@ export default function PrecosClient({ modulos: modulosIniciais }: Props) {
       </div>
 
       {/* Barra de Pesquisa Rápida e Filtros Mobile-First */}
-      <div className="bg-white dark:bg-card border border-slate-200 dark:border-white/10 rounded-2xl p-4 shadow-sm space-y-3">
+      <div className="bg-white dark:bg-card border border-slate-200 dark:border-white/10 rounded-2xl p-4 shadow-sm space-y-3 min-w-0">
         <div className="relative">
           <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
           <input
@@ -172,8 +172,8 @@ export default function PrecosClient({ modulos: modulosIniciais }: Props) {
           )}
         </div>
 
-        {/* Tags de Categoria para Acesso Instantâneo */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+        {/* Tags de Categoria para Acesso Instantâneo com rolagem suave */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar w-full">
           <button
             onClick={() => setSelectedCategory('TODAS')}
             className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${

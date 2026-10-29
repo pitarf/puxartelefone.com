@@ -318,13 +318,13 @@ export default function GerenciadorBlog({ initialArticles, initialCategories }: 
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 min-w-0 max-w-full">
       
-      {/* Abas */}
-      <div className="flex border-b border-slate-200 dark:border-white/10">
+      {/* Abas com rolagem suave no mobile */}
+      <div className="flex border-b border-slate-200 dark:border-white/10 overflow-x-auto no-scrollbar w-full">
         <button
           onClick={() => setActiveTab('articles')}
-          className={`px-5 py-3 text-sm font-bold flex items-center gap-2 border-b-2 transition-all cursor-pointer ${
+          className={`px-5 py-3 text-xs sm:text-sm font-bold flex items-center gap-2 border-b-2 transition-all cursor-pointer whitespace-nowrap shrink-0 ${
             activeTab === 'articles'
               ? 'border-blue-600 text-blue-600'
               : 'border-transparent text-slate-500 hover:text-slate-700 dark:hover:text-white'
@@ -335,7 +335,7 @@ export default function GerenciadorBlog({ initialArticles, initialCategories }: 
         </button>
         <button
           onClick={() => setActiveTab('categories')}
-          className={`px-5 py-3 text-sm font-bold flex items-center gap-2 border-b-2 transition-all cursor-pointer ${
+          className={`px-5 py-3 text-xs sm:text-sm font-bold flex items-center gap-2 border-b-2 transition-all cursor-pointer whitespace-nowrap shrink-0 ${
             activeTab === 'categories'
               ? 'border-blue-600 text-blue-600'
               : 'border-transparent text-slate-500 hover:text-slate-700 dark:hover:text-white'
@@ -540,27 +540,27 @@ export default function GerenciadorBlog({ initialArticles, initialCategories }: 
         </div>
       )}
 
-      {/* Modal Criar/Editar Artigo */}
+      {/* Modal Criar/Editar Artigo responsivo com overflow controlado */}
       {modalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 overflow-y-auto">
-          <div className="relative w-full max-w-4xl bg-white dark:bg-card border border-slate-200 dark:border-white/10 rounded-3xl shadow-2xl my-8 max-h-[90vh] flex flex-col">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-3 sm:p-4 overflow-y-auto">
+          <div className="relative w-full max-w-[95vw] sm:max-w-2xl md:max-w-4xl bg-white dark:bg-card border border-slate-200 dark:border-white/10 rounded-2xl sm:rounded-3xl shadow-2xl my-4 sm:my-8 max-h-[90vh] flex flex-col">
             
             {/* Header */}
-            <div className="p-6 border-b border-slate-100 dark:border-white/5 flex items-center justify-between">
-              <h2 className="text-xl font-black text-[#243b56] dark:text-white flex items-center gap-2">
-                <BookOpen className="text-blue-500 w-5 h-5" />
+            <div className="p-4 sm:p-6 border-b border-slate-100 dark:border-white/5 flex items-center justify-between">
+              <h2 className="text-lg sm:text-xl font-black text-[#243b56] dark:text-white flex items-center gap-2 truncate">
+                <BookOpen className="text-blue-500 w-5 h-5 shrink-0" />
                 {editingArticle ? 'Editar Artigo' : 'Escrever Novo Artigo'}
               </h2>
               <button 
                 onClick={() => setModalOpen(false)}
-                className="p-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-white/5 text-slate-400 hover:text-slate-600 dark:hover:text-white"
+                className="p-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-white/5 text-slate-400 hover:text-slate-600 dark:hover:text-white shrink-0"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Formulário */}
-            <form onSubmit={handleSubmitArticle} className="flex-1 overflow-y-auto p-6 md:p-8 space-y-6">
+            <form onSubmit={handleSubmitArticle} className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 space-y-6">
               
               {/* Título e Slug */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -882,15 +882,15 @@ export default function GerenciadorBlog({ initialArticles, initialCategories }: 
 
             </form>
 
-            {/* Footer com Ações */}
-            <div className="p-6 border-t border-slate-100 dark:border-white/5 bg-slate-50 dark:bg-black/20 rounded-b-3xl flex justify-between gap-3 items-center">
+            {/* Footer com Ações adaptado para mobile com flex-col-reverse */}
+            <div className="p-4 sm:p-6 border-t border-slate-100 dark:border-white/5 bg-slate-50 dark:bg-black/20 rounded-b-2xl sm:rounded-b-3xl flex flex-col sm:flex-row justify-between gap-3 sm:items-center">
               <div>
                 {editingArticle && (
                   <a
                     href={`/blog/${editingArticle.slug}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2 bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-xs font-bold text-slate-700 dark:text-white rounded-xl transition-all shadow-sm flex items-center gap-1"
+                    className="w-full sm:w-auto px-4 py-2 bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-xs font-bold text-slate-700 dark:text-white rounded-xl transition-all shadow-sm flex items-center justify-center gap-1.5"
                   >
                     <Eye className="w-3.5 h-3.5" />
                     Visualizar no Blog
@@ -898,11 +898,11 @@ export default function GerenciadorBlog({ initialArticles, initialCategories }: 
                 )}
               </div>
 
-              <div className="flex gap-3">
+              <div className="flex flex-col-reverse sm:flex-row gap-2.5 sm:gap-3 w-full sm:w-auto">
                 <button
                   type="button"
                   onClick={() => setModalOpen(false)}
-                  className="px-5 py-3 text-xs md:text-sm font-bold text-slate-500 hover:text-slate-900 border border-slate-200 dark:border-white/10 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 transition-all cursor-pointer"
+                  className="w-full sm:w-auto px-5 py-2.5 sm:py-3 text-xs md:text-sm font-bold text-slate-500 hover:text-slate-900 border border-slate-200 dark:border-white/10 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 transition-all cursor-pointer text-center"
                 >
                   Cancelar
                 </button>
@@ -910,7 +910,7 @@ export default function GerenciadorBlog({ initialArticles, initialCategories }: 
                   type="button"
                   onClick={handleSubmitArticle}
                   disabled={loading || uploadingImage}
-                  className="px-6 py-3 text-xs md:text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition-all shadow-md hover:shadow-blue-500/10 disabled:opacity-50 inline-flex items-center gap-2 cursor-pointer"
+                  className="w-full sm:w-auto px-6 py-2.5 sm:py-3 text-xs md:text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition-all shadow-md hover:shadow-blue-500/10 disabled:opacity-50 inline-flex items-center justify-center gap-2 cursor-pointer text-center"
                 >
                   {loading ? <Loader2 className="w-4.5 h-4.5 animate-spin" /> : <Save className="w-4.5 h-4.5" />}
                   {editingArticle ? 'Salvar Alterações' : 'Criar Artigo'}

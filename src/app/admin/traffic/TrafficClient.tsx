@@ -72,65 +72,65 @@ export default function TrafficClient({
   const totalPages = Math.ceil(initialUsers.length / itemsPerPage);
 
   return (
-    <div className="max-w-6xl mx-auto pb-20 space-y-8 text-left">
+    <div className="max-w-6xl mx-auto pb-20 space-y-6 sm:space-y-8 text-left min-w-0">
       {/* 1. Header */}
-      <div className="bg-gradient-to-r from-[#0f1e36] to-[#1e3b5b] text-white p-6 md:p-8 rounded-3xl shadow-lg border border-[#1e3b5b]/30 flex flex-col md:flex-row md:items-center justify-between gap-6">
-        <div className="space-y-1">
-          <h1 className="text-2xl md:text-3xl font-bold tracking-tight flex items-center gap-2">
-            <Globe className="w-8 h-8 text-sky-400" />
+      <div className="bg-gradient-to-r from-[#0f1e36] to-[#1e3b5b] text-white p-5 sm:p-6 md:p-8 rounded-3xl shadow-lg border border-[#1e3b5b]/30 flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6 min-w-0">
+        <div className="space-y-1 min-w-0">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight flex items-center gap-2">
+            <Globe className="w-6 h-6 sm:w-8 sm:h-8 text-sky-400 shrink-0" />
             Origem dos Clientes & UTMs
           </h1>
-          <p className="text-white/70 text-sm font-medium">
+          <p className="text-white/70 text-xs sm:text-sm font-medium">
             Rastreamento e atribuição de tráfego das campanhas de marketing em tempo real.
           </p>
         </div>
       </div>
 
       {/* 2. KPIs de Campanhas */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="glass-panel p-6 rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-card shadow-sm flex items-center justify-between">
-          <div className="space-y-1">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 min-w-0">
+        <div className="glass-panel p-5 sm:p-6 rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-card shadow-sm flex items-center justify-between min-w-0">
+          <div className="space-y-1 min-w-0">
             <span className="text-xs text-slate-400 dark:text-gray-400 font-bold uppercase tracking-wider block">Cadastros por Campanhas</span>
-            <span className="text-3xl font-black text-slate-900 dark:text-white block">{initialKpis.totalCampaignUsers}</span>
+            <span className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white block truncate">{initialKpis.totalCampaignUsers}</span>
           </div>
-          <div className="p-4 bg-blue-500/10 text-[#2872fa] rounded-2xl">
-            <Users className="w-6 h-6" />
+          <div className="p-3.5 sm:p-4 bg-blue-500/10 text-[#2872fa] rounded-2xl shrink-0">
+            <Users className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
         </div>
 
-        <div className="glass-panel p-6 rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-card shadow-sm flex items-center justify-between">
-          <div className="space-y-1">
+        <div className="glass-panel p-5 sm:p-6 rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-card shadow-sm flex items-center justify-between min-w-0">
+          <div className="space-y-1 min-w-0">
             <span className="text-xs text-slate-400 dark:text-gray-400 font-bold uppercase tracking-wider block">Faturamento Campanhas</span>
-            <span className="text-3xl font-black text-slate-900 dark:text-white block">
+            <span className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white block truncate">
               R$ {initialKpis.totalCampaignRevenue.toFixed(2).replace('.', ',')}
             </span>
           </div>
-          <div className="p-4 bg-sky-500/10 text-sky-500 rounded-2xl">
-            <DollarSign className="w-6 h-6" />
+          <div className="p-3.5 sm:p-4 bg-sky-500/10 text-sky-500 rounded-2xl shrink-0">
+            <DollarSign className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
         </div>
 
-        <div className="glass-panel p-6 rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-card shadow-sm flex items-center justify-between">
-          <div className="space-y-1">
+        <div className="glass-panel p-5 sm:p-6 rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-card shadow-sm flex items-center justify-between col-span-1 sm:col-span-2 md:col-span-1 min-w-0">
+          <div className="space-y-1 min-w-0">
             <span className="text-xs text-slate-400 dark:text-gray-400 font-bold uppercase tracking-wider block">Lucro Líquido Real</span>
-            <span className="text-3xl font-black text-emerald-500 block">
+            <span className="text-2xl sm:text-3xl font-black text-emerald-500 block truncate">
               R$ {initialKpis.totalCampaignProfit.toFixed(2).replace('.', ',')}
             </span>
           </div>
-          <div className="p-4 bg-emerald-500/10 text-emerald-500 rounded-2xl">
-            <TrendingUp className="w-6 h-6" />
+          <div className="p-3.5 sm:p-4 bg-emerald-500/10 text-emerald-500 rounded-2xl shrink-0">
+            <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
         </div>
       </div>
 
       {/* 3. Tabela de Origem de Canais */}
-      <div className="glass-panel rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-card shadow-sm p-6 md:p-8">
-        <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+      <div className="glass-panel rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-card shadow-sm p-4 sm:p-6 md:p-8 min-w-0">
+        <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
           <BarChart3 className="w-5 h-5 text-primary" />
           Desempenho Geral de Canais
         </h2>
         
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto w-full inline-block align-middle">
           <table className="w-full text-left text-sm text-slate-600 dark:text-gray-300">
             <thead className="text-xs uppercase bg-slate-50 dark:bg-black/20 text-slate-400 dark:text-gray-500 tracking-wider">
               <tr>
@@ -184,13 +184,13 @@ export default function TrafficClient({
       </div>
 
       {/* 4. Busca, Filtros e Lista Detalhada */}
-      <div className="glass-panel rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-card shadow-sm p-6 md:p-8 space-y-6">
+      <div className="glass-panel rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-card shadow-sm p-4 sm:p-6 md:p-8 space-y-6 min-w-0">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 dark:border-white/5 pb-6">
-          <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+          <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
             Lista Detalhada de Clientes Rastreados
           </h2>
 
-          <form onSubmit={handleSearchSubmit} className="flex flex-wrap items-center gap-3 w-full md:w-auto">
+          <form onSubmit={handleSearchSubmit} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
             {/* Input de Busca */}
             <div className="relative flex-1 md:w-64">
               <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
@@ -213,7 +213,7 @@ export default function TrafficClient({
               <select
                 value={sourceFilter}
                 onChange={(e) => handleSourceChange(e.target.value)}
-                className="pl-9 pr-8 py-2 border border-slate-200 dark:border-white/10 rounded-xl bg-slate-50 dark:bg-black/20 text-slate-950 dark:text-white outline-none focus:border-primary text-xs font-semibold appearance-none cursor-pointer"
+                className="w-full sm:w-auto pl-9 pr-8 py-2 border border-slate-200 dark:border-white/10 rounded-xl bg-slate-50 dark:bg-black/20 text-slate-950 dark:text-white outline-none focus:border-primary text-xs font-semibold appearance-none cursor-pointer"
               >
                 <option value="">Todas as Origens</option>
                 {sources.map(s => (
@@ -227,7 +227,7 @@ export default function TrafficClient({
               <button
                 type="button"
                 onClick={clearFilters}
-                className="p-2 border border-slate-200 dark:border-white/10 rounded-xl text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
+                className="p-2 border border-slate-200 dark:border-white/10 rounded-xl text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors flex items-center justify-center"
                 title="Limpar Filtros"
               >
                 <X className="w-4 h-4" />
@@ -237,7 +237,7 @@ export default function TrafficClient({
         </div>
 
         {/* Tabela de Usuários */}
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto w-full inline-block align-middle">
           <table className="w-full text-left text-sm text-slate-600 dark:text-gray-300">
             <thead className="text-xs uppercase bg-slate-50 dark:bg-black/20 text-slate-400 dark:text-gray-500 tracking-wider">
               <tr>

@@ -24,35 +24,35 @@ export default async function AdminLogsPage() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto pb-20">
-      <div className="mb-8 border-b border-slate-200 dark:border-white/10 pb-6">
-        <h1 className="text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
-          <Activity className="text-primary w-8 h-8" />
+    <div className="max-w-6xl mx-auto pb-20 min-w-0 max-w-full">
+      <div className="mb-6 sm:mb-8 border-b border-slate-200 dark:border-white/10 pb-4 sm:pb-6">
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
+          <Activity className="text-primary w-7 h-7 sm:w-8 sm:h-8 shrink-0" />
           Logs do Sistema
         </h1>
-        <p className="text-slate-500 dark:text-gray-400 mt-2">Monitoramento de eventos, erros e atividades críticas da plataforma.</p>
+        <p className="text-slate-500 dark:text-gray-400 text-xs sm:text-sm mt-1 sm:mt-2">Monitoramento de eventos, erros e atividades críticas da plataforma.</p>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-4 min-w-0">
         {logs.map((log) => (
-          <div key={log.id} className="bg-white dark:bg-card border border-slate-200 dark:border-white/10 shadow-sm rounded-2xl p-6 hover:border-slate-300 dark:hover:border-white/20 transition-all">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
-              <div className="flex items-center gap-3">
-                <div className={`flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold border ${getLevelStyles(log.level)}`}>
+          <div key={log.id} className="bg-white dark:bg-card border border-slate-200 dark:border-white/10 shadow-sm rounded-2xl p-4 sm:p-6 hover:border-slate-300 dark:hover:border-white/20 transition-all min-w-0">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-4 mb-3 sm:mb-4">
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                <div className={`flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 rounded-full text-[10px] font-bold border shrink-0 ${getLevelStyles(log.level)}`}>
                   {getLevelIcon(log.level)}
                   {log.level}
                 </div>
-                <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-gray-400">
-                  <Clock className="w-3 h-3" />
+                <div className="flex items-center gap-1.5 sm:gap-2 text-xs text-slate-500 dark:text-gray-400">
+                  <Clock className="w-3 h-3 shrink-0" />
                   {new Date(log.createdAt).toLocaleString('pt-BR')}
                 </div>
               </div>
-              <div className="text-[10px] text-slate-400 dark:text-gray-500 font-mono select-all bg-slate-50 dark:bg-white/5 px-2 py-1 rounded border border-slate-200 dark:border-white/5">
+              <div className="text-[10px] text-slate-400 dark:text-gray-500 font-mono select-all bg-slate-50 dark:bg-white/5 px-2 py-1 rounded border border-slate-200 dark:border-white/5 w-fit">
                 ID: {log.id}
               </div>
             </div>
             
-            <h3 className="text-slate-900 dark:text-white font-medium mb-3 leading-relaxed">{log.message}</h3>
+            <h3 className="text-slate-900 dark:text-white text-sm sm:text-base font-medium mb-3 leading-relaxed break-words">{log.message}</h3>
 
             {/* Resumo Visual Inteligente para o Administrador */}
             {log.context && (() => {
@@ -68,16 +68,16 @@ export default async function AdminLogsPage() {
               if (!userEmail && !query && !target) return null;
 
               return (
-                <div className="p-3.5 bg-slate-50 dark:bg-white/[0.03] rounded-xl border border-slate-200 dark:border-white/10 text-xs mb-3 space-y-2">
-                  <div className="flex flex-wrap items-center gap-2.5">
+                <div className="p-3 sm:p-3.5 bg-slate-50 dark:bg-white/[0.03] rounded-xl border border-slate-200 dark:border-white/10 text-xs mb-3 space-y-2 min-w-0">
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
                     {userEmail && (
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-blue-500/10 text-blue-700 dark:text-blue-300 font-medium text-[11px] border border-blue-500/20">
-                        <Shield className="w-3.5 h-3.5 text-blue-500" />
-                        {userName && userName !== 'Não informado' ? `${userName} (${userEmail})` : userEmail}
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-blue-500/10 text-blue-700 dark:text-blue-300 font-medium text-[11px] border border-blue-500/20 max-w-full truncate">
+                        <Shield className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                        <span className="truncate">{userName && userName !== 'Não informado' ? `${userName} (${userEmail})` : userEmail}</span>
                       </span>
                     )}
                     {target && query && (
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-primary/10 text-primary font-mono text-[11px] font-bold border border-primary/20">
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-primary/10 text-primary font-mono text-[11px] font-bold border border-primary/20 max-w-full truncate">
                         {target.toUpperCase()}: {query}
                       </span>
                     )}
@@ -93,7 +93,7 @@ export default async function AdminLogsPage() {
                     )}
                   </div>
                   {diagnostico && (
-                    <p className="text-slate-600 dark:text-gray-300 text-[11px] pt-1.5 border-t border-slate-200 dark:border-white/5 leading-relaxed">
+                    <p className="text-slate-600 dark:text-gray-300 text-[11px] pt-1.5 border-t border-slate-200 dark:border-white/5 leading-relaxed break-words">
                       💡 <strong>Diagnóstico:</strong> {diagnostico}
                     </p>
                   )}
@@ -102,12 +102,12 @@ export default async function AdminLogsPage() {
             })()}
 
             {log.context && (
-              <div className="mt-2">
+              <div className="mt-2 min-w-0">
                 <p className="text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-widest mb-2 flex items-center gap-2">
-                  <Shield className="w-3 h-3" />
+                  <Shield className="w-3 h-3 shrink-0" />
                   Contexto Técnico (JSON)
                 </p>
-                <pre className="bg-slate-900 dark:bg-black/40 p-4 rounded-xl text-[11px] text-blue-600 dark:text-blue-400/80 font-mono overflow-x-auto border border-slate-200 dark:border-white/5 shadow-inner">
+                <pre className="bg-slate-900 dark:bg-black/40 p-3 sm:p-4 rounded-xl text-[10px] sm:text-[11px] text-blue-600 dark:text-blue-400/80 font-mono overflow-x-auto border border-slate-200 dark:border-white/5 shadow-inner max-w-full">
                   {JSON.stringify(log.context, null, 2)}
                 </pre>
               </div>

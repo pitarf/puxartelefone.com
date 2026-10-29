@@ -31,26 +31,26 @@ export default function PerformanceChart({ data }: { data: ChartData[] }) {
   };
 
   return (
-    <div className="glass-panel rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm p-8">
+    <div className="glass-panel rounded-3xl border border-slate-200 dark:border-white/5 bg-white dark:bg-card shadow-sm p-4 sm:p-6 md:p-8 min-w-0">
       {/* Header */}
-      <div className="mb-6">
-        <h2 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+      <div className="mb-4 sm:mb-6">
+        <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
           <span className="w-1.5 h-6 bg-[#00B87C] rounded-full mr-1"></span>
           Relatório de Desempenho
         </h2>
       </div>
 
-      <div className="bg-white dark:bg-slate-900/50 rounded-2xl border border-slate-100 dark:border-white/5 p-6 shadow-sm">
-        <div className="mb-6">
-          <h3 className="text-lg font-semibold text-slate-800 dark:text-white">Métricas de Crescimento</h3>
-          <p className="text-sm text-slate-500 dark:text-slate-400">Acompanhe a evolução temporal de depósitos e cadastros</p>
+      <div className="bg-white dark:bg-slate-900/50 rounded-2xl border border-slate-100 dark:border-white/5 p-4 sm:p-6 shadow-sm min-w-0">
+        <div className="mb-4 sm:mb-6">
+          <h3 className="text-base sm:text-lg font-semibold text-slate-800 dark:text-white">Métricas de Crescimento</h3>
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Acompanhe a evolução temporal de depósitos e cadastros</p>
         </div>
 
-        {/* Tabs */}
-        <div className="flex bg-slate-50 dark:bg-slate-800 p-1 rounded-xl w-fit mb-8 border border-slate-100 dark:border-slate-700">
+        {/* Tabs responsivas com rolagem suave */}
+        <div className="flex bg-slate-50 dark:bg-slate-800 p-1 rounded-xl w-full sm:w-fit mb-6 sm:mb-8 border border-slate-100 dark:border-slate-700 overflow-x-auto no-scrollbar gap-1">
           <button
             onClick={() => setActiveTab('amount')}
-            className={`flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-medium transition-all ${
+            className={`flex items-center justify-center gap-2 px-3.5 sm:px-5 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all whitespace-nowrap shrink-0 flex-1 sm:flex-initial ${
               activeTab === 'amount'
                 ? 'bg-[#00B87C] text-white shadow-md'
                 : 'text-slate-500 hover:text-slate-700 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
@@ -61,7 +61,7 @@ export default function PerformanceChart({ data }: { data: ChartData[] }) {
           </button>
           <button
             onClick={() => setActiveTab('users')}
-            className={`flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-medium transition-all ${
+            className={`flex items-center justify-center gap-2 px-3.5 sm:px-5 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all whitespace-nowrap shrink-0 flex-1 sm:flex-initial ${
               activeTab === 'users'
                 ? 'bg-[#2872fa] text-white shadow-md'
                 : 'text-slate-500 hover:text-slate-700 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
@@ -75,13 +75,13 @@ export default function PerformanceChart({ data }: { data: ChartData[] }) {
         {/* Legend */}
         <div className="flex items-center gap-2 mb-4">
           <div className={`w-3 h-3 rounded-full ${activeTab === 'amount' ? 'bg-[#00B87C]' : 'bg-[#2872fa]'}`}></div>
-          <span className="text-sm text-slate-600 dark:text-slate-400 font-medium">
+          <span className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium">
             {activeTab === 'amount' ? 'Total em Reais (R$)' : 'Quantidade de Cadastros'}
           </span>
         </div>
 
-        {/* Chart */}
-        <div className="h-[350px] w-full">
+        {/* Chart com min-w-0 */}
+        <div className="h-[280px] sm:h-[350px] w-full min-w-0">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart
               data={data}

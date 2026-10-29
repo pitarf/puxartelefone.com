@@ -79,12 +79,12 @@ export default function VendasClient({ initialSales, initialPending }: VendasCli
   };
 
   return (
-    <div className="space-y-6">
-      {/* Menu de Abas Premium */}
-      <div className="flex border-b border-slate-200 dark:border-white/10 pb-px gap-4">
+    <div className="space-y-6 min-w-0">
+      {/* Menu de Abas com suporte a scroll horizontal no mobile */}
+      <div className="flex border-b border-slate-200 dark:border-white/10 pb-px gap-2 sm:gap-4 overflow-x-auto no-scrollbar w-full">
         <button
           onClick={() => setActiveTab('pending')}
-          className={`pb-4 px-2 text-sm font-bold flex items-center gap-2 border-b-2 transition-all relative ${
+          className={`pb-4 px-2 text-xs sm:text-sm font-bold flex items-center gap-2 border-b-2 transition-all relative shrink-0 whitespace-nowrap ${
             activeTab === 'pending'
               ? 'border-primary text-primary'
               : 'border-transparent text-slate-500 hover:text-slate-900 dark:text-gray-400 dark:hover:text-white'
@@ -100,7 +100,7 @@ export default function VendasClient({ initialSales, initialPending }: VendasCli
         </button>
         <button
           onClick={() => setActiveTab('completed')}
-          className={`pb-4 px-2 text-sm font-bold flex items-center gap-2 border-b-2 transition-all ${
+          className={`pb-4 px-2 text-xs sm:text-sm font-bold flex items-center gap-2 border-b-2 transition-all relative shrink-0 whitespace-nowrap ${
             activeTab === 'completed'
               ? 'border-primary text-primary'
               : 'border-transparent text-slate-500 hover:text-slate-900 dark:text-gray-400 dark:hover:text-white'
@@ -118,7 +118,7 @@ export default function VendasClient({ initialSales, initialPending }: VendasCli
 
       {/* Conteúdo das Tabelas */}
       <div className="glass-panel rounded-2xl overflow-hidden border border-slate-200 dark:border-white/10 bg-white dark:bg-card shadow-sm hover:shadow-md transition-all">
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto w-full inline-block align-middle">
           {activeTab === 'pending' ? (
             /* TAB 1: PENDENTES */
             <table className="w-full text-left text-sm text-slate-700 dark:text-gray-300">

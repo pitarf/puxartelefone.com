@@ -238,9 +238,10 @@ export default function UserTableClient({ initialUsers }: { initialUsers: any[] 
 
   return (
     <>
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+      {/* Barra superior de pesquisa e exportação com empilhamento limpo no mobile */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-6">
         {/* Barra de pesquisa */}
-        <div className="relative flex-grow max-w-md">
+        <div className="relative flex-grow max-w-md w-full">
           <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
             <Search className="w-4 h-4" />
           </span>
@@ -256,24 +257,25 @@ export default function UserTableClient({ initialUsers }: { initialUsers: any[] 
         {/* Botão de Exportar */}
         <button
           onClick={handleExportCSV}
-          className="flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 rounded-xl transition-all shadow-md hover:shadow-blue-500/10 active:scale-95 cursor-pointer"
+          className="flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 rounded-xl transition-all shadow-md hover:shadow-blue-500/10 active:scale-95 cursor-pointer shrink-0 w-full sm:w-auto"
         >
           <Download className="w-4 h-4" />
           Exportar Leads (CSV)
         </button>
       </div>
 
+      {/* Tabela de Usuários com wrapper responsivo para rolagem horizontal suave */}
       <div className="glass-panel rounded-xl overflow-hidden border border-slate-200 dark:border-white/10 bg-white dark:bg-card shadow-sm hover:shadow-md transition-all">
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto w-full inline-block align-middle">
           <table className="w-full text-left text-sm text-slate-700 dark:text-gray-300">
             <thead className="bg-slate-50 dark:bg-black/40 text-xs uppercase text-slate-500 dark:text-gray-500 font-bold border-b border-slate-200 dark:border-white/5">
               <tr>
-                <th className="px-6 py-4">Usuário</th>
-                <th className="px-6 py-4">Saldo (R$)</th>
-                <th className="px-6 py-4">Status</th>
-                <th className="px-6 py-4">Data Registro</th>
-                <th className="px-6 py-4">Último Acesso</th>
-                <th className="px-6 py-4 text-right">Ações</th>
+                <th className="px-4 sm:px-6 py-4">Usuário</th>
+                <th className="px-4 sm:px-6 py-4">Saldo (R$)</th>
+                <th className="px-4 sm:px-6 py-4">Status</th>
+                <th className="px-4 sm:px-6 py-4">Data Registro</th>
+                <th className="px-4 sm:px-6 py-4">Último Acesso</th>
+                <th className="px-4 sm:px-6 py-4 text-right">Ações</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-white/5 bg-transparent dark:bg-black/10">
@@ -335,65 +337,67 @@ export default function UserTableClient({ initialUsers }: { initialUsers: any[] 
                       <span className="text-slate-400 dark:text-gray-500 italic text-xs">Nunca</span>
                     )}
                   </td>
-                  <td className="px-6 py-4 text-right space-x-2">
-                    <button 
-                      onClick={() => handleToggleRole(user.id, user.role, user.email)}
-                      disabled={loading}
-                      className={`p-2 rounded transition-all inline-flex ${
-                        user.role === 'ADMIN' 
-                          ? 'bg-amber-500/20 text-amber-600 dark:text-amber-400 hover:bg-amber-500 hover:text-white' 
-                          : user.role === 'SEO'
-                          ? 'bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500 hover:text-white'
-                          : 'bg-slate-200/50 dark:bg-white/5 text-slate-500 dark:text-gray-400 hover:bg-amber-500 hover:text-white'
-                      }`}
-                      title={`Cargo atual: ${user.role || 'USER'}. Clique para alterar.`}
-                    >
-                      {user.role === 'ADMIN' ? (
-                        <Crown className="w-4 h-4" />
-                      ) : user.role === 'SEO' ? (
-                        <Globe className="w-4 h-4" />
-                      ) : (
-                        <User className="w-4 h-4" />
-                      )}
-                    </button>
-
-                    <button 
-                      onClick={() => handleOpenAuditModal(user)}
-                      disabled={loading}
-                      className="p-2 bg-purple-500/20 text-purple-600 dark:text-purple-400 hover:bg-purple-500 hover:text-white rounded transition-colors inline-flex"
-                      title="Auditoria de Pedidos"
-                    >
-                      <Eye className="w-4 h-4" />
-                    </button>
-
-                    <button 
-                      onClick={() => handleOpenBalanceModal(user)}
-                      disabled={loading}
-                      className="p-2 bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500 hover:text-white rounded transition-colors inline-flex"
-                      title="Adicionar Saldo"
-                    >
-                      <Wallet className="w-4 h-4" />
-                    </button>
-
-                    <button 
-                      onClick={() => handleOpenPixValidationModal(user)}
-                      disabled={loading}
-                      className="p-2 bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500 hover:text-white rounded transition-colors inline-flex"
-                      title="Validar Pix Manual"
-                    >
-                      <QrCode className="w-4 h-4" />
-                    </button>
-                    
-                    {user.role !== 'ADMIN' && (
+                  <td className="px-4 sm:px-6 py-4 text-right">
+                    <div className="whitespace-nowrap flex items-center justify-end gap-1.5">
                       <button 
-                        onClick={() => handleToggleStatus(user.id, user.active)}
+                        onClick={() => handleToggleRole(user.id, user.role, user.email)}
                         disabled={loading}
-                        className={`p-2 rounded transition-colors inline-flex ${user.active ? 'bg-red-500/20 text-red-600 dark:text-red-400 hover:bg-red-500 hover:text-white' : 'bg-green-500/20 text-green-600 dark:text-green-400 hover:bg-green-500 hover:text-white'}`}
-                        title={user.active ? "Banir Usuário" : "Restaurar Usuário"}
+                        className={`p-2 rounded transition-all inline-flex shrink-0 ${
+                          user.role === 'ADMIN' 
+                            ? 'bg-amber-500/20 text-amber-600 dark:text-amber-400 hover:bg-amber-500 hover:text-white' 
+                            : user.role === 'SEO'
+                            ? 'bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500 hover:text-white'
+                            : 'bg-slate-200/50 dark:bg-white/5 text-slate-500 dark:text-gray-400 hover:bg-amber-500 hover:text-white'
+                        }`}
+                        title={`Cargo atual: ${user.role || 'USER'}. Clique para alterar.`}
                       >
-                        {user.active ? <Ban className="w-4 h-4" /> : <CheckCircle className="w-4 h-4" />}
+                        {user.role === 'ADMIN' ? (
+                          <Crown className="w-4 h-4" />
+                        ) : user.role === 'SEO' ? (
+                          <Globe className="w-4 h-4" />
+                        ) : (
+                          <User className="w-4 h-4" />
+                        )}
                       </button>
-                    )}
+
+                      <button 
+                        onClick={() => handleOpenAuditModal(user)}
+                        disabled={loading}
+                        className="p-2 bg-purple-500/20 text-purple-600 dark:text-purple-400 hover:bg-purple-500 hover:text-white rounded transition-colors inline-flex shrink-0"
+                        title="Auditoria de Pedidos"
+                      >
+                        <Eye className="w-4 h-4" />
+                      </button>
+
+                      <button 
+                        onClick={() => handleOpenBalanceModal(user)}
+                        disabled={loading}
+                        className="p-2 bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500 hover:text-white rounded transition-colors inline-flex shrink-0"
+                        title="Adicionar Saldo"
+                      >
+                        <Wallet className="w-4 h-4" />
+                      </button>
+
+                      <button 
+                        onClick={() => handleOpenPixValidationModal(user)}
+                        disabled={loading}
+                        className="p-2 bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500 hover:text-white rounded transition-colors inline-flex shrink-0"
+                        title="Validar Pix Manual"
+                      >
+                        <QrCode className="w-4 h-4" />
+                      </button>
+                      
+                      {user.role !== 'ADMIN' && (
+                        <button 
+                          onClick={() => handleToggleStatus(user.id, user.active)}
+                          disabled={loading}
+                          className={`p-2 rounded transition-colors inline-flex shrink-0 ${user.active ? 'bg-red-500/20 text-red-600 dark:text-red-400 hover:bg-red-500 hover:text-white' : 'bg-green-500/20 text-green-600 dark:text-green-400 hover:bg-green-500 hover:text-white'}`}
+                          title={user.active ? "Banir Usuário" : "Restaurar Usuário"}
+                        >
+                          {user.active ? <Ban className="w-4 h-4" /> : <CheckCircle className="w-4 h-4" />}
+                        </button>
+                      )}
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -407,12 +411,12 @@ export default function UserTableClient({ initialUsers }: { initialUsers: any[] 
         </div>
       </div>
 
-      {/* Modal de Saldo */}
+      {/* Modal de Saldo com padding e dimensões mobile-first */}
       {modalOpen && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 px-4">
-          <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-white/10 p-6 rounded-2xl w-full max-w-md shadow-2xl animate-in zoom-in-95 duration-200">
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Gerenciar Saldo</h3>
-            <p className="text-sm text-slate-500 dark:text-gray-400 mb-6">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-3 sm:p-4">
+          <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-white/10 p-4 sm:p-6 rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-2xl animate-in zoom-in-95 duration-200">
+            <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-2">Gerenciar Saldo</h3>
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-gray-400 mb-6 break-words">
               Gerenciamento de saldo para o usuário <strong className="text-slate-900 dark:text-white">{selectedUser?.email}</strong>.
             </p>
 
@@ -421,7 +425,7 @@ export default function UserTableClient({ initialUsers }: { initialUsers: any[] 
               <button
                 type="button"
                 onClick={() => setBalanceTab('adjust')}
-                className={`flex-1 pb-3 text-sm font-semibold border-b-2 transition-all ${
+                className={`flex-1 pb-3 text-xs sm:text-sm font-semibold border-b-2 transition-all ${
                   balanceTab === 'adjust'
                     ? 'border-primary text-primary'
                     : 'border-transparent text-slate-400 hover:text-slate-600 dark:text-gray-500 dark:hover:text-gray-300'
@@ -432,7 +436,7 @@ export default function UserTableClient({ initialUsers }: { initialUsers: any[] 
               <button
                 type="button"
                 onClick={() => setBalanceTab('pix')}
-                className={`flex-1 pb-3 text-sm font-semibold border-b-2 transition-all ${
+                className={`flex-1 pb-3 text-xs sm:text-sm font-semibold border-b-2 transition-all ${
                   balanceTab === 'pix'
                     ? 'border-primary text-primary'
                     : 'border-transparent text-slate-400 hover:text-slate-600 dark:text-gray-500 dark:hover:text-gray-300'
@@ -594,31 +598,31 @@ export default function UserTableClient({ initialUsers }: { initialUsers: any[] 
         </div>
       )}
 
-      {/* Modal de Auditoria */}
+      {/* Modal de Auditoria responsivo com padding adaptável para mobile */}
       {auditOpen && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-white/10 rounded-3xl w-full max-w-5xl max-h-[90vh] shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-4 duration-300">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-2 sm:p-4">
+          <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-white/10 rounded-2xl sm:rounded-3xl w-full max-w-4xl max-h-[88vh] shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-4 duration-300">
             {/* Header Audit */}
-            <div className="p-6 border-b border-slate-200 dark:border-white/10 flex items-center justify-between bg-slate-50 dark:bg-white/5">
-              <div className="flex items-center gap-4">
-                <div className="p-3 bg-purple-500/20 rounded-2xl text-purple-600 dark:text-purple-400 shadow-xl shadow-purple-500/10">
-                  <History className="w-6 h-6" />
+            <div className="p-4 sm:p-6 border-b border-slate-200 dark:border-white/10 flex items-center justify-between bg-slate-50 dark:bg-white/5">
+              <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+                <div className="p-2.5 sm:p-3 bg-purple-500/20 rounded-2xl text-purple-600 dark:text-purple-400 shadow-xl shadow-purple-500/10 shrink-0">
+                  <History className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">Auditoria de Usuário</h3>
-                  <p className="text-sm text-slate-500 dark:text-gray-400">{selectedUser?.email}</p>
+                <div className="min-w-0">
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight truncate">Auditoria de Usuário</h3>
+                  <p className="text-xs sm:text-sm text-slate-500 dark:text-gray-400 truncate">{selectedUser?.email}</p>
                 </div>
               </div>
               <button 
                 onClick={() => { setAuditOpen(false); setAuditData(null); }}
-                className="p-2 hover:bg-slate-100 dark:hover:bg-white/10 rounded-full text-slate-400 hover:text-slate-900 dark:text-gray-400 dark:hover:text-white transition-colors"
+                className="p-1.5 sm:p-2 hover:bg-slate-100 dark:hover:bg-white/10 rounded-full text-slate-400 hover:text-slate-900 dark:text-gray-400 dark:hover:text-white transition-colors shrink-0"
               >
-                <X className="w-6 h-6" />
+                <X className="w-5 h-5 sm:w-6 sm:h-6" />
               </button>
             </div>
 
             {/* Content Audit */}
-            <div className="flex-1 overflow-y-auto p-8 custom-scrollbar bg-slate-50/50 dark:bg-card/30">
+            <div className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 custom-scrollbar bg-slate-50/50 dark:bg-card/30">
               {loading && !auditData ? (
                 <div className="flex flex-col items-center justify-center py-20 text-slate-400 dark:text-gray-500 gap-4">
                   <Loader2 className="w-10 h-10 animate-spin text-primary" />

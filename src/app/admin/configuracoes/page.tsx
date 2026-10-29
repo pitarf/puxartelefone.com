@@ -107,27 +107,27 @@ export default function AdminSettingsPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto pb-12">
-      <div className="mb-8 border-b border-slate-200 dark:border-white/10 pb-6">
-        <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Configurações do Sistema</h1>
-        <p className="text-slate-500 dark:text-gray-400 mt-2">Gerencie a identidade visual, SEO e canais de suporte.</p>
+    <div className="max-w-4xl mx-auto pb-12 min-w-0 max-w-full">
+      <div className="mb-6 sm:mb-8 border-b border-slate-200 dark:border-white/10 pb-4 sm:pb-6">
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">Configurações do Sistema</h1>
+        <p className="text-slate-500 dark:text-gray-400 text-xs sm:text-sm mt-1 sm:mt-2">Gerencie a identidade visual, SEO e canais de suporte.</p>
       </div>
 
-      <form onSubmit={handleSave} className="space-y-8">
+      <form onSubmit={handleSave} className="space-y-6 sm:space-y-8 min-w-0">
 
         {/* ====== BRANDING VISUAL ====== */}
-        <section className="bg-white dark:bg-card border border-slate-200 dark:border-white/10 shadow-sm rounded-3xl p-8 space-y-6">
+        <section className="bg-white dark:bg-card border border-slate-200 dark:border-white/10 shadow-sm rounded-3xl p-4 sm:p-6 md:p-8 space-y-6 min-w-0">
           <div className="flex items-center gap-3 border-b border-slate-100 dark:border-white/5 pb-4 mb-6">
-            <div className="p-2 bg-blue-500/20 rounded-lg text-blue-600 dark:text-blue-400">
+            <div className="p-2 bg-blue-500/20 rounded-lg text-blue-600 dark:text-blue-400 shrink-0">
               <Image className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-slate-900 dark:text-white">Branding Visual</h2>
-              <p className="text-slate-500 dark:text-gray-400 text-sm">Defina a logo e o favicon do sistema via URL externa.</p>
+              <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Branding Visual</h2>
+              <p className="text-slate-500 dark:text-gray-400 text-xs sm:text-sm">Defina a logo e o favicon do sistema via URL externa.</p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
             {/* Logo */}
             <div className="space-y-3">
               <label className="text-sm font-bold text-slate-600 dark:text-gray-400">URL da Logo</label>
@@ -217,12 +217,12 @@ export default function AdminSettingsPage() {
         </section>
 
         {/* ====== SEO & IDENTIDADE ====== */}
-        <section className="bg-white dark:bg-card border border-slate-200 dark:border-white/10 shadow-sm rounded-3xl p-8 space-y-6">
+        <section className="bg-white dark:bg-card border border-slate-200 dark:border-white/10 shadow-sm rounded-3xl p-4 sm:p-6 md:p-8 space-y-6 min-w-0">
           <div className="flex items-center gap-3 border-b border-slate-100 dark:border-white/5 pb-4 mb-6">
-            <div className="p-2 bg-primary/20 rounded-lg text-primary">
+            <div className="p-2 bg-primary/20 rounded-lg text-primary shrink-0">
               <Globe className="w-5 h-5" />
             </div>
-            <h2 className="text-xl font-bold text-slate-900 dark:text-white">Identidade & SEO</h2>
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Identidade & SEO</h2>
           </div>
 
           <div className="grid grid-cols-1 gap-6">
@@ -264,14 +264,14 @@ export default function AdminSettingsPage() {
         {role === 'ADMIN' && (
           <>
             {/* ====== GATEWAY DE PAGAMENTO (PUSHINPAY) ====== */}
-            <section className="bg-white dark:bg-card border border-slate-200 dark:border-white/10 shadow-sm rounded-3xl p-8 space-y-6">
+            <section className="bg-white dark:bg-card border border-slate-200 dark:border-white/10 shadow-sm rounded-3xl p-4 sm:p-6 md:p-8 space-y-6 min-w-0">
               <div className="flex items-center gap-3 border-b border-slate-100 dark:border-white/5 pb-4 mb-6">
-                <div className="p-2 bg-emerald-500/20 rounded-lg text-emerald-600 dark:text-emerald-400">
+                <div className="p-2 bg-emerald-500/20 rounded-lg text-emerald-600 dark:text-emerald-400 shrink-0">
                   <CreditCard className="w-5 h-5" />
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold text-slate-900 dark:text-white">Gateway de Pagamento (PushinPay)</h2>
-                  <p className="text-slate-500 dark:text-gray-400 text-sm">Configure as chaves de integração Pix. Se deixado em branco, o sistema usará as chaves padrão do arquivo .env.</p>
+                  <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Gateway de Pagamento (PushinPay)</h2>
+                  <p className="text-slate-500 dark:text-gray-400 text-xs sm:text-sm">Configure as chaves de integração Pix. Se deixado em branco, o sistema usará as chaves padrão do arquivo .env.</p>
                 </div>
               </div>
 

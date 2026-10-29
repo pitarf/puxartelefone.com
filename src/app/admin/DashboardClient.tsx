@@ -32,8 +32,8 @@ export default function DashboardClient({ currentPeriod, initialStart, initialEn
   };
 
   return (
-    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
-      {/* Filtros Rápidos */}
+    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full sm:w-auto min-w-0">
+      {/* Filtros Rápidos com rolagem suave horizontal no mobile sem quebrar o layout */}
       <div className="flex items-center bg-black/20 dark:bg-black/35 p-1 rounded-2xl border border-white/10 shadow-inner gap-1 overflow-x-auto no-scrollbar w-full max-w-full">
         {PERIODS.map((p) => {
           const active = currentPeriod === p.value;
@@ -45,7 +45,7 @@ export default function DashboardClient({ currentPeriod, initialStart, initialEn
                 setShowDatePicker(false);
                 router.push(`/admin?period=${p.value}`);
               }}
-              className={`px-3 py-1.5 text-xs font-bold rounded-xl transition-all whitespace-nowrap ${
+              className={`px-3 py-1.5 text-xs font-bold rounded-xl transition-all whitespace-nowrap shrink-0 ${
                 active
                   ? 'bg-blue-600 text-white shadow-md'
                   : 'text-white/70 hover:text-white hover:bg-white/5'
@@ -58,7 +58,7 @@ export default function DashboardClient({ currentPeriod, initialStart, initialEn
         <button
           type="button"
           onClick={() => setShowDatePicker(!showDatePicker)}
-          className={`px-3 py-1.5 text-xs font-bold rounded-xl transition-all whitespace-nowrap flex items-center gap-1.5 ${
+          className={`px-3 py-1.5 text-xs font-bold rounded-xl transition-all whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
             currentPeriod === 'custom'
               ? 'bg-blue-600 text-white shadow-md'
               : 'text-white/70 hover:text-white hover:bg-white/5'
@@ -69,34 +69,34 @@ export default function DashboardClient({ currentPeriod, initialStart, initialEn
         </button>
       </div>
 
-      {/* Inputs de Data (Colapsável) */}
+      {/* Inputs de Data (Colapsável) adaptados para caber com folga em telas de 360px */}
       {showDatePicker && (
-        <form onSubmit={applyCustomFilter} className="flex flex-row flex-wrap items-center gap-2 bg-slate-800/80 dark:bg-card border border-white/10 rounded-2xl p-2 animate-in fade-in slide-in-from-top-1 duration-200">
-          <div className="flex items-center gap-1">
-            <span className="text-[10px] font-bold text-white/50 px-1">De:</span>
+        <form onSubmit={applyCustomFilter} className="flex flex-col sm:flex-row sm:items-center gap-2 bg-slate-800/90 dark:bg-card border border-white/10 rounded-2xl p-2.5 animate-in fade-in slide-in-from-top-1 duration-200 w-full sm:w-auto">
+          <div className="flex items-center justify-between sm:justify-start gap-1.5">
+            <span className="text-[10px] font-bold text-white/60 shrink-0">De:</span>
             <input
               type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
               required
-              className="bg-black/40 border border-white/10 rounded-lg px-2 py-1 text-xs text-white outline-none focus:border-blue-500"
+              className="bg-black/40 border border-white/10 rounded-lg px-2 py-1 text-xs text-white outline-none focus:border-blue-500 w-full sm:w-auto"
             />
           </div>
-          <div className="flex items-center gap-1">
-            <span className="text-[10px] font-bold text-white/50 px-1">Até:</span>
+          <div className="flex items-center justify-between sm:justify-start gap-1.5">
+            <span className="text-[10px] font-bold text-white/60 shrink-0">Até:</span>
             <input
               type="date"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
               required
-              className="bg-black/40 border border-white/10 rounded-lg px-2 py-1 text-xs text-white outline-none focus:border-blue-500"
+              className="bg-black/40 border border-white/10 rounded-lg px-2 py-1 text-xs text-white outline-none focus:border-blue-500 w-full sm:w-auto"
             />
           </div>
           <button
             type="submit"
-            className="bg-blue-600 hover:bg-blue-500 text-white font-bold px-3 py-1 rounded-lg text-xs shadow-md transition-all active:scale-95"
+            className="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white font-bold px-3.5 py-1.5 rounded-lg text-xs shadow-md transition-all active:scale-95 text-center mt-1 sm:mt-0"
           >
-            OK
+            Aplicar
           </button>
         </form>
       )}

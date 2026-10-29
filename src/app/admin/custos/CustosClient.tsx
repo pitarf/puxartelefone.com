@@ -62,23 +62,23 @@ export default function CustosClient({ dailyBreakdown, detailedQueries }: Custos
   });
 
   return (
-    <div className="space-y-6 text-left">
+    <div className="space-y-6 text-left min-w-0">
       {/* Cards de Resumo */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 min-w-0">
         {/* Total Consultas */}
-        <div className="bg-white dark:bg-card border border-slate-200 dark:border-white/5 rounded-3xl p-6 shadow-sm">
+        <div className="bg-white dark:bg-card border border-slate-200 dark:border-white/5 rounded-3xl p-5 sm:p-6 shadow-sm min-w-0">
           <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Total Consultas (Provedor)</p>
           <div className="mt-2 flex items-baseline justify-between">
-            <span className="text-2xl font-bold text-slate-800 dark:text-white">{totalQueries}</span>
+            <span className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-white">{totalQueries}</span>
             <span className="text-xs text-slate-500 font-medium">Requisições reais</span>
           </div>
         </div>
 
         {/* Custo Total de APIs */}
-        <div className="bg-white dark:bg-card border border-slate-200 dark:border-white/5 rounded-3xl p-6 shadow-sm">
+        <div className="bg-white dark:bg-card border border-slate-200 dark:border-white/5 rounded-3xl p-5 sm:p-6 shadow-sm min-w-0">
           <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Custo Provedor API</p>
           <div className="mt-2 flex items-baseline justify-between">
-            <span className="text-2xl font-bold text-red-600 dark:text-red-400">
+            <span className="text-xl sm:text-2xl font-bold text-red-600 dark:text-red-400 truncate">
               R$ {totalApiCost.toFixed(2).replace('.', ',')}
             </span>
             <span className="text-xs text-slate-500 font-medium">Cobrado p/ consulta</span>
@@ -86,10 +86,10 @@ export default function CustosClient({ dailyBreakdown, detailedQueries }: Custos
         </div>
 
         {/* Faturamento de Consultas */}
-        <div className="bg-white dark:bg-card border border-slate-200 dark:border-white/5 rounded-3xl p-6 shadow-sm">
+        <div className="bg-white dark:bg-card border border-slate-200 dark:border-white/5 rounded-3xl p-5 sm:p-6 shadow-sm min-w-0">
           <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Cobrado dos Usuários</p>
           <div className="mt-2 flex items-baseline justify-between">
-            <span className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">
+            <span className="text-xl sm:text-2xl font-bold text-emerald-600 dark:text-emerald-400 truncate">
               R$ {totalUserCharged.toFixed(2).replace('.', ',')}
             </span>
             <span className="text-xs text-slate-500 font-medium">Consumo de saldo</span>
@@ -97,10 +97,10 @@ export default function CustosClient({ dailyBreakdown, detailedQueries }: Custos
         </div>
 
         {/* Lucro Estimado */}
-        <div className="bg-white dark:bg-card border border-slate-200 dark:border-white/5 rounded-3xl p-6 shadow-sm">
+        <div className="bg-white dark:bg-card border border-slate-200 dark:border-white/5 rounded-3xl p-5 sm:p-6 shadow-sm min-w-0">
           <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Lucro Líquido Estimado</p>
           <div className="mt-2 flex items-baseline justify-between">
-            <span className={`text-2xl font-bold ${totalProfit >= 0 ? 'text-blue-600 dark:text-blue-400' : 'text-rose-600'}`}>
+            <span className={`text-xl sm:text-2xl font-bold truncate ${totalProfit >= 0 ? 'text-blue-600 dark:text-blue-400' : 'text-rose-600'}`}>
               R$ {totalProfit.toFixed(2).replace('.', ',')}
             </span>
             <span className="text-xs text-slate-500 font-medium">Margem bruta</span>
@@ -108,11 +108,11 @@ export default function CustosClient({ dailyBreakdown, detailedQueries }: Custos
         </div>
       </div>
 
-      {/* Tabs */}
-      <div className="flex border-b border-slate-200 dark:border-white/5">
+      {/* Tabs com scroll suave para telas móveis */}
+      <div className="flex border-b border-slate-200 dark:border-white/5 overflow-x-auto no-scrollbar w-full">
         <button
           onClick={() => setActiveTab('daily')}
-          className={`flex items-center gap-2 px-6 py-3 font-bold text-sm border-b-2 transition-all ${
+          className={`flex items-center gap-2 px-4 sm:px-6 py-3 font-bold text-xs sm:text-sm border-b-2 transition-all shrink-0 whitespace-nowrap ${
             activeTab === 'daily'
               ? 'border-red-500 text-red-500 bg-red-500/5'
               : 'border-transparent text-slate-400 hover:text-slate-200 dark:hover:text-slate-100'
@@ -123,7 +123,7 @@ export default function CustosClient({ dailyBreakdown, detailedQueries }: Custos
         </button>
         <button
           onClick={() => setActiveTab('detailed')}
-          className={`flex items-center gap-2 px-6 py-3 font-bold text-sm border-b-2 transition-all ${
+          className={`flex items-center gap-2 px-4 sm:px-6 py-3 font-bold text-xs sm:text-sm border-b-2 transition-all shrink-0 whitespace-nowrap ${
             activeTab === 'detailed'
               ? 'border-red-500 text-red-500 bg-red-500/5'
               : 'border-transparent text-slate-400 hover:text-slate-200 dark:hover:text-slate-100'
@@ -136,9 +136,9 @@ export default function CustosClient({ dailyBreakdown, detailedQueries }: Custos
 
       {/* Tab: Resumo Diário */}
       {activeTab === 'daily' && (
-        <div className="bg-white dark:bg-card border border-slate-200 dark:border-white/5 rounded-3xl p-6 md:p-8 shadow-sm">
-          <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-4">Breakdown por Dia</h2>
-          <div className="overflow-x-auto">
+        <div className="bg-white dark:bg-card border border-slate-200 dark:border-white/5 rounded-3xl p-4 sm:p-6 md:p-8 shadow-sm min-w-0">
+          <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white mb-4">Breakdown por Dia</h2>
+          <div className="overflow-x-auto w-full inline-block align-middle">
             <table className="w-full text-left text-sm text-slate-600 dark:text-gray-300">
               <thead className="text-xs uppercase bg-slate-50 dark:bg-black/20 text-slate-400 dark:text-gray-500 tracking-wider">
                 <tr>
@@ -193,9 +193,9 @@ export default function CustosClient({ dailyBreakdown, detailedQueries }: Custos
 
       {/* Tab: Histórico Detalhado */}
       {activeTab === 'detailed' && (
-        <div className="bg-white dark:bg-card border border-slate-200 dark:border-white/5 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+        <div className="bg-white dark:bg-card border border-slate-200 dark:border-white/5 rounded-3xl p-4 sm:p-6 md:p-8 shadow-sm space-y-6 min-w-0">
           {/* Filtros e Busca */}
-          <div className="flex flex-col md:flex-row gap-4 items-end">
+          <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-end">
             <div className="flex-1 w-full">
               <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Busca de Termo ou Usuário</label>
               <div className="relative">
@@ -229,7 +229,7 @@ export default function CustosClient({ dailyBreakdown, detailedQueries }: Custos
           </div>
 
           {/* Tabela de Histórico */}
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto w-full inline-block align-middle">
             <table className="w-full text-left text-sm text-slate-600 dark:text-gray-300">
               <thead className="text-xs uppercase bg-slate-50 dark:bg-black/20 text-slate-400 dark:text-gray-500 tracking-wider">
                 <tr>

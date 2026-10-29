@@ -68,18 +68,18 @@ export default function BloqueiosClient({ initialBlockedList }: { initialBlocked
   );
 
   return (
-    <div className="space-y-8 text-left">
-      {/* Form de Adicionar Bloqueio */}
-      <div className="bg-white dark:bg-card border border-slate-200 dark:border-white/5 rounded-3xl p-6 md:p-8 shadow-sm">
-        <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
-          <Ban className="w-5 h-5 text-red-500" />
+    <div className="space-y-6 sm:space-y-8 text-left min-w-0">
+      {/* Form de Adicionar Bloqueio com quebra mobile inteligente */}
+      <div className="bg-white dark:bg-card border border-slate-200 dark:border-white/5 rounded-3xl p-4 sm:p-6 md:p-8 shadow-sm min-w-0">
+        <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white mb-2 sm:mb-4 flex items-center gap-2">
+          <Ban className="w-5 h-5 text-red-500 shrink-0" />
           Bloquear Novo CPF, CNPJ, Placa, Telefone ou Nome
         </h2>
         <p className="text-xs text-slate-500 dark:text-slate-400 mb-6 leading-relaxed">
           Os dados inseridos aqui serão bloqueados para consultas em todos os módulos da plataforma imediatamente.
         </p>
 
-        <form onSubmit={handleAddBlock} className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+        <form onSubmit={handleAddBlock} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
           <div>
             <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Tipo de Dado</label>
             <select
@@ -124,7 +124,7 @@ export default function BloqueiosClient({ initialBlockedList }: { initialBlocked
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-red-600 hover:bg-red-500 text-white font-bold py-4 px-6 rounded-2xl shadow-lg transition-all disabled:opacity-50 active:scale-95 text-sm text-center uppercase tracking-wider"
+              className="w-full bg-red-600 hover:bg-red-500 text-white font-bold py-3.5 sm:py-4 px-6 rounded-2xl shadow-lg transition-all disabled:opacity-50 active:scale-95 text-xs sm:text-sm text-center uppercase tracking-wider"
             >
               {loading ? 'Bloqueando...' : 'Aplicar Bloqueio'}
             </button>
@@ -132,12 +132,12 @@ export default function BloqueiosClient({ initialBlockedList }: { initialBlocked
         </form>
       </div>
 
-      {/* Lista de Bloqueios */}
-      <div className="bg-white dark:bg-card border border-slate-200 dark:border-white/5 rounded-3xl p-6 md:p-8 shadow-sm">
+      {/* Lista de Bloqueios com padding e layout mobile-first */}
+      <div className="bg-white dark:bg-card border border-slate-200 dark:border-white/5 rounded-3xl p-4 sm:p-6 md:p-8 shadow-sm min-w-0">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
           <div>
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-emerald-500" />
+            <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <ShieldCheck className="w-5 h-5 text-emerald-500 shrink-0" />
               Lista de Bloqueios Ativos
             </h2>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Registros atualmente excluídos de consultas</p>
@@ -157,7 +157,7 @@ export default function BloqueiosClient({ initialBlockedList }: { initialBlocked
         </div>
 
         {/* Tabela de registros */}
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto w-full inline-block align-middle">
           <table className="w-full text-left text-sm text-slate-600 dark:text-gray-300">
             <thead className="text-xs uppercase bg-slate-50 dark:bg-black/20 text-slate-400 dark:text-gray-500 tracking-wider">
               <tr>
