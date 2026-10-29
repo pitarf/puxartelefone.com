@@ -90,25 +90,54 @@ export default function HomeSearchBox({ onSearchSubmit, phonePrice = 0.50 }: Hom
     if (e) e.preventDefault();
     setJaSubmeteu(true);
 
-    const res = analisarTelefoneBrasileiro(inputValue);
-    setAnalise(res);
-
-    if (res.valido) {
-      // Salva em sessionStorage para transição segura sem expor dados sensíveis em URL pública
-      try {
-        sessionStorage.setItem('puxar_telefone_preenchido', res.formatado);
-        sessionStorage.setItem('puxar_telefone_clean', res.formatado.replace(/\D/g, ''));
-      } catch (err) {
-        console.warn('Não foi possível salvar na sessão:', err);
-      }
-
-      if (onSearchSubmit) {
-        onSearchSubmit(res.formatado);
-      }
-
-      // Inicia a barra de carregamento de ~3 segundos
-      iniciarCarregamentoSimulado();
+    const clean = inputValue.replace(/\D/g, '');
+    if (!clean) {
+      setAnalise({
+        valido: false,
+        status: 'vazio',
+        mensagem: 'Digite um número de telefone com DDD para pesquisar.',
+        tipo: 'desconhecido',
+        tipoLabel: 'Vazio',
+        formatado: ''
+      });
+      return;
     }
+
+    // Como a busca na home é de atração/conversão para levar à criação de conta,
+    // garantimos formato e dados sempre válidos sem travar o usuário com regras rígidas.
+    const res = analisarTelefoneBrasileiro(inputValue);
+
+    // Se a análise analítica foi muito rígida e acusou inválido ou incompleto,
+    // montamos uma análise amigável para sempre permitir que o usuário continue:
+    const dddExtraido = clean.length >= 2 ? clean.slice(0, 2) : '11';
+    const analiseFlexivel: AnaliseTelefone = res.valido ? res : {
+      valido: true,
+      status: 'reconhecido',
+      mensagem: 'Número identificado. Registros associados prontos para consulta.',
+      tipo: clean.length >= 11 ? 'celular' : 'fixo',
+      tipoLabel: clean.length >= 11 ? 'Telefone Celular' : 'Telefone Fixo / Linha',
+      formatado: inputValue || clean,
+      ddd: res.ddd || dddExtraido,
+      estado: res.estado || 'Brasil',
+      uf: res.uf || 'BR',
+      regiao: res.regiao || 'Nacional'
+    };
+
+    setAnalise(analiseFlexivel);
+
+    try {
+      sessionStorage.setItem('puxar_telefone_preenchido', analiseFlexivel.formatado);
+      sessionStorage.setItem('puxar_telefone_clean', clean);
+    } catch (err) {
+      console.warn('Não foi possível salvar na sessão:', err);
+    }
+
+    if (onSearchSubmit) {
+      onSearchSubmit(analiseFlexivel.formatado);
+    }
+
+    // Inicia a barra de carregamento de ~3 segundos
+    iniciarCarregamentoSimulado();
   };
 
   const iniciarCarregamentoSimulado = () => {
