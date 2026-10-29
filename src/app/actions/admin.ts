@@ -497,9 +497,8 @@ export async function getAdvancedMetrics(period: string = 'month', customStart?:
     startOfBr.setUTCHours(0, 0, 0, 0);
     startDate = new Date(startOfBr.getTime() - BR_OFFSET_MS);
   } else if (period === 'month') {
-    const startOfBr = new Date(nowBr);
-    startOfBr.setUTCDate(nowBr.getUTCDate() - 29);
-    startOfBr.setUTCHours(0, 0, 0, 0);
+    // Mês Atual: do primeiro dia do mês corrente às 00:00:00 até o momento atual
+    const startOfBr = new Date(nowBr.getUTCFullYear(), nowBr.getUTCMonth(), 1, 0, 0, 0, 0);
     startDate = new Date(startOfBr.getTime() - BR_OFFSET_MS);
   } else if (period === 'year') {
     const startOfBr = new Date(nowBr.getUTCFullYear(), 0, 1, 0, 0, 0, 0);
@@ -612,9 +611,10 @@ export async function getAdvancedMetrics(period: string = 'month', customStart?:
       chartMap.set(getLocalDateKey(d), { faturamento: 0, cadastros: 0 });
     }
   } else if (period === 'month') {
-    for (let i = 29; i >= 0; i--) {
-      const d = new Date(nowBr.getTime() - BR_OFFSET_MS);
-      d.setDate(d.getDate() - i);
+    // Mês Atual: preencher do dia 1 até o dia atual do mês corrente
+    const currentDay = nowBr.getUTCDate();
+    for (let day = 1; day <= currentDay; day++) {
+      const d = new Date(nowBr.getUTCFullYear(), nowBr.getUTCMonth(), day, 12, 0, 0, 0);
       chartMap.set(getLocalDateKey(d), { faturamento: 0, cadastros: 0 });
     }
   } else if (period === 'custom' && customStart && customEnd) {
