@@ -392,6 +392,7 @@ export function DashboardNavbar({ user, logoUrl, whatsappLink }: DashboardNavbar
             <div className="space-y-1">
               <Link
                 href="/dashboard"
+                onClick={() => setMobileMenuOpen(false)}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
                   pathname === '/dashboard'
                     ? 'text-[#0061D9] bg-[#EFFBFC] dark:bg-white/10 dark:text-cyan-400'
@@ -409,6 +410,7 @@ export function DashboardNavbar({ user, logoUrl, whatsappLink }: DashboardNavbar
 
               <Link
                 href="/dashboard?tab=cpf"
+                onClick={() => setMobileMenuOpen(false)}
                 className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 dark:text-gray-200 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
               >
                 <div className="w-7 h-7 rounded-lg bg-blue-50 dark:bg-blue-500/10 flex items-center justify-center text-blue-600">
@@ -422,6 +424,7 @@ export function DashboardNavbar({ user, logoUrl, whatsappLink }: DashboardNavbar
 
               <Link
                 href="/dashboard/veiculos"
+                onClick={() => setMobileMenuOpen(false)}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
                   pathname.startsWith('/dashboard/veiculos')
                     ? 'text-[#0061D9] bg-[#EFFBFC] dark:bg-white/10 dark:text-cyan-400'
@@ -439,6 +442,7 @@ export function DashboardNavbar({ user, logoUrl, whatsappLink }: DashboardNavbar
 
               <Link
                 href="/dashboard/empresas"
+                onClick={() => setMobileMenuOpen(false)}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
                   pathname.startsWith('/dashboard/empresas')
                     ? 'text-[#0061D9] bg-[#EFFBFC] dark:bg-white/10 dark:text-cyan-400'
@@ -456,6 +460,7 @@ export function DashboardNavbar({ user, logoUrl, whatsappLink }: DashboardNavbar
 
               <Link
                 href="/dashboard/processos"
+                onClick={() => setMobileMenuOpen(false)}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
                   pathname.startsWith('/dashboard/processos')
                     ? 'text-[#0061D9] bg-[#EFFBFC] dark:bg-white/10 dark:text-cyan-400'
@@ -481,6 +486,7 @@ export function DashboardNavbar({ user, logoUrl, whatsappLink }: DashboardNavbar
             <div className="space-y-1">
               <Link
                 href="/dashboard/historico"
+                onClick={() => setMobileMenuOpen(false)}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${
                   isActive('/dashboard/historico')
                     ? 'text-[#0061D9] bg-[#EFFBFC] dark:bg-white/10 font-semibold'
@@ -493,6 +499,7 @@ export function DashboardNavbar({ user, logoUrl, whatsappLink }: DashboardNavbar
 
               <Link
                 href="/dashboard/faturas"
+                onClick={() => setMobileMenuOpen(false)}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${
                   isActive('/dashboard/faturas')
                     ? 'text-[#0061D9] bg-[#EFFBFC] dark:bg-white/10 font-semibold'
@@ -505,6 +512,7 @@ export function DashboardNavbar({ user, logoUrl, whatsappLink }: DashboardNavbar
 
               <Link
                 href="/dashboard/promocoes"
+                onClick={() => setMobileMenuOpen(false)}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${
                   isActive('/dashboard/promocoes')
                     ? 'text-[#0061D9] bg-[#EFFBFC] dark:bg-white/10 font-semibold'
@@ -517,6 +525,7 @@ export function DashboardNavbar({ user, logoUrl, whatsappLink }: DashboardNavbar
 
               <Link
                 href="/dashboard/indicacoes"
+                onClick={() => setMobileMenuOpen(false)}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${
                   isActive('/dashboard/indicacoes')
                     ? 'text-[#0061D9] bg-[#EFFBFC] dark:bg-white/10 font-semibold'
@@ -529,6 +538,7 @@ export function DashboardNavbar({ user, logoUrl, whatsappLink }: DashboardNavbar
 
               <Link
                 href="/dashboard/perfil"
+                onClick={() => setMobileMenuOpen(false)}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${
                   isActive('/dashboard/perfil')
                     ? 'text-[#0061D9] bg-[#EFFBFC] dark:bg-white/10 font-semibold'
@@ -543,6 +553,7 @@ export function DashboardNavbar({ user, logoUrl, whatsappLink }: DashboardNavbar
                 href={whatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => setMobileMenuOpen(false)}
                 className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-500/10 transition-colors"
               >
                 <LifeBuoy className="w-4 h-4 text-emerald-600" />

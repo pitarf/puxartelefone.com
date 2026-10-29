@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { realizarConsulta, getPricing, getSearchSettings } from '@/app/actions/consultas';
 import { getUserProfile } from '@/app/actions/perfil';
 import { validarChave } from '@/lib/validators';
@@ -51,10 +52,22 @@ const INITIAL_DATA_MODULES = [
 ];
 
 export default function DashboardPage() {
-  const [chaveTipo, setChaveTipo] = useState('telefone');
+  const searchParams = useSearchParams();
+  const tabParam = searchParams.get('tab');
+
+  const [chaveTipo, setChaveTipo] = useState(tabParam === 'cpf' ? 'cpf' : 'telefone');
   const [chaveValor, setChaveValor] = useState('');
   const [chaveUf, setChaveUf] = useState('');
   const [modules, setModules] = useState(INITIAL_DATA_MODULES);
+
+  // Sincroniza a chaveTipo se o parâmetro tab mudar na URL
+  useEffect(() => {
+    if (tabParam === 'cpf') {
+      setChaveTipo('cpf');
+    } else if (tabParam === 'telefone') {
+      setChaveTipo('telefone');
+    }
+  }, [tabParam]);
   
   // Estado para guardar quais IDs de módulos estão marcados
   const [selectedModules, setSelectedModules] = useState<string[]>([]);
