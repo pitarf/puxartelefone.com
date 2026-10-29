@@ -193,7 +193,7 @@ export default async function Home() {
 
                 {/* BLOCO 02 & 03: FORMULÁRIO PRINCIPAL E RETORNO IMEDIATO */}
                 <div className="pt-2">
-                  <HomeSearchBox />
+                  <HomeSearchBox phonePrice={phonePrice} />
                 </div>
 
                 {/* Micro selos de transparência e conformidade */}
