@@ -84,22 +84,11 @@ export default async function Footer({ logoUrl }: FooterProps) {
           {/* Coluna da Marca */}
           <div className="lg:col-span-1 space-y-4 text-left">
             <Link href="/" className="flex items-center gap-2.5">
-              {logoUrl ? (
-                <img 
-                  src={logoUrl} 
-                  alt="PuxarTelefone" 
-                  className="h-8 w-auto object-contain" 
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = '/logo.webp';
-                  }}
-                />
-              ) : (
-                <img 
-                  src="/logo.webp" 
-                  alt="PuxarTelefone" 
-                  className="h-8 w-auto object-contain" 
-                />
-              )}
+              <img 
+                src={(logoUrl && !logoUrl.includes('canva.com')) ? logoUrl : '/logo.webp'} 
+                alt="PuxarTelefone" 
+                className="h-8 w-auto object-contain" 
+              />
               <span className="text-lg font-extrabold text-[#172B3A] dark:text-white tracking-tight">
                 puxar<span className="text-[#0061D9]">telefone</span>
               </span>
