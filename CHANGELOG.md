@@ -2,6 +2,24 @@
 
 Todas as mudanças notáveis para este projeto serão documentadas neste arquivo.
 
+## [1.5.0] - 2026-11-01
+### Branding e Identidade Visual: Logo e Favicon Oficiais do PuxarTelefone
+- **Identidade Visual Definitiva:**
+  - Extração e padronização da logo oficial vetorial em alta resolução fornecida pelo Canva.
+  - Atualização dos arquivos locais estáticos em `public/`:
+    - `logo.png` e `logo.webp` (Arte oficial com paleta azul turquesa do PuxarTelefone).
+    - `favicon.ico`, `favicon.png`, `apple-touch-icon.png` e ícones do Android Chrome (192x192 e 512x512).
+- **Banco de Dados & Estabilidade:**
+  - Atualização permanente da tabela `SystemSetting` no banco de dados da VPS para utilizar `/logo.png` e `/favicon.ico`.
+  - Remoção de dependências de URLs efêmeras do Canva sujeitas a expiração de token.
+- **Correção em Páginas Coringa (`[slug]`):**
+  - Removido `onError` indevido de Server Component no componente `Footer.tsx`, solucionando erro 500 na abertura de páginas públicas dinâmicas.
+
+## [1.4.9] - 2026-10-30
+### Consultas: Enriquecimento de Busca por CPF com Filiação Completa
+- **Pesquisa Avançada V2:**
+  - Otimização da rota de CPF para priorizar a consulta avançada com retorno completo de filiação (nome da mãe e parentesco).
+
 ## [1.4.8] - 2026-10-27
 ### Segurança & LGPD: Bloqueio Total de Cadastro sem Aceite (Formulário e Google)
 - **Bloqueio no Cadastro com Google:**

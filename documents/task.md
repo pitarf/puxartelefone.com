@@ -1,5 +1,18 @@
 # Roadmap de Desenvolvimento - puxartelefone.com
 
+## SPLIT 24: Logo e Favicon Oficiais do PuxarTelefone & Correção de Rotas CMS (✅ 100% CONCLUÍDO)
+*Este split consolidou a arte oficial da marca no repositório estático e banco de dados, além de corrigir o carregamento de páginas CMS.*
+- [x] **Download e Padronização de Assets Oficiais:**
+  - `public/logo.png` e `public/logo.webp` gerados a partir da arte oficial do Canva.
+  - Multi-formato de favicon: `favicon.ico`, `favicon.png`, `apple-touch-icon.png`, `android-chrome-192x192.png` e `512x512.png`.
+- [x] **Persistência no Banco de Dados em Produção:**
+  - Atualização de `SystemSetting` (`logoUrl = '/logo.png'`, `faviconUrl = '/favicon.ico'`) eliminando tokens efêmeros.
+- [x] **Correção de Server Component no Footer:**
+  - Remoção de `onError` do `Footer.tsx` restaurando o status 200 em todas as páginas públicas `/[slug]`.
+- [x] **Validação & Deploy:**
+  - Build local aprovado.
+  - Sincronização via Git e deploy em container na VPS.
+
 ## SPLIT 23: Bloqueio Estrito no Cadastro Convencional e via Google sem Aceite (✅ 100% CONCLUÍDO)
 *Este split assegurou que nenhum usuário possa se cadastrar sem aceitar previamente os Termos de Uso e Política de Privacidade, inclusive pelo login social do Google.*
 - [x] **Bloqueio no Cadastro pelo Google (`CadastroClient.tsx`):**
