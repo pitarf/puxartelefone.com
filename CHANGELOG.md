@@ -2,6 +2,16 @@
 
 Todas as mudanças notáveis para este projeto serão documentadas neste arquivo.
 
+## [1.5.1] - 2026-11-03
+### Exportação de Relatórios: Dossiê Cadastral em PDF de Alta Qualidade Vetorial
+- **Utilitário de Exportação (`src/utils/pdf-report.ts`):**
+  - Gerador modular de HTML timbrado com `@media print` otimizado para formato A4 portrait sem corte de seções (`break-inside: avoid`).
+  - Suporte completo a dados de Pessoas Físicas (CPF, Contatos, Endereços, Veículos, Vínculos Societários), Pessoas Jurídicas (CNPJ/QSA) e Processos Judiciais (formatação CNJ e partes processuais).
+  - Cabeçalho institucional com marca **PuxarTelefone**, etiqueta de sigilo confidencial, número de protocolo único e carimbo de conformidade com a LGPD (Lei nº 13.709/2018).
+- **Integração na Interface:**
+  - `src/components/DataViewer.tsx`: Botão **"Exportar PDF"** integrado ao lado da visualização de dados brutos para todas as consultas do painel.
+  - `src/components/ProcessosJudiciaisViewer.tsx`: Botão **"Exportar PDF"** específico no cabeçalho dos processos judiciais localizados.
+
 ## [1.5.0] - 2026-11-01
 ### Branding e Identidade Visual: Logo e Favicon Oficiais do PuxarTelefone
 - **Identidade Visual Definitiva:**

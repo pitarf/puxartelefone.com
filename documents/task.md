@@ -1,5 +1,19 @@
 # Roadmap de Desenvolvimento - puxartelefone.com
 
+## SPLIT 25: Exportação de Consultas em PDF - Dossiê Profissional (✅ 100% CONCLUÍDO)
+*Este split implementou a geração vetorial de relatórios cadastrais em PDF e impressão padrão A4 para todas as consultas da plataforma.*
+- [x] **Utilitário de Impressão e PDF (`src/utils/pdf-report.ts`):**
+  - Geração de HTML com `@media print` otimizado, sem dependências pesadas de Chromium no servidor.
+  - Cabeçalho timbrado com marca PuxarTelefone, badge de documento confidencial, protocolo único e rodapé de conformidade LGPD.
+  - Suporte a formatação automática de CNJ, CPF/CNPJ, datas e moedas.
+- [x] **Integração no `DataViewer.tsx`:**
+  - Botão "Exportar PDF" ao lado do botão de JSON em todas as consultas (Dashboard, Veículos, Empresas, Endereços, Histórico).
+- [x] **Integração no `ProcessosJudiciaisViewer.tsx`:**
+  - Botão "Exportar PDF" dedicado para dossiê processual jurídico.
+- [x] **Validação & Exemplo Real:**
+  - Build de produção Next.js 16 validado sem advertências.
+  - Exemplo real em PDF gerado e arquivado: `Dossie_Cadastral_Exemplo_PuxarTelefone.pdf`.
+
 ## SPLIT 24: Logo e Favicon Oficiais do PuxarTelefone & Correção de Rotas CMS (✅ 100% CONCLUÍDO)
 *Este split consolidou a arte oficial da marca no repositório estático e banco de dados, além de corrigir o carregamento de páginas CMS.*
 - [x] **Download e Padronização de Assets Oficiais:**
