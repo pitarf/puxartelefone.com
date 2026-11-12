@@ -2,6 +2,14 @@
 
 Todas as mudanças notáveis para este projeto serão documentadas neste arquivo.
 
+## [1.5.0] - 2026-11-11
+### Aprimorado
+- **Substituição de 'Desconhecido' por 'Resultado após confirmar e consultar':**
+  - Utilização do utilitário src/utils/candidate-helpers.ts centralizando a detecção de valores desconhecidos e formatação de localização, filiação materna, data de nascimento e CPF mascarado.
+  - Atualização dos cards de homônimos e prévia de candidatos nas rotas /dashboard, /dashboard/enderecos e /dashboard/processos.
+  - Sanitização prévia de strings vazias ou nulas em src/services/direct-data.ts.
+  - Destaque visual dos campos a serem desbloqueados com a cor primária da plataforma, incentivando a conversão e confirmação de consulta.
+
 ## [1.5.1] - 2026-11-03
 ### Exportação de Relatórios: Dossiê Cadastral em PDF de Alta Qualidade Vetorial
 - **Utilitário de Exportação (`src/utils/pdf-report.ts`):**
