@@ -1,0 +1,1006 @@
+[
+  {
+    "route": "/admin",
+    "viewport": "mobile-small",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [
+      {
+        "tag": "button",
+        "className": "px-3 py-1.5 text-xs font-bold rounded-xl transition-all whitespace-nowrap shrink-0 flex items-center",
+        "id": "",
+        "right": 435,
+        "excess": 75
+      },
+      {
+        "tag": "table",
+        "className": "w-full text-left text-sm text-slate-600 dark:text-gray-300",
+        "id": "",
+        "right": 439,
+        "excess": 79
+      },
+      {
+        "tag": "thead",
+        "className": "text-xs uppercase bg-slate-50 dark:bg-black/20 text-slate-400 dark:text-gray-500 tracking-wider",
+        "id": "",
+        "right": 439,
+        "excess": 79
+      },
+      {
+        "tag": "tr",
+        "className": "",
+        "id": "",
+        "right": 439,
+        "excess": 79
+      },
+      {
+        "tag": "th",
+        "className": "px-4 py-3 text-center rounded-r-xl",
+        "id": "",
+        "right": 439,
+        "excess": 79
+      }
+    ],
+    "screenshot": "mobile-small_admin-dashboard.png"
+  },
+  {
+    "route": "/admin/usuarios",
+    "viewport": "mobile-small",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/usuarios",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [
+      {
+        "tag": "table",
+        "className": "w-full text-left text-sm text-slate-700 dark:text-gray-300",
+        "id": "",
+        "right": 789,
+        "excess": 429
+      },
+      {
+        "tag": "thead",
+        "className": "bg-slate-50 dark:bg-black/40 text-xs uppercase text-slate-500 dark:text-gray-500 font-bold border-b ",
+        "id": "",
+        "right": 789,
+        "excess": 429
+      },
+      {
+        "tag": "tr",
+        "className": "",
+        "id": "",
+        "right": 789,
+        "excess": 429
+      },
+      {
+        "tag": "th",
+        "className": "px-4 sm:px-6 py-4",
+        "id": "",
+        "right": 374,
+        "excess": 14
+      },
+      {
+        "tag": "th",
+        "className": "px-4 sm:px-6 py-4",
+        "id": "",
+        "right": 491,
+        "excess": 131
+      }
+    ],
+    "screenshot": "mobile-small_admin-usuarios.png"
+  },
+  {
+    "route": "/admin/vendas",
+    "viewport": "mobile-small",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/vendas",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [
+      {
+        "tag": "button",
+        "className": "pb-4 px-2 text-xs sm:text-sm font-bold flex items-center gap-2 border-b-2 transition-all relative sh",
+        "id": "",
+        "right": 423,
+        "excess": 63
+      },
+      {
+        "tag": "span",
+        "className": "ml-1.5 px-2 py-0.5 text-[10px] font-bold bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-gray-",
+        "id": "",
+        "right": 415,
+        "excess": 55
+      },
+      {
+        "tag": "table",
+        "className": "w-full text-left text-sm text-slate-700 dark:text-gray-300",
+        "id": "",
+        "right": 950,
+        "excess": 590
+      },
+      {
+        "tag": "thead",
+        "className": "bg-slate-50 dark:bg-black/40 text-xs uppercase text-slate-500 dark:text-gray-500 font-bold tracking-",
+        "id": "",
+        "right": 950,
+        "excess": 590
+      },
+      {
+        "tag": "tr",
+        "className": "",
+        "id": "",
+        "right": 950,
+        "excess": 590
+      }
+    ],
+    "screenshot": "mobile-small_admin-vendas.png"
+  },
+  {
+    "route": "/admin/custos",
+    "viewport": "mobile-small",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/custos",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [
+      {
+        "tag": "table",
+        "className": "w-full text-left text-sm text-slate-600 dark:text-gray-300",
+        "id": "",
+        "right": 656,
+        "excess": 296
+      },
+      {
+        "tag": "thead",
+        "className": "text-xs uppercase bg-slate-50 dark:bg-black/20 text-slate-400 dark:text-gray-500 tracking-wider",
+        "id": "",
+        "right": 656,
+        "excess": 296
+      },
+      {
+        "tag": "tr",
+        "className": "",
+        "id": "",
+        "right": 656,
+        "excess": 296
+      },
+      {
+        "tag": "th",
+        "className": "px-6 py-4 text-right",
+        "id": "",
+        "right": 392,
+        "excess": 32
+      },
+      {
+        "tag": "th",
+        "className": "px-6 py-4 text-right",
+        "id": "",
+        "right": 535,
+        "excess": 175
+      }
+    ],
+    "screenshot": "mobile-small_admin-custos.png"
+  },
+  {
+    "route": "/admin/traffic",
+    "viewport": "mobile-small",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/traffic",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [
+      {
+        "tag": "table",
+        "className": "w-full text-left text-sm text-slate-600 dark:text-gray-300",
+        "id": "",
+        "right": 760,
+        "excess": 400
+      },
+      {
+        "tag": "thead",
+        "className": "text-xs uppercase bg-slate-50 dark:bg-black/20 text-slate-400 dark:text-gray-500 tracking-wider",
+        "id": "",
+        "right": 760,
+        "excess": 400
+      },
+      {
+        "tag": "tr",
+        "className": "",
+        "id": "",
+        "right": 760,
+        "excess": 400
+      },
+      {
+        "tag": "th",
+        "className": "px-6 py-4 text-right",
+        "id": "",
+        "right": 404,
+        "excess": 44
+      },
+      {
+        "tag": "th",
+        "className": "px-6 py-4 text-right",
+        "id": "",
+        "right": 547,
+        "excess": 187
+      }
+    ],
+    "screenshot": "mobile-small_admin-traffic.png"
+  },
+  {
+    "route": "/admin/bloqueios",
+    "viewport": "mobile-small",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/bloqueios",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [
+      {
+        "tag": "table",
+        "className": "w-full text-left text-sm text-slate-600 dark:text-gray-300",
+        "id": "",
+        "right": 535,
+        "excess": 175
+      },
+      {
+        "tag": "thead",
+        "className": "text-xs uppercase bg-slate-50 dark:bg-black/20 text-slate-400 dark:text-gray-500 tracking-wider",
+        "id": "",
+        "right": 535,
+        "excess": 175
+      },
+      {
+        "tag": "tr",
+        "className": "",
+        "id": "",
+        "right": 535,
+        "excess": 175
+      },
+      {
+        "tag": "th",
+        "className": "px-6 py-4 text-center",
+        "id": "",
+        "right": 446,
+        "excess": 86
+      },
+      {
+        "tag": "th",
+        "className": "px-6 py-4 text-center rounded-r-2xl",
+        "id": "",
+        "right": 535,
+        "excess": 175
+      }
+    ],
+    "screenshot": "mobile-small_admin-bloqueios.png"
+  },
+  {
+    "route": "/admin/precos",
+    "viewport": "mobile-small",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/precos",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [
+      {
+        "tag": "button",
+        "className": "px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all bg-slate-100 hover:bg-slat",
+        "id": "",
+        "right": 367,
+        "excess": 7
+      },
+      {
+        "tag": "button",
+        "className": "px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all bg-slate-100 hover:bg-slat",
+        "id": "",
+        "right": 452,
+        "excess": 92
+      },
+      {
+        "tag": "button",
+        "className": "px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all bg-slate-100 hover:bg-slat",
+        "id": "",
+        "right": 595,
+        "excess": 235
+      },
+      {
+        "tag": "button",
+        "className": "px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all bg-slate-100 hover:bg-slat",
+        "id": "",
+        "right": 744,
+        "excess": 384
+      },
+      {
+        "tag": "button",
+        "className": "px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all bg-slate-100 hover:bg-slat",
+        "id": "",
+        "right": 822,
+        "excess": 462
+      }
+    ],
+    "screenshot": "mobile-small_admin-precos.png"
+  },
+  {
+    "route": "/admin/paginas",
+    "viewport": "mobile-small",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/paginas",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [
+      {
+        "tag": "table",
+        "className": "w-full text-left text-sm text-slate-700 dark:text-gray-300",
+        "id": "",
+        "right": 849,
+        "excess": 489
+      },
+      {
+        "tag": "thead",
+        "className": "bg-slate-50 dark:bg-black/40 text-xs uppercase text-slate-500 dark:text-gray-500 font-bold border-b ",
+        "id": "",
+        "right": 849,
+        "excess": 489
+      },
+      {
+        "tag": "tr",
+        "className": "",
+        "id": "",
+        "right": 849,
+        "excess": 489
+      },
+      {
+        "tag": "th",
+        "className": "px-6 py-4",
+        "id": "",
+        "right": 374,
+        "excess": 14
+      },
+      {
+        "tag": "th",
+        "className": "px-6 py-4",
+        "id": "",
+        "right": 499,
+        "excess": 139
+      }
+    ],
+    "screenshot": "mobile-small_admin-paginas.png"
+  },
+  {
+    "route": "/admin/blog",
+    "viewport": "mobile-small",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/blog",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [
+      {
+        "tag": "table",
+        "className": "w-full text-left text-sm text-slate-700 dark:text-gray-300",
+        "id": "",
+        "right": 603,
+        "excess": 243
+      },
+      {
+        "tag": "thead",
+        "className": "bg-slate-50 dark:bg-black/40 text-xs uppercase text-slate-500 font-bold border-b border-slate-200 da",
+        "id": "",
+        "right": 603,
+        "excess": 243
+      },
+      {
+        "tag": "tr",
+        "className": "",
+        "id": "",
+        "right": 603,
+        "excess": 243
+      },
+      {
+        "tag": "th",
+        "className": "px-6 py-4",
+        "id": "",
+        "right": 399,
+        "excess": 39
+      },
+      {
+        "tag": "th",
+        "className": "px-6 py-4",
+        "id": "",
+        "right": 517,
+        "excess": 157
+      }
+    ],
+    "screenshot": "mobile-small_admin-blog.png"
+  },
+  {
+    "route": "/admin/configuracoes",
+    "viewport": "mobile-small",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/configuracoes",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [],
+    "screenshot": "mobile-small_admin-configuracoes.png"
+  },
+  {
+    "route": "/admin/logs",
+    "viewport": "mobile-small",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/logs",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [],
+    "screenshot": "mobile-small_admin-logs.png"
+  },
+  {
+    "route": "/admin",
+    "viewport": "mobile-standard",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [
+      {
+        "tag": "button",
+        "className": "px-3 py-1.5 text-xs font-bold rounded-xl transition-all whitespace-nowrap shrink-0 flex items-center",
+        "id": "",
+        "right": 435,
+        "excess": 45
+      },
+      {
+        "tag": "table",
+        "className": "w-full text-left text-sm text-slate-600 dark:text-gray-300",
+        "id": "",
+        "right": 439,
+        "excess": 49
+      },
+      {
+        "tag": "thead",
+        "className": "text-xs uppercase bg-slate-50 dark:bg-black/20 text-slate-400 dark:text-gray-500 tracking-wider",
+        "id": "",
+        "right": 439,
+        "excess": 49
+      },
+      {
+        "tag": "tr",
+        "className": "",
+        "id": "",
+        "right": 439,
+        "excess": 49
+      },
+      {
+        "tag": "th",
+        "className": "px-4 py-3 text-center rounded-r-xl",
+        "id": "",
+        "right": 439,
+        "excess": 49
+      }
+    ],
+    "screenshot": "mobile-standard_admin-dashboard.png"
+  },
+  {
+    "route": "/admin/usuarios",
+    "viewport": "mobile-standard",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/usuarios",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [
+      {
+        "tag": "table",
+        "className": "w-full text-left text-sm text-slate-700 dark:text-gray-300",
+        "id": "",
+        "right": 789,
+        "excess": 399
+      },
+      {
+        "tag": "thead",
+        "className": "bg-slate-50 dark:bg-black/40 text-xs uppercase text-slate-500 dark:text-gray-500 font-bold border-b ",
+        "id": "",
+        "right": 789,
+        "excess": 399
+      },
+      {
+        "tag": "tr",
+        "className": "",
+        "id": "",
+        "right": 789,
+        "excess": 399
+      },
+      {
+        "tag": "th",
+        "className": "px-4 sm:px-6 py-4",
+        "id": "",
+        "right": 491,
+        "excess": 101
+      },
+      {
+        "tag": "th",
+        "className": "px-4 sm:px-6 py-4",
+        "id": "",
+        "right": 611,
+        "excess": 221
+      }
+    ],
+    "screenshot": "mobile-standard_admin-usuarios.png"
+  },
+  {
+    "route": "/admin/vendas",
+    "viewport": "mobile-standard",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/vendas",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [
+      {
+        "tag": "button",
+        "className": "pb-4 px-2 text-xs sm:text-sm font-bold flex items-center gap-2 border-b-2 transition-all relative sh",
+        "id": "",
+        "right": 423,
+        "excess": 33
+      },
+      {
+        "tag": "span",
+        "className": "ml-1.5 px-2 py-0.5 text-[10px] font-bold bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-gray-",
+        "id": "",
+        "right": 415,
+        "excess": 25
+      },
+      {
+        "tag": "table",
+        "className": "w-full text-left text-sm text-slate-700 dark:text-gray-300",
+        "id": "",
+        "right": 950,
+        "excess": 560
+      },
+      {
+        "tag": "thead",
+        "className": "bg-slate-50 dark:bg-black/40 text-xs uppercase text-slate-500 dark:text-gray-500 font-bold tracking-",
+        "id": "",
+        "right": 950,
+        "excess": 560
+      },
+      {
+        "tag": "tr",
+        "className": "",
+        "id": "",
+        "right": 950,
+        "excess": 560
+      }
+    ],
+    "screenshot": "mobile-standard_admin-vendas.png"
+  },
+  {
+    "route": "/admin/custos",
+    "viewport": "mobile-standard",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/custos",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [
+      {
+        "tag": "table",
+        "className": "w-full text-left text-sm text-slate-600 dark:text-gray-300",
+        "id": "",
+        "right": 656,
+        "excess": 266
+      },
+      {
+        "tag": "thead",
+        "className": "text-xs uppercase bg-slate-50 dark:bg-black/20 text-slate-400 dark:text-gray-500 tracking-wider",
+        "id": "",
+        "right": 656,
+        "excess": 266
+      },
+      {
+        "tag": "tr",
+        "className": "",
+        "id": "",
+        "right": 656,
+        "excess": 266
+      },
+      {
+        "tag": "th",
+        "className": "px-6 py-4 text-right",
+        "id": "",
+        "right": 392,
+        "excess": 2
+      },
+      {
+        "tag": "th",
+        "className": "px-6 py-4 text-right",
+        "id": "",
+        "right": 535,
+        "excess": 145
+      }
+    ],
+    "screenshot": "mobile-standard_admin-custos.png"
+  },
+  {
+    "route": "/admin/traffic",
+    "viewport": "mobile-standard",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/traffic",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [
+      {
+        "tag": "table",
+        "className": "w-full text-left text-sm text-slate-600 dark:text-gray-300",
+        "id": "",
+        "right": 760,
+        "excess": 370
+      },
+      {
+        "tag": "thead",
+        "className": "text-xs uppercase bg-slate-50 dark:bg-black/20 text-slate-400 dark:text-gray-500 tracking-wider",
+        "id": "",
+        "right": 760,
+        "excess": 370
+      },
+      {
+        "tag": "tr",
+        "className": "",
+        "id": "",
+        "right": 760,
+        "excess": 370
+      },
+      {
+        "tag": "th",
+        "className": "px-6 py-4 text-right",
+        "id": "",
+        "right": 404,
+        "excess": 14
+      },
+      {
+        "tag": "th",
+        "className": "px-6 py-4 text-right",
+        "id": "",
+        "right": 547,
+        "excess": 157
+      }
+    ],
+    "screenshot": "mobile-standard_admin-traffic.png"
+  },
+  {
+    "route": "/admin/bloqueios",
+    "viewport": "mobile-standard",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/bloqueios",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [
+      {
+        "tag": "table",
+        "className": "w-full text-left text-sm text-slate-600 dark:text-gray-300",
+        "id": "",
+        "right": 535,
+        "excess": 145
+      },
+      {
+        "tag": "thead",
+        "className": "text-xs uppercase bg-slate-50 dark:bg-black/20 text-slate-400 dark:text-gray-500 tracking-wider",
+        "id": "",
+        "right": 535,
+        "excess": 145
+      },
+      {
+        "tag": "tr",
+        "className": "",
+        "id": "",
+        "right": 535,
+        "excess": 145
+      },
+      {
+        "tag": "th",
+        "className": "px-6 py-4 text-center",
+        "id": "",
+        "right": 446,
+        "excess": 56
+      },
+      {
+        "tag": "th",
+        "className": "px-6 py-4 text-center rounded-r-2xl",
+        "id": "",
+        "right": 535,
+        "excess": 145
+      }
+    ],
+    "screenshot": "mobile-standard_admin-bloqueios.png"
+  },
+  {
+    "route": "/admin/precos",
+    "viewport": "mobile-standard",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/precos",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [
+      {
+        "tag": "button",
+        "className": "px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all bg-slate-100 hover:bg-slat",
+        "id": "",
+        "right": 452,
+        "excess": 62
+      },
+      {
+        "tag": "button",
+        "className": "px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all bg-slate-100 hover:bg-slat",
+        "id": "",
+        "right": 595,
+        "excess": 205
+      },
+      {
+        "tag": "button",
+        "className": "px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all bg-slate-100 hover:bg-slat",
+        "id": "",
+        "right": 744,
+        "excess": 354
+      },
+      {
+        "tag": "button",
+        "className": "px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all bg-slate-100 hover:bg-slat",
+        "id": "",
+        "right": 822,
+        "excess": 432
+      }
+    ],
+    "screenshot": "mobile-standard_admin-precos.png"
+  },
+  {
+    "route": "/admin/paginas",
+    "viewport": "mobile-standard",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/paginas",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [
+      {
+        "tag": "table",
+        "className": "w-full text-left text-sm text-slate-700 dark:text-gray-300",
+        "id": "",
+        "right": 849,
+        "excess": 459
+      },
+      {
+        "tag": "thead",
+        "className": "bg-slate-50 dark:bg-black/40 text-xs uppercase text-slate-500 dark:text-gray-500 font-bold border-b ",
+        "id": "",
+        "right": 849,
+        "excess": 459
+      },
+      {
+        "tag": "tr",
+        "className": "",
+        "id": "",
+        "right": 849,
+        "excess": 459
+      },
+      {
+        "tag": "th",
+        "className": "px-6 py-4",
+        "id": "",
+        "right": 499,
+        "excess": 109
+      },
+      {
+        "tag": "th",
+        "className": "px-6 py-4",
+        "id": "",
+        "right": 655,
+        "excess": 265
+      }
+    ],
+    "screenshot": "mobile-standard_admin-paginas.png"
+  },
+  {
+    "route": "/admin/blog",
+    "viewport": "mobile-standard",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/blog",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [
+      {
+        "tag": "table",
+        "className": "w-full text-left text-sm text-slate-700 dark:text-gray-300",
+        "id": "",
+        "right": 603,
+        "excess": 213
+      },
+      {
+        "tag": "thead",
+        "className": "bg-slate-50 dark:bg-black/40 text-xs uppercase text-slate-500 font-bold border-b border-slate-200 da",
+        "id": "",
+        "right": 603,
+        "excess": 213
+      },
+      {
+        "tag": "tr",
+        "className": "",
+        "id": "",
+        "right": 603,
+        "excess": 213
+      },
+      {
+        "tag": "th",
+        "className": "px-6 py-4",
+        "id": "",
+        "right": 399,
+        "excess": 9
+      },
+      {
+        "tag": "th",
+        "className": "px-6 py-4",
+        "id": "",
+        "right": 517,
+        "excess": 127
+      }
+    ],
+    "screenshot": "mobile-standard_admin-blog.png"
+  },
+  {
+    "route": "/admin/configuracoes",
+    "viewport": "mobile-standard",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/configuracoes",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [],
+    "screenshot": "mobile-standard_admin-configuracoes.png"
+  },
+  {
+    "route": "/admin/logs",
+    "viewport": "mobile-standard",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/logs",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [],
+    "screenshot": "mobile-standard_admin-logs.png"
+  },
+  {
+    "route": "/admin",
+    "viewport": "desktop",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [],
+    "screenshot": "desktop_admin-dashboard.png"
+  },
+  {
+    "route": "/admin/usuarios",
+    "viewport": "desktop",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/usuarios",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [],
+    "screenshot": "desktop_admin-usuarios.png"
+  },
+  {
+    "route": "/admin/vendas",
+    "viewport": "desktop",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/vendas",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [],
+    "screenshot": "desktop_admin-vendas.png"
+  },
+  {
+    "route": "/admin/custos",
+    "viewport": "desktop",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/custos",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [],
+    "screenshot": "desktop_admin-custos.png"
+  },
+  {
+    "route": "/admin/traffic",
+    "viewport": "desktop",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/traffic",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [],
+    "screenshot": "desktop_admin-traffic.png"
+  },
+  {
+    "route": "/admin/bloqueios",
+    "viewport": "desktop",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/bloqueios",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [],
+    "screenshot": "desktop_admin-bloqueios.png"
+  },
+  {
+    "route": "/admin/precos",
+    "viewport": "desktop",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/precos",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [],
+    "screenshot": "desktop_admin-precos.png"
+  },
+  {
+    "route": "/admin/paginas",
+    "viewport": "desktop",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/paginas",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [],
+    "screenshot": "desktop_admin-paginas.png"
+  },
+  {
+    "route": "/admin/blog",
+    "viewport": "desktop",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/blog",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [],
+    "screenshot": "desktop_admin-blog.png"
+  },
+  {
+    "route": "/admin/configuracoes",
+    "viewport": "desktop",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/configuracoes",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [],
+    "screenshot": "desktop_admin-configuracoes.png"
+  },
+  {
+    "route": "/admin/logs",
+    "viewport": "desktop",
+    "status": 200,
+    "currentUrl": "http://localhost:3000/admin/logs",
+    "wasRedirected": false,
+    "hasOverflow": false,
+    "overflowExcess": 0,
+    "overflowElements": [],
+    "screenshot": "desktop_admin-logs.png"
+  }
+]
